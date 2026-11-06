@@ -1,0 +1,59 @@
+# Acionamento por evento: abertura/atualização de PR e push em branches de funcionalidade.
+name: Agente de Testes
+
+on:
+  pull_request:
+  push:
+    branches: ["feature/**", "feat/**"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  agente-testes:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Instalar o agente
+        run: pip install ./agente-testes || pip install .
+
+      - name: Construir imagem de execução isolada
+        run: docker build -t agente-testes-runner-python:latest -f docker/runner-python.Dockerfile docker
+
+      - name: Executar o agente sobre a mudança
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          AGENTE_EXECUTOR: docker
+          AGENTE_COBERTURA_MINIMA: "70"
+        run: |
+          BASE="${{ github.event.pull_request.base.sha || github.event.before }}"
+          if [ -z "$BASE" ] || [ "$BASE" = "0000000000000000000000000000000000000000" ]; then BASE="HEAD~1"; fi
+          agente-testes executar --raiz . --diff-base "$BASE" --incluir-projeto \
+            $( [ -f requisitos.yaml ] && echo --requisitos requisitos.yaml ) \
+            $( [ -f openapi.yaml ] && echo --openapi openapi.yaml ) \
+            --saida-json relatorio-testes.json --saida-md relatorio-testes.md --com-codigo
+
+      - name: Publicar resumo
+        if: always()
+        run: '[ -f relatorio-testes.md ] && cat relatorio-testes.md >> "$GITHUB_STEP_SUMMARY" || true'
+
+      - name: Comentar no PR
+        if: always() && github.event_name == 'pull_request'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: '[ -f relatorio-testes.md ] && gh pr comment ${{ github.event.pull_request.number }} --body-file relatorio-testes.md --edit-last --create-if-none || true'
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: relatorio-testes
+          path: relatorio-testes.*

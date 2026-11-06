@@ -1,0 +1,19 @@
+requisitos:
+  - id: RF-01
+    descricao: O sistema deve calcular o desconto de um pedido (calcular_desconto).
+    criterios_aceite:
+      - Percentual deve estar entre 0 e 100, caso contrário rejeitar.
+      - Valor negativo deve ser rejeitado.
+  - id: RF-02
+    descricao: O sistema deve calcular o frete (calcular_frete) por peso e distância.
+    criterios_aceite:
+      - Peso deve ser positivo.
+      - Pedidos acima de 30 kg têm acréscimo de 20%.
+  - id: RF-03
+    descricao: O painel deve exibir o ticket médio (ticket_medio) dos pedidos do dia.
+    criterios_aceite:
+      - Sem pedidos no dia, o ticket médio exibido é 0.
+  - id: RF-04
+    descricao: O checkout aceita cupons de desconto (aplicar cupom).
+    criterios_aceite:
+      - Cupom inexistente não altera o total.

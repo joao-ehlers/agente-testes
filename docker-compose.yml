@@ -1,0 +1,17 @@
+services:
+  agente-testes:
+    build: .
+    ports: ["8000:8000"]
+    environment:
+      - GEMINI_API_KEY=${GEMINI_API_KEY:-}
+      - AGENTE_EXECUTOR=docker
+      - AGENTE_DIR_DADOS=/dados
+      # o workspace temporário precisa existir no host para ser montado nos containers irmãos
+      - TMPDIR=/tmp/agente-testes
+      - AGENTE_DOCUMENTACAO_URL=${AGENTE_DOCUMENTACAO_URL:-}
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /tmp/agente-testes:/tmp/agente-testes
+      - dados:/dados
+volumes:
+  dados:

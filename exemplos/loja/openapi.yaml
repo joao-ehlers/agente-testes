@@ -1,0 +1,42 @@
+openapi: 3.0.3
+info:
+  title: API da Loja
+  version: 1.0.0
+paths:
+  /pedidos:
+    post:
+      operationId: criarPedido
+      summary: Cria um pedido
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NovoPedido'
+      responses:
+        '201': {description: criado}
+        '422': {description: inválido}
+  /pedidos/{id}:
+    get:
+      operationId: obterPedido
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: {type: integer, minimum: 1}
+      responses:
+        '200': {description: ok}
+        '404': {description: não encontrado}
+components:
+  schemas:
+    NovoPedido:
+      type: object
+      required: [itens]
+      properties:
+        itens:
+          type: object
+          additionalProperties: {type: integer}
+          example: {"SKU-1": 2}
+        cupom:
+          type: string
+          example: BEMVINDO10

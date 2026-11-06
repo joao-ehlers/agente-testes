@@ -1,0 +1,8 @@
+.venv/
+__pycache__/
+.agente_dados/
+relatorio*.md
+relatorio*.json
+*.egg-info/
+.pytest_cache/
+.coverage
