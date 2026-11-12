@@ -30,8 +30,9 @@ class ExecutorDeTestes(Filtro[ArtefatosDeTeste, ResultadoPipelineExecucao]):
     tipo_saida = ResultadoPipelineExecucao
 
     def __init__(self, preferencia_executor: str = "auto", timeout_s: int = 300,
-                 manter_workspace: Optional[Path] = None):
+                 manter_workspace: Optional[Path] = None, timeout_teste_s: int = 10):
         super().__init__()
+        self.timeout_teste_s = timeout_teste_s
         self.preferencia = preferencia_executor
         self.timeout_s = timeout_s
         self.manter_workspace = manter_workspace
@@ -70,7 +71,8 @@ class ExecutorDeTestes(Filtro[ArtefatosDeTeste, ResultadoPipelineExecucao]):
             resultados: List[ResultadoDeTeste] = []
             cobertura: Optional[Cobertura] = None
             saidas, comandos, executores, codigo_final, duracao = [], [], set(), 0, 0.0
-            env: Dict[str, str] = {}
+            # Lido pelo plugin pytest-timeout (local e na imagem Docker).
+            env: Dict[str, str] = {"PYTEST_TIMEOUT": str(self.timeout_teste_s)}
             if entrada.api_base_url:
                 env["API_BASE_URL"] = entrada.api_base_url
             for framework, arquivos in grupos.items():
@@ -94,8 +96,10 @@ class ExecutorDeTestes(Filtro[ArtefatosDeTeste, ResultadoPipelineExecucao]):
                     self.anotar("ATENÇÃO: execução sem isolamento (Docker indisponível ou desabilitado)")
                 rs, cob = adaptador.ler_resultados(workspace)
                 if not rs and saida.codigo not in (0, 5):
+                    msg = (f"tempo limite total de {self.timeout_s}s excedido" if saida.codigo == 124
+                           else "framework não produziu resultados")
                     rs = [ResultadoDeTeste(nome=f"{framework}::execucao", status=StatusResultado.ERRO,
-                                           mensagem="framework não produziu resultados", detalhe=saida.saida[-3000:])]
+                                           mensagem=msg, detalhe=saida.saida[-3000:])]
                 resultados += rs
                 cobertura = cobertura or cob
                 saidas.append(saida.saida)

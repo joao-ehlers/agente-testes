@@ -1,0 +1,5 @@
+--- a/calc.py
++++ b/calc.py
+@@ -8,0 +9,2 @@
++    if b == 0:
++        raise ValueError("divisor zero")

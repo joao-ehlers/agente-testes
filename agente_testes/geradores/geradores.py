@@ -180,6 +180,8 @@ class GeradorTesteUnitario(GeradorDeCodigoTeste):
         if c.tipo == TipoCenario.FALHA and c.excecao_esperada:
             tupla, ext = _excecoes(c.excecao_esperada.split("|"))
             return cab + _imports_excecoes(u, ext) + f"    with pytest.raises({tupla}):\n        {chamada}\n"
+        if c.nao_deve_lancar:
+            return cab + f"    resultado = {chamada}\n" + _assert_tipo(u)
         ok, esperado = _literal(c.resultado_esperado)
         if ok and c.origem == Origem.LLM:
             return cab + f"    resultado = {chamada}\n    assert resultado == {esperado!r}\n"

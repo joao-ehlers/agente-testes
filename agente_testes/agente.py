@@ -23,6 +23,8 @@ from .pipeline.filtros.f6_resultados import AnalisadorDeResultados
 class Configuracao:
     executor: str = field(default_factory=lambda: os.getenv("AGENTE_EXECUTOR", "auto"))
     timeout_s: int = field(default_factory=lambda: int(os.getenv("AGENTE_TIMEOUT_S", "300")))
+    # Limite por teste: um laço infinito derruba só o teste que o exercita, não a execução inteira.
+    timeout_teste_s: int = field(default_factory=lambda: int(os.getenv("AGENTE_TIMEOUT_TESTE_S", "10")))
     cobertura_minima: float = field(default_factory=lambda: float(os.getenv("AGENTE_COBERTURA_MINIMA", "0")))
     max_iteracoes: int = field(default_factory=lambda: int(os.getenv("AGENTE_MAX_ITERACOES", "3")))
     dir_dados: Path = field(default_factory=lambda: Path(os.getenv("AGENTE_DIR_DADOS", ".agente_dados")))
@@ -45,7 +47,8 @@ class AgenteDeTestes:
             GeradorDeCenarios(self.llm),
             SeletorDeEstrategia(),
             GeradorDeCodigo(self.llm),
-            ExecutorDeTestes(self.config.executor, self.config.timeout_s, self.config.manter_workspace),
+            ExecutorDeTestes(self.config.executor, self.config.timeout_s, self.config.manter_workspace,
+                             self.config.timeout_teste_s),
             AnalisadorDeResultados(self.config.cobertura_minima, self.llm.nome),
         ])
 

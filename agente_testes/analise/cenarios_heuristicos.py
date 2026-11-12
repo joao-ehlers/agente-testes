@@ -6,7 +6,8 @@ from typing import Dict, List, Optional
 
 from ..contratos import ContextoAnalisado, EndpointAPI, UnidadeCodigo
 from ..modelos.dominio import CenarioDeTeste, Origem, Requisito, TipoCenario, TipoTeste
-from .valores import eh_sem_valor, resolver_condicao, tipo_base, valor_tipico, valores_borda
+from .valores import (eh_sem_valor, limite_valido, resolver_condicao, satisfaz, tipo_base, valor_tipico,
+                      valores_borda)
 
 MAX_BORDAS_POR_UNIDADE = 6
 
@@ -89,6 +90,26 @@ def cenarios_de_unidade(u: UnidadeCodigo, requisitos: List[Requisito]) -> List[C
             descricao=f"Dado {c.parametro}={v!r} (viola '{cond}'), quando {u.nome} é executada, então lança {c.excecao}.",
             entradas=dict(base, **{c.parametro: v}), excecao_esperada=c.excecao,
             resultado_esperado=f"lança {c.excecao}", automatizavel=automatizavel))
+
+    # Valor-limite do lado válido: na fronteira de cada `raise`, o valor permitido não pode ser rejeitado.
+    validos = set()
+    for c in u.condicoes_excecao:
+        p = next((x for x in u.parametros if x.nome == c.parametro), None)
+        if p is None:
+            continue
+        v = limite_valido(c, p)
+        conds_param = [x for x in u.condicoes_excecao if x.parametro == c.parametro]
+        if eh_sem_valor(v) or any(satisfaz(x, v) for x in conds_param) or (c.parametro, repr(v)) in validos:
+            continue
+        validos.add((c.parametro, repr(v)))
+        cond = f"{c.parametro} {c.operador} {c.valor!r}"
+        out.append(CenarioDeTeste(
+            titulo=f"{u.nome}: aceita {c.parametro}={v!r} (limite de '{cond}')", tipo=TipoCenario.BORDA,
+            alvo=u.qualificado, requisito_id=req,
+            descricao=(f"Dado {c.parametro}={v!r} (fronteira válida de '{cond}'), quando {u.nome} é executada, "
+                       f"então não lança exceção e retorna {retorno}."),
+            entradas=dict(base, **{c.parametro: v}), resultado_esperado=retorno, nao_deve_lancar=True,
+            automatizavel=automatizavel))
 
     for p in u.parametros:  # validação de entrada: None onde o tipo não admite None
         b, opcional = tipo_base(p.anotacao)
