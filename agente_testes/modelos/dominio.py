@@ -94,6 +94,7 @@ class CenarioDeTeste(BaseModel):
     entradas: Dict[str, object] = Field(default_factory=dict)
     resultado_esperado: str = ""
     excecao_esperada: Optional[str] = None
+    nao_deve_lancar: bool = Field(False, description="Valor-limite válido: qualquer exceção reprova o teste")
     tipo_teste_sugerido: Optional[TipoTeste] = None
     automatizavel: bool = True
     origem: Origem = Origem.HEURISTICA
@@ -178,7 +179,9 @@ class ResumoExecucao(BaseModel):
 class Achado(BaseModel):
     """Interpretação de um resultado: defeito suspeito, risco ou erro do próprio teste."""
 
-    categoria: str  # defeito_suspeito | validacao_ausente | erro_no_teste | regressao | instavel
+    # defeito_suspeito | validacao_ausente | tempo_esgotado | dependencia_externa | erro_no_teste |
+    # regressao | falha_suite_existente
+    categoria: str
     teste: str
     cenario_id: Optional[str] = None
     alvo: Optional[str] = None

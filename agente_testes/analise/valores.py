@@ -81,5 +81,30 @@ def resolver_condicao(c: Condicao, p: Parametro) -> Any:
     return {"<": v - passo, "<=": v, ">": v + passo, ">=": v, "==": v, "!=": v + passo}.get(c.operador, _SEM_VALOR)
 
 
+def _passo(c: Condicao, p: Parametro) -> float:
+    base, _ = tipo_base(p.anotacao)
+    return 0.5 if (base == "float" or isinstance(c.valor, float)) else 1
+
+
+def limite_valido(c: Condicao, p: Parametro) -> Any:
+    """Valor mais próximo da fronteira que NÃO dispara o `raise` (análise de valor-limite, lado válido).
+
+    Ex.: `x < 0` -> 0; `x > 100` -> 100; `x <= 0` -> 1 (int) ou 0.5 (float).
+    """
+    v = c.valor
+    if not isinstance(v, (int, float)) or isinstance(v, bool):
+        return _SEM_VALOR
+    passo = _passo(c, p)
+    return {"<": v, "<=": v + passo, ">": v, ">=": v - passo}.get(c.operador, _SEM_VALOR)
+
+
+def satisfaz(c: Condicao, x: Any) -> bool:
+    """A condição numérica `x <op> valor` é verdadeira? (falso para condições não numéricas)."""
+    v = c.valor
+    if not isinstance(v, (int, float)) or isinstance(v, bool) or not isinstance(x, (int, float)):
+        return False
+    return {"<": x < v, "<=": x <= v, ">": x > v, ">=": x >= v, "==": x == v, "!=": x != v}.get(c.operador, False)
+
+
 def eh_sem_valor(v: Any) -> bool:
     return v is _SEM_VALOR

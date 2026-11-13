@@ -1,0 +1,4535 @@
+{
+  "configuracao": {
+    "modo": "heuristico",
+    "executor": "docker",
+    "repeticoes": 5,
+    "timeout_teste_s": 3,
+    "python": "3.9.6",
+    "plataforma": "darwin",
+    "data": "2026-11-12 10:13:50",
+    "modelo": [
+      "nenhum (modo heurístico)",
+      "simulado (roteirizado)"
+    ]
+  },
+  "casos": [
+    {
+      "id": "C01",
+      "tipo": "típico",
+      "cenario": "Código correto com requisitos (sem defeito plantado)",
+      "esperado": "Portão aprovado, nenhum achado de defeito e cobertura ≥ 70%",
+      "defeitos_reais": []
+    },
+    {
+      "id": "C02",
+      "tipo": "típico",
+      "cenario": "Módulo da loja com 2 defeitos plantados (ticket_medio, aplicar_cupom)",
+      "esperado": "Os 2 defeitos plantados apontados e portão reprovado",
+      "defeitos_reais": [
+        "loja.aplicar_cupom",
+        "loja.ticket_medio"
+      ]
+    },
+    {
+      "id": "C03",
+      "tipo": "típico",
+      "cenario": "Análise incremental: diff altera só a função dividir",
+      "esperado": "Cenários apenas para dividir e portão aprovado",
+      "defeitos_reais": []
+    },
+    {
+      "id": "C04",
+      "tipo": "típico",
+      "cenario": "Regressão: suíte existente passava e a mudança a quebrou",
+      "esperado": "Achado “regressao” em test_dobro e portão reprovado",
+      "defeitos_reais": [
+        "tests.test_calc::test_dobro"
+      ]
+    },
+    {
+      "id": "C05",
+      "tipo": "típico",
+      "cenario": "Contrato OpenAPI com a API da loja em execução",
+      "esperado": "Testes de API gerados do contrato, executados contra a API e aprovados",
+      "defeitos_reais": []
+    },
+    {
+      "id": "B01",
+      "tipo": "borda",
+      "cenario": "Entrada vazia (sem código, diff ou contrato)",
+      "esperado": "Rejeição na validação do contrato, sem executar o pipeline",
+      "defeitos_reais": []
+    },
+    {
+      "id": "B02",
+      "tipo": "borda",
+      "cenario": "Código-fonte que não compila",
+      "esperado": "Risco ALTA “não compila”, nenhum teste e portão reprovado",
+      "defeitos_reais": []
+    },
+    {
+      "id": "B03",
+      "tipo": "borda",
+      "cenario": "Laço infinito plantado em fila.processar",
+      "esperado": "Testes interrompidos pelo limite por teste, achado “tempo_esgotado” e portão reprovado",
+      "defeitos_reais": [
+        "fila.processar"
+      ]
+    },
+    {
+      "id": "B04",
+      "tipo": "borda",
+      "cenario": "Código que acessa a rede (bloqueada no isolamento)",
+      "esperado": "Achado “dependencia_externa”, nenhum falso defeito e portão reprovado",
+      "defeitos_reais": []
+    },
+    {
+      "id": "B05",
+      "tipo": "borda",
+      "cenario": "LLM devolve respostas fora do esquema JSON",
+      "esperado": "Respostas rejeitadas, queda para heurística e pipeline concluído",
+      "defeitos_reais": []
+    },
+    {
+      "id": "B06",
+      "tipo": "borda",
+      "cenario": "LLM alucina alvo inexistente e legitima ZeroDivisionError",
+      "esperado": "Alvo inexistente descartado, exceção acidental rejeitada e defeito apontado",
+      "defeitos_reais": [
+        "estat.media"
+      ]
+    },
+    {
+      "id": "B07",
+      "tipo": "borda",
+      "cenario": "Código sem anotações de tipo e classe com construtor com argumentos",
+      "esperado": "Risco de testabilidade registrado; portão não aprova sem evidência executada",
+      "defeitos_reais": []
+    }
+  ],
+  "execucoes": [
+    {
+      "caso": "C01",
+      "tipo": "típico",
+      "repeticao": 1,
+      "tempo_s": 0.717,
+      "ok": true,
+      "obtido": "Portão aprovado; 22 testes (22 aprovados); nenhum achado; cobertura 100%",
+      "testes": 22,
+      "aprovados": 22,
+      "reprovados": 0,
+      "erros": 0,
+      "cobertura": 100.0,
+      "portao_aprovado": true,
+      "sinalizadas": [],
+      "vp": 0,
+      "fp": 0,
+      "fn": 0,
+      "iteracoes": 1,
+      "tempo_por_filtro": {
+        "0-normalizacao": 0.001,
+        "1-analise-contexto": 0.001,
+        "2-geracao-cenarios": 0.001,
+        "3-selecao-estrategia": 0.0,
+        "4-geracao-codigo": 0.002,
+        "5-execucao": 0.709,
+        "6-analise-resultados": 0.0
+      },
+      "modelo": "nenhum (modo heurístico)"
+    },
+    {
+      "caso": "C01",
+      "tipo": "típico",
+      "repeticao": 2,
+      "tempo_s": 0.653,
+      "ok": true,
+      "obtido": "Portão aprovado; 22 testes (22 aprovados); nenhum achado; cobertura 100%",
+      "testes": 22,
+      "aprovados": 22,
+      "reprovados": 0,
+      "erros": 0,
+      "cobertura": 100.0,
+      "portao_aprovado": true,
+      "sinalizadas": [],
+      "vp": 0,
+      "fp": 0,
+      "fn": 0,
+      "iteracoes": 1,
+      "tempo_por_filtro": {
+        "0-normalizacao": 0.0,
+        "1-analise-contexto": 0.001,
+        "2-geracao-cenarios": 0.001,
+        "3-selecao-estrategia": 0.0,
+        "4-geracao-codigo": 0.004,
+        "5-execucao": 0.646,
+        "6-analise-resultados": 0.0
+      },
+      "modelo": "nenhum (modo heurístico)"
+    },
+    {
+      "caso": "C01",
+      "tipo": "típico",
+      "repeticao": 3,
+      "tempo_s": 0.672,
+      "ok": true,
+      "obtido": "Portão aprovado; 22 testes (22 aprovados); nenhum achado; cobertura 100%",
+      "testes": 22,
+      "aprovados": 22,
+      "reprovados": 0,
+      "erros": 0,
+      "cobertura": 100.0,
+      "portao_aprovado": true,
+      "sinalizadas": [],
+      "vp": 0,
+      "fp": 0,
+      "fn": 0,
+      "iteracoes": 1,
+      "tempo_por_filtro": {
+        "0-normalizacao": 0.0,
+        "1-analise-contexto": 0.001,
+        "2-geracao-cenarios": 0.001,
+        "3-selecao-estrategia": 0.0,
+        "4-geracao-codigo": 0.002,
+        "5-execucao": 0.666,
+        "6-analise-resultados": 0.0
+      },
+      "modelo": "nenhum (modo heurístico)"
+    },
+    {
+      "caso": "C01",
+      "tipo": "típico",
+      "repeticao": 4,
+      "tempo_s": 0.643,
+      "ok": true,
+      "obtido": "Portão aprovado; 22 testes (22 aprovados); nenhum achado; cobertura 100%",
+      "testes": 22,
+      "aprovados": 22,
+      "reprovados": 0,
+      "erros": 0,
+      "cobertura": 100.0,
+      "portao_aprovado": true,
+      "sinalizadas": [],
+      "vp": 0,
+      "fp": 0,
+      "fn": 0,
+      "iteracoes": 1,
+      "tempo_por_filtro": {
+        "0-normalizacao": 0.0,
+        "1-analise-contexto": 0.001,
+        "2-geracao-cenarios": 0.001,
+        "3-selecao-estrategia": 0.0,
+        "4-geracao-codigo": 0.002,
+        "5-execucao": 0.637,
+        "6-analise-resultados": 0.0
+      },
+      "modelo": "nenhum (modo heurístico)"
+    },
+    {
+      "caso": "C01",
+      "tipo": "típico",
+      "repeticao": 5,
+      "tempo_s": 0.688,
+      "ok": true,
+      "obtido": "Portão aprovado; 22 testes (22 aprovados); nenhum achado; cobertura 100%",
+      "testes": 22,
+      "aprovados": 22,
+      "reprovados": 0,
+      "erros": 0,
+      "cobertura": 100.0,
+      "portao_aprovado": true,
+      "sinalizadas": [],
+      "vp": 0,
+      "fp": 0,
+      "fn": 0,
+      "iteracoes": 1,
+      "tempo_por_filtro": {
+        "0-normalizacao": 0.0,
+        "1-analise-contexto": 0.0,
+        "2-geracao-cenarios": 0.0,
+        "3-selecao-estrategia": 0.0,
+        "4-geracao-codigo": 0.001,
+        "5-execucao": 0.684,
+        "6-analise-resultados": 0.0
+      },
+      "modelo": "nenhum (modo heurístico)"
+    },
+    {
+      "caso": "C02",
+      "tipo": "típico",
+      "repeticao": 1,
+      "tempo_s": 0.729,
+      "ok": true,
+      "obtido": "Portão reprovado; 65 testes; defeitos apontados em Estoque.adicionar, aplicar_cupom, ticket_medio; cobertura 98%",
+      "testes": 65,
+      "aprovados": 62,
+      "reprovados": 3,
+      "erros": 0,
+      "cobertura": 97.7,
+      "portao_aprovado": false,
+      "sinalizadas": [
+        "loja.Estoque.adicionar",
+        "loja.aplicar_cupom",
+        "loja.ticket_medio"
+      ],
+      "vp": 2,
+      "fp": 1,
+      "fn": 0,
+      "iteracoes": 1,
+      "tempo_por_filtro": {
+        "0-normalizacao": 0.0,
+        "1-analise-contexto": 0.001,
+        "2-geracao-cenarios": 0.001,
+        "3-selecao-estrategia": 0.0,
+        "4-geracao-codigo": 0.003,
+        "5-execucao": 0.717,
+        "6-analise-resultados": 0.0
+      },
+      "modelo": "nenhum (modo heurístico)"
+    },
+    {
+      "caso": "C02",
+      "tipo": "típico",
+      "repeticao": 2,
+      "tempo_s": 0.702,
+      "ok": true,
+      "obtido": "Portão reprovado; 65 testes; defeitos apontados em Estoque.adicionar, aplicar_cupom, ticket_medio; cobertura 98%",
+      "testes": 65,
+      "aprovados": 62,
+      "reprovados": 3,
+      "erros": 0,
+      "cobertura": 97.7,
+      "portao_aprovado": false,
+      "sinalizadas": [
+        "loja.Estoque.adicionar",
+        "loja.aplicar_cupom",
+        "loja.ticket_medio"
+      ],
+      "vp": 2,
+      "fp": 1,
+      "fn": 0,
+      "iteracoes": 1,
+      "tempo_por_filtro": {
+        "0-normalizacao": 0.0,
+        "1-analise-contexto": 0.001,
+        "2-geracao-cenarios": 0.001,
+        "3-selecao-estrategia": 0.0,
+        "4-geracao-codigo": 0.003,
+        "5-execucao": 0.691,
+        "6-analise-resultados": 0.0
+      },
+      "modelo": "nenhum (modo heurístico)"
+    },
+    {
+      "caso": "C02",
+      "tipo": "típico",
+      "repeticao": 3,
+      "tempo_s": 0.705,
+      "ok": true,
+      "obtido": "Portão reprovado; 65 testes; defeitos apontados em Estoque.adicionar, aplicar_cupom, ticket_medio; cobertura 98%",
+      "testes": 65,
+      "aprovados": 62,
+      "reprovados": 3,
+      "erros": 0,
+      "cobertura": 97.7,
+      "portao_aprovado": false,
+      "sinalizadas": [
+        "loja.Estoque.adicionar",
+        "loja.aplicar_cupom",
+        "loja.ticket_medio"
+      ],
+      "vp": 2,
+      "fp": 1,
+      "fn": 0,
+      "iteracoes": 1,
+      "tempo_por_filtro": {
+        "0-normalizacao": 0.0,
+        "1-analise-contexto": 0.002,
+        "2-geracao-cenarios": 0.002,
+        "3-selecao-estrategia": 0.0,
+        "4-geracao-codigo": 0.003,
+        "5-execucao": 0.692,
+        "6-analise-resultados": 0.0
+      },
+      "modelo": "nenhum (modo heurístico)"
+    },
+    {
+      "caso": "C02",
+      "tipo": "típico",
+      "repeticao": 4,
+      "tempo_s": 0.716,
+      "ok": true,
+      "obtido": "Portão reprovado; 65 testes; defeitos apontados em Estoque.adicionar, aplicar_cupom, ticket_medio; cobertura 98%",
+      "testes": 65,
+      "aprovados": 62,
+      "reprovados": 3,
+      "erros": 0,
+      "cobertura": 97.7,
+      "portao_aprovado": false,
+      "sinalizadas": [
+        "loja.Estoque.adicionar",
+        "loja.aplicar_cupom",
+        "loja.ticket_medio"
+      ],
+      "vp": 2,
+      "fp": 1,
+      "fn": 0,
+      "iteracoes": 1,
+      "tempo_por_filtro": {
+        "0-normalizacao": 0.0,
+        "1-analise-contexto": 0.002,
+        "2-geracao-cenarios": 0.001,
+        "3-selecao-estrategia": 0.0,
+        "4-geracao-codigo": 0.016,
+        "5-execucao": 0.691,
+        "6-analise-resultados": 0.0
+      },
+      "modelo": "nenhum (modo heurístico)"
+    },
+    {
+      "caso": "C02",
+      "tipo": "típico",
+      "repeticao": 5,
+      "tempo_s": 0.715,
+      "ok": true,
+      "obtido": "Portão reprovado; 65 testes; defeitos apontados em Estoque.adicionar, aplicar_cupom, ticket_medio; cobertura 98%",
+      "testes": 65,
+      "aprovados": 62,
+      "reprovados": 3,
+      "erros": 0,
+      "cobertura": 97.7,
+      "portao_aprovado": false,
+      "sinalizadas": [
+        "loja.Estoque.adicionar",
+        "loja.aplicar_cupom",
+        "loja.ticket_medio"
+      ],
+      "vp": 2,
+      "fp": 1,
+      "fn": 0,
+      "iteracoes": 1,
+      "tempo_por_filtro": {
+        "0-normalizacao": 0.0,
+        "1-analise-contexto": 0.002,
+        "2-geracao-cenarios": 0.002,
+        "3-selecao-estrategia": 0.0,
+        "4-geracao-codigo": 0.003,
+        "5-execucao": 0.701,
+        "6-analise-resultados": 0.0
+      },
+      "modelo": "nenhum (modo heurístico)"
+    },
+    {
+      "caso": "C03",
+      "tipo": "típico",
+      "repeticao": 1,
+      "tempo_s": 0.615,
+      "ok": true,
+      "obtido": "Unidades com cenários: calc.dividir; 9 testes; portão aprovado",
+      "testes": 9,
+      "aprovados": 9,
+      "reprovados": 0,
+      "erros": 0,
+      "cobertura": 83.3,
+      "portao_aprovado": true,
+      "sinalizadas": [],
+      "vp": 0,
+      "fp": 0,
+      "fn": 0,
+      "iteracoes": 1,
+      "tempo_por_filtro": {
+        "0-normalizacao": 0.0,
+        "1-analise-contexto": 0.0,
+        "2-geracao-cenarios": 0.0,
+        "3-selecao-estrategia": 0.0,
+        "4-geracao-codigo": 0.001,
+        "5-execucao": 0.611,
+        "6-analise-resultados": 0.0
+      },
+      "modelo": "nenhum (modo heurístico)"
+    },
+    {
+      "caso": "C03",
+      "tipo": "típico",
+      "repeticao": 2,
+      "tempo_s": 0.587,
+      "ok": true,
+      "obtido": "Unidades com cenários: calc.dividir; 9 testes; portão aprovado",
+      "testes": 9,
+      "aprovados": 9,
+      "reprovados": 0,
+      "erros": 0,
+      "cobertura": 83.3,
+      "portao_aprovado": true,
+      "sinalizadas": [],
+      "vp": 0,
+      "fp": 0,
+      "fn": 0,
+      "iteracoes": 1,
+      "tempo_por_filtro": {
+        "0-normalizacao": 0.0,
+        "1-analise-contexto": 0.0,
+        "2-geracao-cenarios": 0.0,
+        "3-selecao-estrategia": 0.0,
+        "4-geracao-codigo": 0.001,
+        "5-execucao": 0.584,
+        "6-analise-resultados": 0.0
+      },
+      "modelo": "nenhum (modo heurístico)"
+    },
+    {
+      "caso": "C03",
+      "tipo": "típico",
+      "repeticao": 3,
+      "tempo_s": 0.611,
+      "ok": true,
+      "obtido": "Unidades com cenários: calc.dividir; 9 testes; portão aprovado",
+      "testes": 9,
+      "aprovados": 9,
+      "reprovados": 0,
+      "erros": 0,
+      "cobertura": 83.3,
+      "portao_aprovado": true,
+      "sinalizadas": [],
+      "vp": 0,
+      "fp": 0,
+      "fn": 0,
+      "iteracoes": 1,
+      "tempo_por_filtro": {
+        "0-normalizacao": 0.0,
+        "1-analise-contexto": 0.0,
+        "2-geracao-cenarios": 0.0,
+        "3-selecao-estrategia": 0.0,
+        "4-geracao-codigo": 0.001,
+        "5-execucao": 0.609,
+        "6-analise-resultados": 0.0
+      },
+      "modelo": "nenhum (modo heurístico)"
+    },
+    {
+      "caso": "C03",
+      "tipo": "típico",
+      "repeticao": 4,
+      "tempo_s": 0.611,
+      "ok": true,
+      "obtido": "Unidades com cenários: calc.dividir; 9 testes; portão aprovado",
+      "testes": 9,
+      "aprovados": 9,
+      "reprovados": 0,
+      "erros": 0,
+      "cobertura": 83.3,
+      "portao_aprovado": true,
+      "sinalizadas": [],
+      "vp": 0,
+      "fp": 0,
+      "fn": 0,
+      "iteracoes": 1,
+      "tempo_por_filtro": {
+        "0-normalizacao": 0.0,
+        "1-analise-contexto": 0.0,
+        "2-geracao-cenarios": 0.0,
+        "3-selecao-estrategia": 0.0,
+        "4-geracao-codigo": 0.001,
+        "5-execucao": 0.606,
+        "6-analise-resultados": 0.0
+      },
+      "modelo": "nenhum (modo heurístico)"
+    },
+    {
+      "caso": "C03",
+      "tipo": "típico",
+      "repeticao": 5,
+      "tempo_s": 0.652,
+      "ok": true,
+      "obtido": "Unidades com cenários: calc.dividir; 9 testes; portão aprovado",
+      "testes": 9,
+      "aprovados": 9,
+      "reprovados": 0,
+      "erros": 0,
+      "cobertura": 83.3,
+      "portao_aprovado": true,
+      "sinalizadas": [],
+      "vp": 0,
+      "fp": 0,
+      "fn": 0,
+      "iteracoes": 1,
+      "tempo_por_filtro": {
+        "0-normalizacao": 0.0,
+        "1-analise-contexto": 0.0,
+        "2-geracao-cenarios": 0.0,
+        "3-selecao-estrategia": 0.0,
+        "4-geracao-codigo": 0.001,
+        "5-execucao": 0.648,
+        "6-analise-resultados": 0.0
+      },
+      "modelo": "nenhum (modo heurístico)"
+    },
+    {
+      "caso": "C04",
+      "tipo": "típico",
+      "repeticao": 1,
+      "tempo_s": 0.614,
+      "ok": true,
+      "obtido": "Regressão apontada em tests.test_calc::test_dobro; portão reprovado; regressao×1",
+      "testes": 6,
+      "aprovados": 5,
+      "reprovados": 1,
+      "erros": 0,
+      "cobertura": 100.0,
+      "portao_aprovado": false,
+      "sinalizadas": [
+        "tests.test_calc::test_dobro"
+      ],
+      "vp": 1,
+      "fp": 0,
+      "fn": 0,
+      "iteracoes": 1,
+      "tempo_por_filtro": {
+        "0-normalizacao": 0.0,
+        "1-analise-contexto": 0.0,
+        "2-geracao-cenarios": 0.0,
+        "3-selecao-estrategia": 0.0,
+        "4-geracao-codigo": 0.001,
+        "5-execucao": 0.611,
+        "6-analise-resultados": 0.0
+      },
+      "modelo": "nenhum (modo heurístico)"
+    },
+    {
+      "caso": "C04",
+      "tipo": "típico",
+      "repeticao": 2,
+      "tempo_s": 0.602,
+      "ok": true,
+      "obtido": "Regressão apontada em tests.test_calc::test_dobro; portão reprovado; regressao×1",
+      "testes": 6,
+      "aprovados": 5,
+      "reprovados": 1,
+      "erros": 0,
+      "cobertura": 100.0,
+      "portao_aprovado": false,
+      "sinalizadas": [
+        "tests.test_calc::test_dobro"
+      ],
+      "vp": 1,
+      "fp": 0,
+      "fn": 0,
+      "iteracoes": 1,
+      "tempo_por_filtro": {
+        "0-normalizacao": 0.0,
+        "1-analise-contexto": 0.0,
+        "2-geracao-cenarios": 0.0,
+        "3-selecao-estrategia": 0.0,
+        "4-geracao-codigo": 0.001,
+        "5-execucao": 0.599,
+        "6-analise-resultados": 0.0
+      },
+      "modelo": "nenhum (modo heurístico)"
+    },
+    {
+      "caso": "C04",
+      "tipo": "típico",
+      "repeticao": 3,
+      "tempo_s": 0.618,
+      "ok": true,
+      "obtido": "Regressão apontada em tests.test_calc::test_dobro; portão reprovado; regressao×1",
+      "testes": 6,
+      "aprovados": 5,
+      "reprovados": 1,
+      "erros": 0,
+      "cobertura": 100.0,
+      "portao_aprovado": false,
+      "sinalizadas": [
+        "tests.test_calc::test_dobro"
+      ],
+      "vp": 1,
+      "fp": 0,
+      "fn": 0,
+      "iteracoes": 1,
+      "tempo_por_filtro": {
+        "0-normalizacao": 0.0,
+        "1-analise-contexto": 0.0,
+        "2-geracao-cenarios": 0.0,
+        "3-selecao-estrategia": 0.0,
+        "4-geracao-codigo": 0.001,
+        "5-execucao": 0.615,
+        "6-analise-resultados": 0.0
+      },
+      "modelo": "nenhum (modo heurístico)"
+    },
+    {
+      "caso": "C04",
+      "tipo": "típico",
+      "repeticao": 4,
+      "tempo_s": 0.621,
+      "ok": true,
+      "obtido": "Regressão apontada em tests.test_calc::test_dobro; portão reprovado; regressao×1",
+      "testes": 6,
+      "aprovados": 5,
+      "reprovados": 1,
+      "erros": 0,
+      "cobertura": 100.0,
+      "portao_aprovado": false,
+      "sinalizadas": [
+        "tests.test_calc::test_dobro"
+      ],
+      "vp": 1,
+      "fp": 0,
+      "fn": 0,
+      "iteracoes": 1,
+      "tempo_por_filtro": {
+        "0-normalizacao": 0.0,
+        "1-analise-contexto": 0.0,
+        "2-geracao-cenarios": 0.0,
+        "3-selecao-estrategia": 0.0,
+        "4-geracao-codigo": 0.001,
+        "5-execucao": 0.618,
+        "6-analise-resultados": 0.0
+      },
+      "modelo": "nenhum (modo heurístico)"
+    },
+    {
+      "caso": "C04",
+      "tipo": "típico",
+      "repeticao": 5,
+      "tempo_s": 0.597,
+      "ok": true,
+      "obtido": "Regressão apontada em tests.test_calc::test_dobro; portão reprovado; regressao×1",
+      "testes": 6,
+      "aprovados": 5,
+      "reprovados": 1,
+      "erros": 0,
+      "cobertura": 100.0,
+      "portao_aprovado": false,
+      "sinalizadas": [
+        "tests.test_calc::test_dobro"
+      ],
+      "vp": 1,
+      "fp": 0,
+      "fn": 0,
+      "iteracoes": 1,
+      "tempo_por_filtro": {
+        "0-normalizacao": 0.0,
+        "1-analise-contexto": 0.0,
+        "2-geracao-cenarios": 0.0,
+        "3-selecao-estrategia": 0.0,
+        "4-geracao-codigo": 0.001,
+        "5-execucao": 0.594,
+        "6-analise-resultados": 0.0
+      },
+      "modelo": "nenhum (modo heurístico)"
+    },
+    {
+      "caso": "C05",
+      "tipo": "típico",
+      "repeticao": 1,
+      "tempo_s": 0.801,
+      "ok": true,
+      "obtido": "1 arquivo(s) de teste de API; 4/4 requisições conforme o contrato; portão aprovado",
+      "testes": 4,
+      "aprovados": 4,
+      "reprovados": 0,
+      "erros": 0,
+      "cobertura": null,
+      "portao_aprovado": true,
+      "sinalizadas": [],
+      "vp": 0,
+      "fp": 0,
+      "fn": 0,
+      "iteracoes": 1,
+      "tempo_por_filtro": {
+        "0-normalizacao": 0.003,
+        "1-analise-contexto": 0.0,
+        "2-geracao-cenarios": 0.0,
+        "3-selecao-estrategia": 0.0,
+        "4-geracao-codigo": 0.0,
+        "5-execucao": 0.796,
+        "6-analise-resultados": 0.0
+      },
+      "modelo": "nenhum (modo heurístico)"
+    },
+    {
+      "caso": "C05",
+      "tipo": "típico",
+      "repeticao": 2,
+      "tempo_s": 0.798,
+      "ok": true,
+      "obtido": "1 arquivo(s) de teste de API; 4/4 requisições conforme o contrato; portão aprovado",
+      "testes": 4,
+      "aprovados": 4,
+      "reprovados": 0,
+      "erros": 0,
+      "cobertura": null,
+      "portao_aprovado": true,
+      "sinalizadas": [],
+      "vp": 0,
+      "fp": 0,
+      "fn": 0,
+      "iteracoes": 1,
+      "tempo_por_filtro": {
+        "0-normalizacao": 0.006,
+        "1-analise-contexto": 0.0,
+        "2-geracao-cenarios": 0.0,
+        "3-selecao-estrategia": 0.0,
+        "4-geracao-codigo": 0.001,
+        "5-execucao": 0.789,
+        "6-analise-resultados": 0.0
+      },
+      "modelo": "nenhum (modo heurístico)"
+    },
+    {
+      "caso": "C05",
+      "tipo": "típico",
+      "repeticao": 3,
+      "tempo_s": 0.771,
+      "ok": true,
+      "obtido": "1 arquivo(s) de teste de API; 4/4 requisições conforme o contrato; portão aprovado",
+      "testes": 4,
+      "aprovados": 4,
+      "reprovados": 0,
+      "erros": 0,
+      "cobertura": null,
+      "portao_aprovado": true,
+      "sinalizadas": [],
+      "vp": 0,
+      "fp": 0,
+      "fn": 0,
+      "iteracoes": 1,
+      "tempo_por_filtro": {
+        "0-normalizacao": 0.005,
+        "1-analise-contexto": 0.0,
+        "2-geracao-cenarios": 0.0,
+        "3-selecao-estrategia": 0.0,
+        "4-geracao-codigo": 0.0,
+        "5-execucao": 0.764,
+        "6-analise-resultados": 0.0
+      },
+      "modelo": "nenhum (modo heurístico)"
+    },
+    {
+      "caso": "C05",
+      "tipo": "típico",
+      "repeticao": 4,
+      "tempo_s": 0.805,
+      "ok": true,
+      "obtido": "1 arquivo(s) de teste de API; 4/4 requisições conforme o contrato; portão aprovado",
+      "testes": 4,
+      "aprovados": 4,
+      "reprovados": 0,
+      "erros": 0,
+      "cobertura": null,
+      "portao_aprovado": true,
+      "sinalizadas": [],
+      "vp": 0,
+      "fp": 0,
+      "fn": 0,
+      "iteracoes": 1,
+      "tempo_por_filtro": {
+        "0-normalizacao": 0.006,
+        "1-analise-contexto": 0.0,
+        "2-geracao-cenarios": 0.0,
+        "3-selecao-estrategia": 0.0,
+        "4-geracao-codigo": 0.001,
+        "5-execucao": 0.796,
+        "6-analise-resultados": 0.0
+      },
+      "modelo": "nenhum (modo heurístico)"
+    },
+    {
+      "caso": "C05",
+      "tipo": "típico",
+      "repeticao": 5,
+      "tempo_s": 0.782,
+      "ok": true,
+      "obtido": "1 arquivo(s) de teste de API; 4/4 requisições conforme o contrato; portão aprovado",
+      "testes": 4,
+      "aprovados": 4,
+      "reprovados": 0,
+      "erros": 0,
+      "cobertura": null,
+      "portao_aprovado": true,
+      "sinalizadas": [],
+      "vp": 0,
+      "fp": 0,
+      "fn": 0,
+      "iteracoes": 1,
+      "tempo_por_filtro": {
+        "0-normalizacao": 0.006,
+        "1-analise-contexto": 0.0,
+        "2-geracao-cenarios": 0.0,
+        "3-selecao-estrategia": 0.0,
+        "4-geracao-codigo": 0.001,
+        "5-execucao": 0.774,
+        "6-analise-resultados": 0.0
+      },
+      "modelo": "nenhum (modo heurístico)"
+    },
+    {
+      "caso": "B01",
+      "tipo": "borda",
+      "repeticao": 1,
+      "tempo_s": 0.0,
+      "ok": true,
+      "obtido": "Rejeitada na validação do contrato (ValidationError: informe ao menos 'arquivos', 'diff' ou 'contrato_openapi'); pipeline não executado",
+      "testes": 0,
+      "aprovados": 0,
+      "reprovados": 0,
+      "erros": 0,
+      "cobertura": null,
+      "portao_aprovado": null,
+      "sinalizadas": [],
+      "vp": 0,
+      "fp": 0,
+      "fn": 0,
+      "iteracoes": 0,
+      "tempo_por_filtro": {},
+      "modelo": "nenhum (modo heurístico)"
+    },
+    {
+      "caso": "B01",
+      "tipo": "borda",
+      "repeticao": 2,
+      "tempo_s": 0.0,
+      "ok": true,
+      "obtido": "Rejeitada na validação do contrato (ValidationError: informe ao menos 'arquivos', 'diff' ou 'contrato_openapi'); pipeline não executado",
+      "testes": 0,
+      "aprovados": 0,
+      "reprovados": 0,
+      "erros": 0,
+      "cobertura": null,
+      "portao_aprovado": null,
+      "sinalizadas": [],
+      "vp": 0,
+      "fp": 0,
+      "fn": 0,
+      "iteracoes": 0,
+      "tempo_por_filtro": {},
+      "modelo": "nenhum (modo heurístico)"
+    },
+    {
+      "caso": "B01",
+      "tipo": "borda",
+      "repeticao": 3,
+      "tempo_s": 0.0,
+      "ok": true,
+      "obtido": "Rejeitada na validação do contrato (ValidationError: informe ao menos 'arquivos', 'diff' ou 'contrato_openapi'); pipeline não executado",
+      "testes": 0,
+      "aprovados": 0,
+      "reprovados": 0,
+      "erros": 0,
+      "cobertura": null,
+      "portao_aprovado": null,
+      "sinalizadas": [],
+      "vp": 0,
+      "fp": 0,
+      "fn": 0,
+      "iteracoes": 0,
+      "tempo_por_filtro": {},
+      "modelo": "nenhum (modo heurístico)"
+    },
+    {
+      "caso": "B01",
+      "tipo": "borda",
+      "repeticao": 4,
+      "tempo_s": 0.0,
+      "ok": true,
+      "obtido": "Rejeitada na validação do contrato (ValidationError: informe ao menos 'arquivos', 'diff' ou 'contrato_openapi'); pipeline não executado",
+      "testes": 0,
+      "aprovados": 0,
+      "reprovados": 0,
+      "erros": 0,
+      "cobertura": null,
+      "portao_aprovado": null,
+      "sinalizadas": [],
+      "vp": 0,
+      "fp": 0,
+      "fn": 0,
+      "iteracoes": 0,
+      "tempo_por_filtro": {},
+      "modelo": "nenhum (modo heurístico)"
+    },
+    {
+      "caso": "B01",
+      "tipo": "borda",
+      "repeticao": 5,
+      "tempo_s": 0.0,
+      "ok": true,
+      "obtido": "Rejeitada na validação do contrato (ValidationError: informe ao menos 'arquivos', 'diff' ou 'contrato_openapi'); pipeline não executado",
+      "testes": 0,
+      "aprovados": 0,
+      "reprovados": 0,
+      "erros": 0,
+      "cobertura": null,
+      "portao_aprovado": null,
+      "sinalizadas": [],
+      "vp": 0,
+      "fp": 0,
+      "fn": 0,
+      "iteracoes": 0,
+      "tempo_por_filtro": {},
+      "modelo": "nenhum (modo heurístico)"
+    },
+    {
+      "caso": "B02",
+      "tipo": "borda",
+      "repeticao": 1,
+      "tempo_s": 0.003,
+      "ok": true,
+      "obtido": "Risco ALTA “não compila” registrado; 0 testes; portão reprovado",
+      "testes": 0,
+      "aprovados": 0,
+      "reprovados": 0,
+      "erros": 0,
+      "cobertura": null,
+      "portao_aprovado": false,
+      "sinalizadas": [],
+      "vp": 0,
+      "fp": 0,
+      "fn": 0,
+      "iteracoes": 1,
+      "tempo_por_filtro": {
+        "0-normalizacao": 0.0,
+        "1-analise-contexto": 0.0,
+        "2-geracao-cenarios": 0.0,
+        "3-selecao-estrategia": 0.0,
+        "4-geracao-codigo": 0.0,
+        "5-execucao": 0.002,
+        "6-analise-resultados": 0.0
+      },
+      "modelo": "nenhum (modo heurístico)"
+    },
+    {
+      "caso": "B02",
+      "tipo": "borda",
+      "repeticao": 2,
+      "tempo_s": 0.002,
+      "ok": true,
+      "obtido": "Risco ALTA “não compila” registrado; 0 testes; portão reprovado",
+      "testes": 0,
+      "aprovados": 0,
+      "reprovados": 0,
+      "erros": 0,
+      "cobertura": null,
+      "portao_aprovado": false,
+      "sinalizadas": [],
+      "vp": 0,
+      "fp": 0,
+      "fn": 0,
+      "iteracoes": 1,
+      "tempo_por_filtro": {
+        "0-normalizacao": 0.0,
+        "1-analise-contexto": 0.0,
+        "2-geracao-cenarios": 0.0,
+        "3-selecao-estrategia": 0.0,
+        "4-geracao-codigo": 0.0,
+        "5-execucao": 0.001,
+        "6-analise-resultados": 0.0
+      },
+      "modelo": "nenhum (modo heurístico)"
+    },
+    {
+      "caso": "B02",
+      "tipo": "borda",
+      "repeticao": 3,
+      "tempo_s": 0.001,
+      "ok": true,
+      "obtido": "Risco ALTA “não compila” registrado; 0 testes; portão reprovado",
+      "testes": 0,
+      "aprovados": 0,
+      "reprovados": 0,
+      "erros": 0,
+      "cobertura": null,
+      "portao_aprovado": false,
+      "sinalizadas": [],
+      "vp": 0,
+      "fp": 0,
+      "fn": 0,
+      "iteracoes": 1,
+      "tempo_por_filtro": {
+        "0-normalizacao": 0.0,
+        "1-analise-contexto": 0.0,
+        "2-geracao-cenarios": 0.0,
+        "3-selecao-estrategia": 0.0,
+        "4-geracao-codigo": 0.0,
+        "5-execucao": 0.001,
+        "6-analise-resultados": 0.0
+      },
+      "modelo": "nenhum (modo heurístico)"
+    },
+    {
+      "caso": "B02",
+      "tipo": "borda",
+      "repeticao": 4,
+      "tempo_s": 0.001,
+      "ok": true,
+      "obtido": "Risco ALTA “não compila” registrado; 0 testes; portão reprovado",
+      "testes": 0,
+      "aprovados": 0,
+      "reprovados": 0,
+      "erros": 0,
+      "cobertura": null,
+      "portao_aprovado": false,
+      "sinalizadas": [],
+      "vp": 0,
+      "fp": 0,
+      "fn": 0,
+      "iteracoes": 1,
+      "tempo_por_filtro": {
+        "0-normalizacao": 0.0,
+        "1-analise-contexto": 0.0,
+        "2-geracao-cenarios": 0.0,
+        "3-selecao-estrategia": 0.0,
+        "4-geracao-codigo": 0.0,
+        "5-execucao": 0.001,
+        "6-analise-resultados": 0.0
+      },
+      "modelo": "nenhum (modo heurístico)"
+    },
+    {
+      "caso": "B02",
+      "tipo": "borda",
+      "repeticao": 5,
+      "tempo_s": 0.002,
+      "ok": true,
+      "obtido": "Risco ALTA “não compila” registrado; 0 testes; portão reprovado",
+      "testes": 0,
+      "aprovados": 0,
+      "reprovados": 0,
+      "erros": 0,
+      "cobertura": null,
+      "portao_aprovado": false,
+      "sinalizadas": [],
+      "vp": 0,
+      "fp": 0,
+      "fn": 0,
+      "iteracoes": 1,
+      "tempo_por_filtro": {
+        "0-normalizacao": 0.0,
+        "1-analise-contexto": 0.0,
+        "2-geracao-cenarios": 0.0,
+        "3-selecao-estrategia": 0.0,
+        "4-geracao-codigo": 0.0,
+        "5-execucao": 0.001,
+        "6-analise-resultados": 0.0
+      },
+      "modelo": "nenhum (modo heurístico)"
+    },
+    {
+      "caso": "B03",
+      "tipo": "borda",
+      "repeticao": 1,
+      "tempo_s": 9.634,
+      "ok": true,
+      "obtido": "3 teste(s) interrompido(s) por tempo em fila.processar; portão reprovado",
+      "testes": 5,
+      "aprovados": 2,
+      "reprovados": 3,
+      "erros": 0,
+      "cobertura": 100.0,
+      "portao_aprovado": false,
+      "sinalizadas": [
+        "fila.processar"
+      ],
+      "vp": 1,
+      "fp": 0,
+      "fn": 0,
+      "iteracoes": 1,
+      "tempo_por_filtro": {
+        "0-normalizacao": 0.0,
+        "1-analise-contexto": 0.0,
+        "2-geracao-cenarios": 0.0,
+        "3-selecao-estrategia": 0.0,
+        "4-geracao-codigo": 0.0,
+        "5-execucao": 9.632,
+        "6-analise-resultados": 0.0
+      },
+      "modelo": "nenhum (modo heurístico)"
+    },
+    {
+      "caso": "B03",
+      "tipo": "borda",
+      "repeticao": 2,
+      "tempo_s": 9.631,
+      "ok": true,
+      "obtido": "3 teste(s) interrompido(s) por tempo em fila.processar; portão reprovado",
+      "testes": 5,
+      "aprovados": 2,
+      "reprovados": 3,
+      "erros": 0,
+      "cobertura": 100.0,
+      "portao_aprovado": false,
+      "sinalizadas": [
+        "fila.processar"
+      ],
+      "vp": 1,
+      "fp": 0,
+      "fn": 0,
+      "iteracoes": 1,
+      "tempo_por_filtro": {
+        "0-normalizacao": 0.0,
+        "1-analise-contexto": 0.0,
+        "2-geracao-cenarios": 0.0,
+        "3-selecao-estrategia": 0.0,
+        "4-geracao-codigo": 0.001,
+        "5-execucao": 9.628,
+        "6-analise-resultados": 0.0
+      },
+      "modelo": "nenhum (modo heurístico)"
+    },
+    {
+      "caso": "B03",
+      "tipo": "borda",
+      "repeticao": 3,
+      "tempo_s": 9.659,
+      "ok": true,
+      "obtido": "3 teste(s) interrompido(s) por tempo em fila.processar; portão reprovado",
+      "testes": 5,
+      "aprovados": 2,
+      "reprovados": 3,
+      "erros": 0,
+      "cobertura": 100.0,
+      "portao_aprovado": false,
+      "sinalizadas": [
+        "fila.processar"
+      ],
+      "vp": 1,
+      "fp": 0,
+      "fn": 0,
+      "iteracoes": 1,
+      "tempo_por_filtro": {
+        "0-normalizacao": 0.0,
+        "1-analise-contexto": 0.0,
+        "2-geracao-cenarios": 0.0,
+        "3-selecao-estrategia": 0.0,
+        "4-geracao-codigo": 0.001,
+        "5-execucao": 9.656,
+        "6-analise-resultados": 0.0
+      },
+      "modelo": "nenhum (modo heurístico)"
+    },
+    {
+      "caso": "B03",
+      "tipo": "borda",
+      "repeticao": 4,
+      "tempo_s": 9.653,
+      "ok": true,
+      "obtido": "3 teste(s) interrompido(s) por tempo em fila.processar; portão reprovado",
+      "testes": 5,
+      "aprovados": 2,
+      "reprovados": 3,
+      "erros": 0,
+      "cobertura": 100.0,
+      "portao_aprovado": false,
+      "sinalizadas": [
+        "fila.processar"
+      ],
+      "vp": 1,
+      "fp": 0,
+      "fn": 0,
+      "iteracoes": 1,
+      "tempo_por_filtro": {
+        "0-normalizacao": 0.0,
+        "1-analise-contexto": 0.0,
+        "2-geracao-cenarios": 0.0,
+        "3-selecao-estrategia": 0.0,
+        "4-geracao-codigo": 0.001,
+        "5-execucao": 9.651,
+        "6-analise-resultados": 0.0
+      },
+      "modelo": "nenhum (modo heurístico)"
+    },
+    {
+      "caso": "B03",
+      "tipo": "borda",
+      "repeticao": 5,
+      "tempo_s": 9.776,
+      "ok": true,
+      "obtido": "3 teste(s) interrompido(s) por tempo em fila.processar; portão reprovado",
+      "testes": 5,
+      "aprovados": 2,
+      "reprovados": 3,
+      "erros": 0,
+      "cobertura": 100.0,
+      "portao_aprovado": false,
+      "sinalizadas": [
+        "fila.processar"
+      ],
+      "vp": 1,
+      "fp": 0,
+      "fn": 0,
+      "iteracoes": 1,
+      "tempo_por_filtro": {
+        "0-normalizacao": 0.0,
+        "1-analise-contexto": 0.0,
+        "2-geracao-cenarios": 0.0,
+        "3-selecao-estrategia": 0.0,
+        "4-geracao-codigo": 0.001,
+        "5-execucao": 9.772,
+        "6-analise-resultados": 0.0
+      },
+      "modelo": "nenhum (modo heurístico)"
+    },
+    {
+      "caso": "B04",
+      "tipo": "borda",
+      "repeticao": 1,
+      "tempo_s": 1.466,
+      "ok": true,
+      "obtido": "2 achado(s) dependencia_externa; 0 unidade(s) apontada(s) como defeito; portão reprovado",
+      "testes": 6,
+      "aprovados": 4,
+      "reprovados": 2,
+      "erros": 0,
+      "cobertura": 83.3,
+      "portao_aprovado": false,
+      "sinalizadas": [],
+      "vp": 0,
+      "fp": 0,
+      "fn": 0,
+      "iteracoes": 1,
+      "tempo_por_filtro": {
+        "0-normalizacao": 0.0,
+        "1-analise-contexto": 0.001,
+        "2-geracao-cenarios": 0.0,
+        "3-selecao-estrategia": 0.0,
+        "4-geracao-codigo": 0.001,
+        "5-execucao": 1.46,
+        "6-analise-resultados": 0.0
+      },
+      "modelo": "nenhum (modo heurístico)"
+    },
+    {
+      "caso": "B04",
+      "tipo": "borda",
+      "repeticao": 2,
+      "tempo_s": 0.8,
+      "ok": true,
+      "obtido": "2 achado(s) dependencia_externa; 0 unidade(s) apontada(s) como defeito; portão reprovado",
+      "testes": 6,
+      "aprovados": 4,
+      "reprovados": 2,
+      "erros": 0,
+      "cobertura": 83.3,
+      "portao_aprovado": false,
+      "sinalizadas": [],
+      "vp": 0,
+      "fp": 0,
+      "fn": 0,
+      "iteracoes": 1,
+      "tempo_por_filtro": {
+        "0-normalizacao": 0.0,
+        "1-analise-contexto": 0.001,
+        "2-geracao-cenarios": 0.0,
+        "3-selecao-estrategia": 0.0,
+        "4-geracao-codigo": 0.001,
+        "5-execucao": 0.796,
+        "6-analise-resultados": 0.0
+      },
+      "modelo": "nenhum (modo heurístico)"
+    },
+    {
+      "caso": "B04",
+      "tipo": "borda",
+      "repeticao": 3,
+      "tempo_s": 0.77,
+      "ok": true,
+      "obtido": "2 achado(s) dependencia_externa; 0 unidade(s) apontada(s) como defeito; portão reprovado",
+      "testes": 6,
+      "aprovados": 4,
+      "reprovados": 2,
+      "erros": 0,
+      "cobertura": 83.3,
+      "portao_aprovado": false,
+      "sinalizadas": [],
+      "vp": 0,
+      "fp": 0,
+      "fn": 0,
+      "iteracoes": 1,
+      "tempo_por_filtro": {
+        "0-normalizacao": 0.0,
+        "1-analise-contexto": 0.0,
+        "2-geracao-cenarios": 0.0,
+        "3-selecao-estrategia": 0.0,
+        "4-geracao-codigo": 0.001,
+        "5-execucao": 0.767,
+        "6-analise-resultados": 0.0
+      },
+      "modelo": "nenhum (modo heurístico)"
+    },
+    {
+      "caso": "B04",
+      "tipo": "borda",
+      "repeticao": 4,
+      "tempo_s": 0.781,
+      "ok": true,
+      "obtido": "2 achado(s) dependencia_externa; 0 unidade(s) apontada(s) como defeito; portão reprovado",
+      "testes": 6,
+      "aprovados": 4,
+      "reprovados": 2,
+      "erros": 0,
+      "cobertura": 83.3,
+      "portao_aprovado": false,
+      "sinalizadas": [],
+      "vp": 0,
+      "fp": 0,
+      "fn": 0,
+      "iteracoes": 1,
+      "tempo_por_filtro": {
+        "0-normalizacao": 0.0,
+        "1-analise-contexto": 0.0,
+        "2-geracao-cenarios": 0.0,
+        "3-selecao-estrategia": 0.0,
+        "4-geracao-codigo": 0.001,
+        "5-execucao": 0.778,
+        "6-analise-resultados": 0.0
+      },
+      "modelo": "nenhum (modo heurístico)"
+    },
+    {
+      "caso": "B04",
+      "tipo": "borda",
+      "repeticao": 5,
+      "tempo_s": 0.822,
+      "ok": true,
+      "obtido": "2 achado(s) dependencia_externa; 0 unidade(s) apontada(s) como defeito; portão reprovado",
+      "testes": 6,
+      "aprovados": 4,
+      "reprovados": 2,
+      "erros": 0,
+      "cobertura": 83.3,
+      "portao_aprovado": false,
+      "sinalizadas": [],
+      "vp": 0,
+      "fp": 0,
+      "fn": 0,
+      "iteracoes": 1,
+      "tempo_por_filtro": {
+        "0-normalizacao": 0.0,
+        "1-analise-contexto": 0.0,
+        "2-geracao-cenarios": 0.0,
+        "3-selecao-estrategia": 0.0,
+        "4-geracao-codigo": 0.001,
+        "5-execucao": 0.819,
+        "6-analise-resultados": 0.0
+      },
+      "modelo": "nenhum (modo heurístico)"
+    },
+    {
+      "caso": "B05",
+      "tipo": "borda",
+      "repeticao": 1,
+      "tempo_s": 0.657,
+      "ok": true,
+      "obtido": "Respostas do LLM rejeitadas pelo esquema; cenários de origem heuristica; 22 testes; portão aprovado",
+      "testes": 22,
+      "aprovados": 22,
+      "reprovados": 0,
+      "erros": 0,
+      "cobertura": 100.0,
+      "portao_aprovado": true,
+      "sinalizadas": [],
+      "vp": 0,
+      "fp": 0,
+      "fn": 0,
+      "iteracoes": 1,
+      "tempo_por_filtro": {
+        "0-normalizacao": 0.0,
+        "1-analise-contexto": 0.008,
+        "2-geracao-cenarios": 0.003,
+        "3-selecao-estrategia": 0.0,
+        "4-geracao-codigo": 0.003,
+        "5-execucao": 0.641,
+        "6-analise-resultados": 0.0
+      },
+      "modelo": "simulado (roteirizado)"
+    },
+    {
+      "caso": "B05",
+      "tipo": "borda",
+      "repeticao": 2,
+      "tempo_s": 0.632,
+      "ok": true,
+      "obtido": "Respostas do LLM rejeitadas pelo esquema; cenários de origem heuristica; 22 testes; portão aprovado",
+      "testes": 22,
+      "aprovados": 22,
+      "reprovados": 0,
+      "erros": 0,
+      "cobertura": 100.0,
+      "portao_aprovado": true,
+      "sinalizadas": [],
+      "vp": 0,
+      "fp": 0,
+      "fn": 0,
+      "iteracoes": 1,
+      "tempo_por_filtro": {
+        "0-normalizacao": 0.0,
+        "1-analise-contexto": 0.003,
+        "2-geracao-cenarios": 0.002,
+        "3-selecao-estrategia": 0.0,
+        "4-geracao-codigo": 0.003,
+        "5-execucao": 0.622,
+        "6-analise-resultados": 0.0
+      },
+      "modelo": "simulado (roteirizado)"
+    },
+    {
+      "caso": "B05",
+      "tipo": "borda",
+      "repeticao": 3,
+      "tempo_s": 0.659,
+      "ok": true,
+      "obtido": "Respostas do LLM rejeitadas pelo esquema; cenários de origem heuristica; 22 testes; portão aprovado",
+      "testes": 22,
+      "aprovados": 22,
+      "reprovados": 0,
+      "erros": 0,
+      "cobertura": 100.0,
+      "portao_aprovado": true,
+      "sinalizadas": [],
+      "vp": 0,
+      "fp": 0,
+      "fn": 0,
+      "iteracoes": 1,
+      "tempo_por_filtro": {
+        "0-normalizacao": 0.0,
+        "1-analise-contexto": 0.002,
+        "2-geracao-cenarios": 0.002,
+        "3-selecao-estrategia": 0.0,
+        "4-geracao-codigo": 0.002,
+        "5-execucao": 0.649,
+        "6-analise-resultados": 0.0
+      },
+      "modelo": "simulado (roteirizado)"
+    },
+    {
+      "caso": "B05",
+      "tipo": "borda",
+      "repeticao": 4,
+      "tempo_s": 0.665,
+      "ok": true,
+      "obtido": "Respostas do LLM rejeitadas pelo esquema; cenários de origem heuristica; 22 testes; portão aprovado",
+      "testes": 22,
+      "aprovados": 22,
+      "reprovados": 0,
+      "erros": 0,
+      "cobertura": 100.0,
+      "portao_aprovado": true,
+      "sinalizadas": [],
+      "vp": 0,
+      "fp": 0,
+      "fn": 0,
+      "iteracoes": 1,
+      "tempo_por_filtro": {
+        "0-normalizacao": 0.0,
+        "1-analise-contexto": 0.003,
+        "2-geracao-cenarios": 0.003,
+        "3-selecao-estrategia": 0.0,
+        "4-geracao-codigo": 0.002,
+        "5-execucao": 0.655,
+        "6-analise-resultados": 0.0
+      },
+      "modelo": "simulado (roteirizado)"
+    },
+    {
+      "caso": "B05",
+      "tipo": "borda",
+      "repeticao": 5,
+      "tempo_s": 0.638,
+      "ok": true,
+      "obtido": "Respostas do LLM rejeitadas pelo esquema; cenários de origem heuristica; 22 testes; portão aprovado",
+      "testes": 22,
+      "aprovados": 22,
+      "reprovados": 0,
+      "erros": 0,
+      "cobertura": 100.0,
+      "portao_aprovado": true,
+      "sinalizadas": [],
+      "vp": 0,
+      "fp": 0,
+      "fn": 0,
+      "iteracoes": 1,
+      "tempo_por_filtro": {
+        "0-normalizacao": 0.0,
+        "1-analise-contexto": 0.003,
+        "2-geracao-cenarios": 0.003,
+        "3-selecao-estrategia": 0.0,
+        "4-geracao-codigo": 0.002,
+        "5-execucao": 0.627,
+        "6-analise-resultados": 0.0
+      },
+      "modelo": "simulado (roteirizado)"
+    },
+    {
+      "caso": "B06",
+      "tipo": "borda",
+      "repeticao": 1,
+      "tempo_s": 0.651,
+      "ok": true,
+      "obtido": "Alvo inexistente descartado; ZeroDivisionError rejeitado como hipótese; defeito em media apontado; portão reprovado",
+      "testes": 4,
+      "aprovados": 3,
+      "reprovados": 1,
+      "erros": 0,
+      "cobertura": 100.0,
+      "portao_aprovado": false,
+      "sinalizadas": [
+        "estat.media"
+      ],
+      "vp": 1,
+      "fp": 0,
+      "fn": 0,
+      "iteracoes": 1,
+      "tempo_por_filtro": {
+        "0-normalizacao": 0.0,
+        "1-analise-contexto": 0.003,
+        "2-geracao-cenarios": 0.002,
+        "3-selecao-estrategia": 0.0,
+        "4-geracao-codigo": 0.001,
+        "5-execucao": 0.644,
+        "6-analise-resultados": 0.0
+      },
+      "modelo": "simulado (roteirizado)"
+    },
+    {
+      "caso": "B06",
+      "tipo": "borda",
+      "repeticao": 2,
+      "tempo_s": 0.634,
+      "ok": true,
+      "obtido": "Alvo inexistente descartado; ZeroDivisionError rejeitado como hipótese; defeito em media apontado; portão reprovado",
+      "testes": 4,
+      "aprovados": 3,
+      "reprovados": 1,
+      "erros": 0,
+      "cobertura": 100.0,
+      "portao_aprovado": false,
+      "sinalizadas": [
+        "estat.media"
+      ],
+      "vp": 1,
+      "fp": 0,
+      "fn": 0,
+      "iteracoes": 1,
+      "tempo_por_filtro": {
+        "0-normalizacao": 0.0,
+        "1-analise-contexto": 0.002,
+        "2-geracao-cenarios": 0.002,
+        "3-selecao-estrategia": 0.0,
+        "4-geracao-codigo": 0.001,
+        "5-execucao": 0.627,
+        "6-analise-resultados": 0.0
+      },
+      "modelo": "simulado (roteirizado)"
+    },
+    {
+      "caso": "B06",
+      "tipo": "borda",
+      "repeticao": 3,
+      "tempo_s": 0.605,
+      "ok": true,
+      "obtido": "Alvo inexistente descartado; ZeroDivisionError rejeitado como hipótese; defeito em media apontado; portão reprovado",
+      "testes": 4,
+      "aprovados": 3,
+      "reprovados": 1,
+      "erros": 0,
+      "cobertura": 100.0,
+      "portao_aprovado": false,
+      "sinalizadas": [
+        "estat.media"
+      ],
+      "vp": 1,
+      "fp": 0,
+      "fn": 0,
+      "iteracoes": 1,
+      "tempo_por_filtro": {
+        "0-normalizacao": 0.0,
+        "1-analise-contexto": 0.002,
+        "2-geracao-cenarios": 0.002,
+        "3-selecao-estrategia": 0.0,
+        "4-geracao-codigo": 0.0,
+        "5-execucao": 0.599,
+        "6-analise-resultados": 0.0
+      },
+      "modelo": "simulado (roteirizado)"
+    },
+    {
+      "caso": "B06",
+      "tipo": "borda",
+      "repeticao": 4,
+      "tempo_s": 0.671,
+      "ok": true,
+      "obtido": "Alvo inexistente descartado; ZeroDivisionError rejeitado como hipótese; defeito em media apontado; portão reprovado",
+      "testes": 4,
+      "aprovados": 3,
+      "reprovados": 1,
+      "erros": 0,
+      "cobertura": 100.0,
+      "portao_aprovado": false,
+      "sinalizadas": [
+        "estat.media"
+      ],
+      "vp": 1,
+      "fp": 0,
+      "fn": 0,
+      "iteracoes": 1,
+      "tempo_por_filtro": {
+        "0-normalizacao": 0.0,
+        "1-analise-contexto": 0.002,
+        "2-geracao-cenarios": 0.002,
+        "3-selecao-estrategia": 0.0,
+        "4-geracao-codigo": 0.001,
+        "5-execucao": 0.664,
+        "6-analise-resultados": 0.0
+      },
+      "modelo": "simulado (roteirizado)"
+    },
+    {
+      "caso": "B06",
+      "tipo": "borda",
+      "repeticao": 5,
+      "tempo_s": 0.662,
+      "ok": true,
+      "obtido": "Alvo inexistente descartado; ZeroDivisionError rejeitado como hipótese; defeito em media apontado; portão reprovado",
+      "testes": 4,
+      "aprovados": 3,
+      "reprovados": 1,
+      "erros": 0,
+      "cobertura": 100.0,
+      "portao_aprovado": false,
+      "sinalizadas": [
+        "estat.media"
+      ],
+      "vp": 1,
+      "fp": 0,
+      "fn": 0,
+      "iteracoes": 1,
+      "tempo_por_filtro": {
+        "0-normalizacao": 0.0,
+        "1-analise-contexto": 0.002,
+        "2-geracao-cenarios": 0.003,
+        "3-selecao-estrategia": 0.0,
+        "4-geracao-codigo": 0.001,
+        "5-execucao": 0.654,
+        "6-analise-resultados": 0.0
+      },
+      "modelo": "simulado (roteirizado)"
+    },
+    {
+      "caso": "B07",
+      "tipo": "borda",
+      "repeticao": 1,
+      "tempo_s": 0.004,
+      "ok": true,
+      "obtido": "Risco de testabilidade registrado; 0 testes; portão reprovado (nenhum teste executado)",
+      "testes": 0,
+      "aprovados": 0,
+      "reprovados": 0,
+      "erros": 0,
+      "cobertura": null,
+      "portao_aprovado": false,
+      "sinalizadas": [],
+      "vp": 0,
+      "fp": 0,
+      "fn": 0,
+      "iteracoes": 1,
+      "tempo_por_filtro": {
+        "0-normalizacao": 0.0,
+        "1-analise-contexto": 0.0,
+        "2-geracao-cenarios": 0.0,
+        "3-selecao-estrategia": 0.0,
+        "4-geracao-codigo": 0.0,
+        "5-execucao": 0.002,
+        "6-analise-resultados": 0.0
+      },
+      "modelo": "nenhum (modo heurístico)"
+    },
+    {
+      "caso": "B07",
+      "tipo": "borda",
+      "repeticao": 2,
+      "tempo_s": 0.003,
+      "ok": true,
+      "obtido": "Risco de testabilidade registrado; 0 testes; portão reprovado (nenhum teste executado)",
+      "testes": 0,
+      "aprovados": 0,
+      "reprovados": 0,
+      "erros": 0,
+      "cobertura": null,
+      "portao_aprovado": false,
+      "sinalizadas": [],
+      "vp": 0,
+      "fp": 0,
+      "fn": 0,
+      "iteracoes": 1,
+      "tempo_por_filtro": {
+        "0-normalizacao": 0.0,
+        "1-analise-contexto": 0.0,
+        "2-geracao-cenarios": 0.0,
+        "3-selecao-estrategia": 0.0,
+        "4-geracao-codigo": 0.0,
+        "5-execucao": 0.002,
+        "6-analise-resultados": 0.0
+      },
+      "modelo": "nenhum (modo heurístico)"
+    },
+    {
+      "caso": "B07",
+      "tipo": "borda",
+      "repeticao": 3,
+      "tempo_s": 0.002,
+      "ok": true,
+      "obtido": "Risco de testabilidade registrado; 0 testes; portão reprovado (nenhum teste executado)",
+      "testes": 0,
+      "aprovados": 0,
+      "reprovados": 0,
+      "erros": 0,
+      "cobertura": null,
+      "portao_aprovado": false,
+      "sinalizadas": [],
+      "vp": 0,
+      "fp": 0,
+      "fn": 0,
+      "iteracoes": 1,
+      "tempo_por_filtro": {
+        "0-normalizacao": 0.0,
+        "1-analise-contexto": 0.0,
+        "2-geracao-cenarios": 0.0,
+        "3-selecao-estrategia": 0.0,
+        "4-geracao-codigo": 0.0,
+        "5-execucao": 0.001,
+        "6-analise-resultados": 0.0
+      },
+      "modelo": "nenhum (modo heurístico)"
+    },
+    {
+      "caso": "B07",
+      "tipo": "borda",
+      "repeticao": 4,
+      "tempo_s": 0.002,
+      "ok": true,
+      "obtido": "Risco de testabilidade registrado; 0 testes; portão reprovado (nenhum teste executado)",
+      "testes": 0,
+      "aprovados": 0,
+      "reprovados": 0,
+      "erros": 0,
+      "cobertura": null,
+      "portao_aprovado": false,
+      "sinalizadas": [],
+      "vp": 0,
+      "fp": 0,
+      "fn": 0,
+      "iteracoes": 1,
+      "tempo_por_filtro": {
+        "0-normalizacao": 0.0,
+        "1-analise-contexto": 0.0,
+        "2-geracao-cenarios": 0.0,
+        "3-selecao-estrategia": 0.0,
+        "4-geracao-codigo": 0.0,
+        "5-execucao": 0.001,
+        "6-analise-resultados": 0.0
+      },
+      "modelo": "nenhum (modo heurístico)"
+    },
+    {
+      "caso": "B07",
+      "tipo": "borda",
+      "repeticao": 5,
+      "tempo_s": 0.002,
+      "ok": true,
+      "obtido": "Risco de testabilidade registrado; 0 testes; portão reprovado (nenhum teste executado)",
+      "testes": 0,
+      "aprovados": 0,
+      "reprovados": 0,
+      "erros": 0,
+      "cobertura": null,
+      "portao_aprovado": false,
+      "sinalizadas": [],
+      "vp": 0,
+      "fp": 0,
+      "fn": 0,
+      "iteracoes": 1,
+      "tempo_por_filtro": {
+        "0-normalizacao": 0.0,
+        "1-analise-contexto": 0.0,
+        "2-geracao-cenarios": 0.0,
+        "3-selecao-estrategia": 0.0,
+        "4-geracao-codigo": 0.0,
+        "5-execucao": 0.001,
+        "6-analise-resultados": 0.0
+      },
+      "modelo": "nenhum (modo heurístico)"
+    }
+  ],
+  "mutantes": [
+    {
+      "id": "M01",
+      "operador": "RVR",
+      "linha": 6,
+      "descricao": "if valor < 0:  →  validação removida (raise → pass)",
+      "morto": true,
+      "motivo": "1/26 testes falharam",
+      "morto_cego": false,
+      "motivo_cego": "",
+      "tempo_s": 1.284
+    },
+    {
+      "id": "M02",
+      "operador": "ROR",
+      "linha": 6,
+      "descricao": "valor < 0  →  valor <= 0",
+      "morto": true,
+      "motivo": "1/26 testes falharam",
+      "morto_cego": false,
+      "motivo_cego": "",
+      "tempo_s": 1.286
+    },
+    {
+      "id": "M03",
+      "operador": "CRP",
+      "linha": 6,
+      "descricao": "0  →  1",
+      "morto": true,
+      "motivo": "1/26 testes falharam",
+      "morto_cego": false,
+      "motivo_cego": "",
+      "tempo_s": 1.348
+    },
+    {
+      "id": "M04",
+      "operador": "RVR",
+      "linha": 8,
+      "descricao": "if percentual < 0 or percentual > 100:  →  validação removida (raise → pass)",
+      "morto": true,
+      "motivo": "2/26 testes falharam",
+      "morto_cego": false,
+      "motivo_cego": "",
+      "tempo_s": 1.403
+    },
+    {
+      "id": "M05",
+      "operador": "ROR",
+      "linha": 8,
+      "descricao": "percentual < 0  →  percentual <= 0",
+      "morto": true,
+      "motivo": "1/26 testes falharam",
+      "morto_cego": false,
+      "motivo_cego": "",
+      "tempo_s": 1.334
+    },
+    {
+      "id": "M06",
+      "operador": "CRP",
+      "linha": 8,
+      "descricao": "0  →  1",
+      "morto": true,
+      "motivo": "1/26 testes falharam",
+      "morto_cego": false,
+      "motivo_cego": "",
+      "tempo_s": 1.333
+    },
+    {
+      "id": "M07",
+      "operador": "ROR",
+      "linha": 8,
+      "descricao": "percentual > 100  →  percentual >= 100",
+      "morto": true,
+      "motivo": "1/26 testes falharam",
+      "morto_cego": false,
+      "motivo_cego": "",
+      "tempo_s": 1.299
+    },
+    {
+      "id": "M08",
+      "operador": "CRP",
+      "linha": 8,
+      "descricao": "100  →  101",
+      "morto": true,
+      "motivo": "1/26 testes falharam",
+      "morto_cego": false,
+      "motivo_cego": "",
+      "tempo_s": 1.3
+    },
+    {
+      "id": "M09",
+      "operador": "AOR",
+      "linha": 10,
+      "descricao": "valor * (1 - percentual / 100)  →  valor / (1 - percentual / 100)",
+      "morto": true,
+      "motivo": "1/26 testes falharam",
+      "morto_cego": true,
+      "motivo_cego": "defeito_suspeito",
+      "tempo_s": 1.305
+    },
+    {
+      "id": "M10",
+      "operador": "AOR",
+      "linha": 10,
+      "descricao": "1 - percentual / 100  →  1 + percentual / 100",
+      "morto": false,
+      "motivo": "",
+      "morto_cego": false,
+      "motivo_cego": "",
+      "tempo_s": 1.269
+    },
+    {
+      "id": "M11",
+      "operador": "CRP",
+      "linha": 10,
+      "descricao": "1  →  2",
+      "morto": false,
+      "motivo": "",
+      "morto_cego": false,
+      "motivo_cego": "",
+      "tempo_s": 1.272
+    },
+    {
+      "id": "M12",
+      "operador": "AOR",
+      "linha": 10,
+      "descricao": "percentual / 100  →  percentual * 100",
+      "morto": false,
+      "motivo": "",
+      "morto_cego": false,
+      "motivo_cego": "",
+      "tempo_s": 1.276
+    },
+    {
+      "id": "M13",
+      "operador": "CRP",
+      "linha": 10,
+      "descricao": "100  →  101",
+      "morto": false,
+      "motivo": "",
+      "morto_cego": false,
+      "motivo_cego": "",
+      "tempo_s": 1.313
+    },
+    {
+      "id": "M14",
+      "operador": "RVR",
+      "linha": 15,
+      "descricao": "if peso_kg <= 0:  →  validação removida (raise → pass)",
+      "morto": true,
+      "motivo": "1/26 testes falharam",
+      "morto_cego": false,
+      "motivo_cego": "",
+      "tempo_s": 1.292
+    },
+    {
+      "id": "M15",
+      "operador": "ROR",
+      "linha": 15,
+      "descricao": "peso_kg <= 0  →  peso_kg < 0",
+      "morto": true,
+      "motivo": "1/26 testes falharam",
+      "morto_cego": false,
+      "motivo_cego": "",
+      "tempo_s": 1.348
+    },
+    {
+      "id": "M16",
+      "operador": "CRP",
+      "linha": 15,
+      "descricao": "0  →  1",
+      "morto": true,
+      "motivo": "1/26 testes falharam",
+      "morto_cego": false,
+      "motivo_cego": "",
+      "tempo_s": 1.349
+    },
+    {
+      "id": "M17",
+      "operador": "RVR",
+      "linha": 17,
+      "descricao": "if distancia_km < 0:  →  validação removida (raise → pass)",
+      "morto": true,
+      "motivo": "1/26 testes falharam",
+      "morto_cego": false,
+      "motivo_cego": "",
+      "tempo_s": 1.31
+    },
+    {
+      "id": "M18",
+      "operador": "ROR",
+      "linha": 17,
+      "descricao": "distancia_km < 0  →  distancia_km <= 0",
+      "morto": true,
+      "motivo": "1/26 testes falharam",
+      "morto_cego": false,
+      "motivo_cego": "",
+      "tempo_s": 1.322
+    },
+    {
+      "id": "M19",
+      "operador": "CRP",
+      "linha": 17,
+      "descricao": "0  →  1",
+      "morto": true,
+      "motivo": "1/26 testes falharam",
+      "morto_cego": false,
+      "motivo_cego": "",
+      "tempo_s": 1.362
+    },
+    {
+      "id": "M20",
+      "operador": "AOR",
+      "linha": 19,
+      "descricao": "10 + 0.5 * peso_kg + 0.1 * distancia_km  →  10 + 0.5 * peso_kg - 0.1 * distancia_km",
+      "morto": false,
+      "motivo": "",
+      "morto_cego": false,
+      "motivo_cego": "",
+      "tempo_s": 1.368
+    },
+    {
+      "id": "M21",
+      "operador": "AOR",
+      "linha": 19,
+      "descricao": "10 + 0.5 * peso_kg  →  10 - 0.5 * peso_kg",
+      "morto": false,
+      "motivo": "",
+      "morto_cego": false,
+      "motivo_cego": "",
+      "tempo_s": 1.318
+    },
+    {
+      "id": "M22",
+      "operador": "CRP",
+      "linha": 19,
+      "descricao": "10  →  11",
+      "morto": false,
+      "motivo": "",
+      "morto_cego": false,
+      "motivo_cego": "",
+      "tempo_s": 1.375
+    },
+    {
+      "id": "M23",
+      "operador": "AOR",
+      "linha": 19,
+      "descricao": "0.5 * peso_kg  →  0.5 / peso_kg",
+      "morto": false,
+      "motivo": "",
+      "morto_cego": false,
+      "motivo_cego": "",
+      "tempo_s": 1.375
+    },
+    {
+      "id": "M24",
+      "operador": "CRP",
+      "linha": 19,
+      "descricao": "0.5  →  1.5",
+      "morto": false,
+      "motivo": "",
+      "morto_cego": false,
+      "motivo_cego": "",
+      "tempo_s": 1.325
+    },
+    {
+      "id": "M25",
+      "operador": "AOR",
+      "linha": 19,
+      "descricao": "0.1 * distancia_km  →  0.1 / distancia_km",
+      "morto": true,
+      "motivo": "2/26 testes falharam",
+      "morto_cego": true,
+      "motivo_cego": "defeito_suspeito",
+      "tempo_s": 1.33
+    },
+    {
+      "id": "M26",
+      "operador": "CRP",
+      "linha": 19,
+      "descricao": "0.1  →  1.1",
+      "morto": false,
+      "motivo": "",
+      "morto_cego": false,
+      "motivo_cego": "",
+      "tempo_s": 1.29
+    },
+    {
+      "id": "M27",
+      "operador": "ROR",
+      "linha": 20,
+      "descricao": "peso_kg > 30  →  peso_kg >= 30",
+      "morto": false,
+      "motivo": "",
+      "morto_cego": false,
+      "motivo_cego": "",
+      "tempo_s": 1.287
+    },
+    {
+      "id": "M28",
+      "operador": "CRP",
+      "linha": 20,
+      "descricao": "30  →  31",
+      "morto": false,
+      "motivo": "",
+      "morto_cego": false,
+      "motivo_cego": "",
+      "tempo_s": 1.298
+    },
+    {
+      "id": "M29",
+      "operador": "AOR",
+      "linha": 21,
+      "descricao": "frete *= 1.2  →  frete /= 1.2",
+      "morto": false,
+      "motivo": "",
+      "morto_cego": false,
+      "motivo_cego": "",
+      "tempo_s": 1.268
+    },
+    {
+      "id": "M30",
+      "operador": "CRP",
+      "linha": 21,
+      "descricao": "1.2  →  2.2",
+      "morto": false,
+      "motivo": "",
+      "morto_cego": false,
+      "motivo_cego": "",
+      "tempo_s": 1.312
+    }
+  ],
+  "metricas": {
+    "total_casos": 12,
+    "casos_tipicos": 5,
+    "casos_borda": 7,
+    "total_execucoes": 60,
+    "casos_ok": [
+      "B01",
+      "B02",
+      "B03",
+      "B04",
+      "B05",
+      "B06",
+      "B07",
+      "C01",
+      "C02",
+      "C03",
+      "C04",
+      "C05"
+    ],
+    "casos_falhos": [],
+    "taxa_acerto": 100.0,
+    "taxa_acerto_execucoes": 100.0,
+    "deteccao": {
+      "vp": 25,
+      "fp": 5,
+      "fn": 0,
+      "precisao": 83.33333333333333,
+      "revocacao": 100.0,
+      "f1": 90.9090909090909
+    },
+    "falso_positivo_correto": 0.0,
+    "execucoes_codigo_correto": 35,
+    "tempo_s": {
+      "n": 60,
+      "media": 1.2752166666666667,
+      "desvio_padrao": 2.573078721065926,
+      "mediana": 0.6515,
+      "p95": 9.634,
+      "min": 0.0,
+      "max": 9.776,
+      "ic95": 0.6510787476310419
+    },
+    "tempo_por_caso": {
+      "C01": {
+        "n": 5,
+        "media": 0.6746000000000001,
+        "desvio_padrao": 0.029364945087638056,
+        "mediana": 0.672,
+        "p95": 0.717,
+        "min": 0.643,
+        "max": 0.717,
+        "ic95": 0.0364555498238608
+      },
+      "C02": {
+        "n": 5,
+        "media": 0.7133999999999999,
+        "desvio_padrao": 0.010644247272588147,
+        "mediana": 0.715,
+        "p95": 0.729,
+        "min": 0.702,
+        "max": 0.729,
+        "ic95": 0.01321445981340139
+      },
+      "C03": {
+        "n": 5,
+        "media": 0.6152,
+        "desvio_padrao": 0.023370922104187522,
+        "mediana": 0.611,
+        "p95": 0.652,
+        "min": 0.587,
+        "max": 0.652,
+        "ic95": 0.029014180433712088
+      },
+      "C04": {
+        "n": 5,
+        "media": 0.6104,
+        "desvio_padrao": 0.010406728592598165,
+        "mediana": 0.614,
+        "p95": 0.621,
+        "min": 0.597,
+        "max": 0.621,
+        "ic95": 0.012919588699335606
+      },
+      "C05": {
+        "n": 5,
+        "media": 0.7914000000000001,
+        "desvio_padrao": 0.014363147287415817,
+        "mediana": 0.798,
+        "p95": 0.805,
+        "min": 0.771,
+        "max": 0.805,
+        "ic95": 0.01783134380129553
+      },
+      "B01": {
+        "n": 5,
+        "media": 0.0,
+        "desvio_padrao": 0.0,
+        "mediana": 0.0,
+        "p95": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "ic95": 0.0
+      },
+      "B02": {
+        "n": 5,
+        "media": 0.0018000000000000002,
+        "desvio_padrao": 0.0008366600265340755,
+        "mediana": 0.002,
+        "p95": 0.003,
+        "min": 0.001,
+        "max": 0.003,
+        "ic95": 0.001038684090568446
+      },
+      "B03": {
+        "n": 5,
+        "media": 9.6706,
+        "desvio_padrao": 0.06012736481835846,
+        "mediana": 9.653,
+        "p95": 9.776,
+        "min": 9.631,
+        "max": 9.776,
+        "ic95": 0.07464601542319559
+      },
+      "B04": {
+        "n": 5,
+        "media": 0.9278000000000001,
+        "desvio_padrao": 0.3015115254845161,
+        "mediana": 0.8,
+        "p95": 1.466,
+        "min": 0.77,
+        "max": 1.466,
+        "ic95": 0.37431598822898277
+      },
+      "B05": {
+        "n": 5,
+        "media": 0.6502000000000001,
+        "desvio_padrao": 0.01434224529144584,
+        "mediana": 0.657,
+        "p95": 0.665,
+        "min": 0.632,
+        "max": 0.665,
+        "ic95": 0.017805394706099622
+      },
+      "B06": {
+        "n": 5,
+        "media": 0.6446,
+        "desvio_padrao": 0.026082561223928935,
+        "mediana": 0.651,
+        "p95": 0.671,
+        "min": 0.605,
+        "max": 0.671,
+        "ic95": 0.03238058533380769
+      },
+      "B07": {
+        "n": 5,
+        "media": 0.0026000000000000003,
+        "desvio_padrao": 0.0008944271909999159,
+        "mediana": 0.002,
+        "p95": 0.004,
+        "min": 0.002,
+        "max": 0.004,
+        "ic95": 0.0011103999999999999
+      }
+    },
+    "tempo_por_filtro": {
+      "0-normalizacao": {
+        "n": 55,
+        "media": 0.0004909090909090909,
+        "desvio_padrao": 0.0015500624512236928,
+        "mediana": 0.0,
+        "p95": 0.006,
+        "min": 0.0,
+        "max": 0.006,
+        "ic95": 0.00040966034143838424
+      },
+      "1-analise-contexto": {
+        "n": 55,
+        "media": 0.0007999999999999999,
+        "desvio_padrao": 0.0013931047127695537,
+        "mediana": 0.0,
+        "p95": 0.003,
+        "min": 0.0,
+        "max": 0.008,
+        "ic95": 0.000368178554252482
+      },
+      "2-geracao-cenarios": {
+        "n": 55,
+        "media": 0.0006363636363636364,
+        "desvio_padrao": 0.0009881452203147959,
+        "mediana": 0.0,
+        "p95": 0.003,
+        "min": 0.0,
+        "max": 0.003,
+        "ic95": 0.0002611532896789386
+      },
+      "3-selecao-estrategia": {
+        "n": 55,
+        "media": 0.0,
+        "desvio_padrao": 0.0,
+        "mediana": 0.0,
+        "p95": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "ic95": 0.0
+      },
+      "4-geracao-codigo": {
+        "n": 55,
+        "media": 0.0014,
+        "desvio_padrao": 0.0022327528267108263,
+        "mediana": 0.001,
+        "p95": 0.003,
+        "min": 0.0,
+        "max": 0.016,
+        "ic95": 0.0005900860862836787
+      },
+      "5-execucao": {
+        "n": 55,
+        "media": 1.385490909090909,
+        "desvio_padrao": 2.659508593377573,
+        "mediana": 0.648,
+        "p95": 9.651,
+        "min": 0.001,
+        "max": 9.772,
+        "ic95": 0.7028718085269883
+      },
+      "6-analise-resultados": {
+        "n": 55,
+        "media": 0.0,
+        "desvio_padrao": 0.0,
+        "mediana": 0.0,
+        "p95": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "ic95": 0.0
+      }
+    },
+    "cobertura": {
+      "n": 40,
+      "media": 95.5375,
+      "desvio_padrao": 7.194716277080865,
+      "mediana": 100.0,
+      "p95": 100.0,
+      "min": 83.3,
+      "max": 100.0,
+      "ic95": 2.2296656743177374
+    },
+    "testes_gerados": {
+      "n": 55,
+      "media": 13.0,
+      "desvio_padrao": 18.114859871060226,
+      "mediana": 6.0,
+      "p95": 65.0,
+      "min": 0.0,
+      "max": 65.0,
+      "ic95": 4.787510125175005
+    },
+    "mutacao": {
+      "total": 30,
+      "mortos": 16,
+      "escore": 53.333333333333336,
+      "mortos_cego": 2,
+      "deteccao_cega": 6.666666666666667,
+      "por_operador": {
+        "RVR": {
+          "total": 4,
+          "mortos": 4,
+          "mortos_cego": 0
+        },
+        "ROR": {
+          "total": 6,
+          "mortos": 5,
+          "mortos_cego": 0
+        },
+        "CRP": {
+          "total": 12,
+          "mortos": 5,
+          "mortos_cego": 0
+        },
+        "AOR": {
+          "total": 8,
+          "mortos": 2,
+          "mortos_cego": 2
+        }
+      }
+    }
+  },
+  "metas": {
+    "taxa_acerto": 90.0,
+    "precisao": 80.0,
+    "revocacao": 90.0,
+    "falso_positivo_correto": 0.0,
+    "tempo_medio_s": 60.0,
+    "cobertura_media": 70.0,
+    "escore_mutacao": 60.0
+  },
+  "evidencia_relatorio": {
+    "id": "REL-06f94437e2",
+    "criado_em": "2026-11-12T13:11:57.255570Z",
+    "projeto": {
+      "nome": "loja",
+      "linguagem": "python",
+      "framework": "pytest"
+    },
+    "requisitos": [
+      {
+        "id": "RF-01",
+        "descricao": "O sistema deve calcular o desconto de um pedido (calcular_desconto).",
+        "criterios_aceite": [
+          "Percentual deve estar entre 0 e 100, caso contrário rejeitar.",
+          "Valor negativo deve ser rejeitado."
+        ]
+      },
+      {
+        "id": "RF-02",
+        "descricao": "O sistema deve calcular o frete (calcular_frete) por peso e distância.",
+        "criterios_aceite": [
+          "Peso deve ser positivo.",
+          "Pedidos acima de 30 kg têm acréscimo de 20%."
+        ]
+      },
+      {
+        "id": "RF-03",
+        "descricao": "O painel deve exibir o ticket médio (ticket_medio) dos pedidos do dia.",
+        "criterios_aceite": [
+          "Sem pedidos no dia, o ticket médio exibido é 0."
+        ]
+      },
+      {
+        "id": "RF-04",
+        "descricao": "O checkout aceita cupons de desconto (aplicar cupom).",
+        "criterios_aceite": [
+          "Cupom inexistente não altera o total."
+        ]
+      }
+    ],
+    "cenarios": [
+      {
+        "id": "CEN-20e0b290d1",
+        "titulo": "calcular_desconto: entradas típicas",
+        "tipo": "sucesso",
+        "descricao": "Dado valor=2.5, percentual=2.5, quando calcular_desconto é executada, então retorna um valor do tipo float.",
+        "alvo": "loja.calcular_desconto",
+        "requisito_id": "RF-01",
+        "entradas": {
+          "valor": 2.5,
+          "percentual": 2.5
+        },
+        "resultado_esperado": "um valor do tipo float",
+        "excecao_esperada": null,
+        "nao_deve_lancar": false,
+        "tipo_teste_sugerido": null,
+        "automatizavel": true,
+        "origem": "heuristica"
+      },
+      {
+        "id": "CEN-219e8d1bec",
+        "titulo": "calcular_desconto: valor=0.0",
+        "tipo": "borda",
+        "descricao": "Dado valor=0.0 (valor-limite), quando calcular_desconto é executada, então não deve lançar exceção inesperada; retorna um valor do tipo float (ou uma exceção documentada: ValueError).",
+        "alvo": "loja.calcular_desconto",
+        "requisito_id": "RF-01",
+        "entradas": {
+          "valor": 0.0,
+          "percentual": 2.5
+        },
+        "resultado_esperado": "um valor do tipo float",
+        "excecao_esperada": null,
+        "nao_deve_lancar": false,
+        "tipo_teste_sugerido": null,
+        "automatizavel": true,
+        "origem": "heuristica"
+      },
+      {
+        "id": "CEN-53f733f159",
+        "titulo": "calcular_desconto: valor=-0.01",
+        "tipo": "borda",
+        "descricao": "Dado valor=-0.01 (valor-limite), quando calcular_desconto é executada, então não deve lançar exceção inesperada; retorna um valor do tipo float (ou uma exceção documentada: ValueError).",
+        "alvo": "loja.calcular_desconto",
+        "requisito_id": "RF-01",
+        "entradas": {
+          "valor": -0.01,
+          "percentual": 2.5
+        },
+        "resultado_esperado": "um valor do tipo float",
+        "excecao_esperada": null,
+        "nao_deve_lancar": false,
+        "tipo_teste_sugerido": null,
+        "automatizavel": true,
+        "origem": "heuristica"
+      },
+      {
+        "id": "CEN-749c208c23",
+        "titulo": "calcular_desconto: valor=1000000000000.0",
+        "tipo": "borda",
+        "descricao": "Dado valor=1000000000000.0 (valor-limite), quando calcular_desconto é executada, então não deve lançar exceção inesperada; retorna um valor do tipo float (ou uma exceção documentada: ValueError).",
+        "alvo": "loja.calcular_desconto",
+        "requisito_id": "RF-01",
+        "entradas": {
+          "valor": 1000000000000.0,
+          "percentual": 2.5
+        },
+        "resultado_esperado": "um valor do tipo float",
+        "excecao_esperada": null,
+        "nao_deve_lancar": false,
+        "tipo_teste_sugerido": null,
+        "automatizavel": true,
+        "origem": "heuristica"
+      },
+      {
+        "id": "CEN-1db8d2a9a0",
+        "titulo": "calcular_desconto: percentual=0.0",
+        "tipo": "borda",
+        "descricao": "Dado percentual=0.0 (valor-limite), quando calcular_desconto é executada, então não deve lançar exceção inesperada; retorna um valor do tipo float (ou uma exceção documentada: ValueError).",
+        "alvo": "loja.calcular_desconto",
+        "requisito_id": "RF-01",
+        "entradas": {
+          "valor": 2.5,
+          "percentual": 0.0
+        },
+        "resultado_esperado": "um valor do tipo float",
+        "excecao_esperada": null,
+        "nao_deve_lancar": false,
+        "tipo_teste_sugerido": null,
+        "automatizavel": true,
+        "origem": "heuristica"
+      },
+      {
+        "id": "CEN-b63b5f005d",
+        "titulo": "calcular_desconto: percentual=-0.01",
+        "tipo": "borda",
+        "descricao": "Dado percentual=-0.01 (valor-limite), quando calcular_desconto é executada, então não deve lançar exceção inesperada; retorna um valor do tipo float (ou uma exceção documentada: ValueError).",
+        "alvo": "loja.calcular_desconto",
+        "requisito_id": "RF-01",
+        "entradas": {
+          "valor": 2.5,
+          "percentual": -0.01
+        },
+        "resultado_esperado": "um valor do tipo float",
+        "excecao_esperada": null,
+        "nao_deve_lancar": false,
+        "tipo_teste_sugerido": null,
+        "automatizavel": true,
+        "origem": "heuristica"
+      },
+      {
+        "id": "CEN-24be833dff",
+        "titulo": "calcular_desconto: percentual=1000000000000.0",
+        "tipo": "borda",
+        "descricao": "Dado percentual=1000000000000.0 (valor-limite), quando calcular_desconto é executada, então não deve lançar exceção inesperada; retorna um valor do tipo float (ou uma exceção documentada: ValueError).",
+        "alvo": "loja.calcular_desconto",
+        "requisito_id": "RF-01",
+        "entradas": {
+          "valor": 2.5,
+          "percentual": 1000000000000.0
+        },
+        "resultado_esperado": "um valor do tipo float",
+        "excecao_esperada": null,
+        "nao_deve_lancar": false,
+        "tipo_teste_sugerido": null,
+        "automatizavel": true,
+        "origem": "heuristica"
+      },
+      {
+        "id": "CEN-f1710123c9",
+        "titulo": "calcular_desconto: rejeita valor < 0",
+        "tipo": "falha",
+        "descricao": "Dado valor=-0.5 (viola 'valor < 0'), quando calcular_desconto é executada, então lança ValueError.",
+        "alvo": "loja.calcular_desconto",
+        "requisito_id": "RF-01",
+        "entradas": {
+          "valor": -0.5,
+          "percentual": 2.5
+        },
+        "resultado_esperado": "lança ValueError",
+        "excecao_esperada": "ValueError",
+        "nao_deve_lancar": false,
+        "tipo_teste_sugerido": null,
+        "automatizavel": true,
+        "origem": "heuristica"
+      },
+      {
+        "id": "CEN-345d30abd4",
+        "titulo": "calcular_desconto: rejeita percentual < 0",
+        "tipo": "falha",
+        "descricao": "Dado percentual=-0.5 (viola 'percentual < 0'), quando calcular_desconto é executada, então lança ValueError.",
+        "alvo": "loja.calcular_desconto",
+        "requisito_id": "RF-01",
+        "entradas": {
+          "valor": 2.5,
+          "percentual": -0.5
+        },
+        "resultado_esperado": "lança ValueError",
+        "excecao_esperada": "ValueError",
+        "nao_deve_lancar": false,
+        "tipo_teste_sugerido": null,
+        "automatizavel": true,
+        "origem": "heuristica"
+      },
+      {
+        "id": "CEN-06f94a711c",
+        "titulo": "calcular_desconto: rejeita percentual > 100",
+        "tipo": "falha",
+        "descricao": "Dado percentual=100.5 (viola 'percentual > 100'), quando calcular_desconto é executada, então lança ValueError.",
+        "alvo": "loja.calcular_desconto",
+        "requisito_id": "RF-01",
+        "entradas": {
+          "valor": 2.5,
+          "percentual": 100.5
+        },
+        "resultado_esperado": "lança ValueError",
+        "excecao_esperada": "ValueError",
+        "nao_deve_lancar": false,
+        "tipo_teste_sugerido": null,
+        "automatizavel": true,
+        "origem": "heuristica"
+      },
+      {
+        "id": "CEN-41a265c9a7",
+        "titulo": "calcular_desconto: aceita valor=0 (limite de 'valor < 0')",
+        "tipo": "borda",
+        "descricao": "Dado valor=0 (fronteira válida de 'valor < 0'), quando calcular_desconto é executada, então não lança exceção e retorna um valor do tipo float.",
+        "alvo": "loja.calcular_desconto",
+        "requisito_id": "RF-01",
+        "entradas": {
+          "valor": 0,
+          "percentual": 2.5
+        },
+        "resultado_esperado": "um valor do tipo float",
+        "excecao_esperada": null,
+        "nao_deve_lancar": true,
+        "tipo_teste_sugerido": null,
+        "automatizavel": true,
+        "origem": "heuristica"
+      },
+      {
+        "id": "CEN-ea0e6dcbc9",
+        "titulo": "calcular_desconto: aceita percentual=0 (limite de 'percentual < 0')",
+        "tipo": "borda",
+        "descricao": "Dado percentual=0 (fronteira válida de 'percentual < 0'), quando calcular_desconto é executada, então não lança exceção e retorna um valor do tipo float.",
+        "alvo": "loja.calcular_desconto",
+        "requisito_id": "RF-01",
+        "entradas": {
+          "valor": 2.5,
+          "percentual": 0
+        },
+        "resultado_esperado": "um valor do tipo float",
+        "excecao_esperada": null,
+        "nao_deve_lancar": true,
+        "tipo_teste_sugerido": null,
+        "automatizavel": true,
+        "origem": "heuristica"
+      },
+      {
+        "id": "CEN-80cade12a4",
+        "titulo": "calcular_desconto: aceita percentual=100 (limite de 'percentual > 100')",
+        "tipo": "borda",
+        "descricao": "Dado percentual=100 (fronteira válida de 'percentual > 100'), quando calcular_desconto é executada, então não lança exceção e retorna um valor do tipo float.",
+        "alvo": "loja.calcular_desconto",
+        "requisito_id": "RF-01",
+        "entradas": {
+          "valor": 2.5,
+          "percentual": 100
+        },
+        "resultado_esperado": "um valor do tipo float",
+        "excecao_esperada": null,
+        "nao_deve_lancar": true,
+        "tipo_teste_sugerido": null,
+        "automatizavel": true,
+        "origem": "heuristica"
+      },
+      {
+        "id": "CEN-2fd6225bad",
+        "titulo": "calcular_desconto: valor=None é rejeitado",
+        "tipo": "falha",
+        "descricao": "Dado valor=None (tipo declarado float), quando calcular_desconto é executada, então deve rejeitar a entrada com TypeError/ValueError (ou uma exceção documentada: ValueError) em vez de prosseguir.",
+        "alvo": "loja.calcular_desconto",
+        "requisito_id": "RF-01",
+        "entradas": {
+          "valor": null,
+          "percentual": 2.5
+        },
+        "resultado_esperado": "entrada inválida rejeitada",
+        "excecao_esperada": "TypeError|ValueError",
+        "nao_deve_lancar": false,
+        "tipo_teste_sugerido": "validacao_entrada",
+        "automatizavel": true,
+        "origem": "heuristica"
+      },
+      {
+        "id": "CEN-c3bf8a9d9f",
+        "titulo": "calcular_frete: entradas típicas",
+        "tipo": "sucesso",
+        "descricao": "Dado peso_kg=2.5, distancia_km=7, quando calcular_frete é executada, então retorna um valor do tipo float.",
+        "alvo": "loja.calcular_frete",
+        "requisito_id": "RF-02",
+        "entradas": {
+          "peso_kg": 2.5,
+          "distancia_km": 7
+        },
+        "resultado_esperado": "um valor do tipo float",
+        "excecao_esperada": null,
+        "nao_deve_lancar": false,
+        "tipo_teste_sugerido": null,
+        "automatizavel": true,
+        "origem": "heuristica"
+      },
+      {
+        "id": "CEN-2c3653e881",
+        "titulo": "calcular_frete: peso_kg=0.0",
+        "tipo": "borda",
+        "descricao": "Dado peso_kg=0.0 (valor-limite), quando calcular_frete é executada, então não deve lançar exceção inesperada; retorna um valor do tipo float (ou uma exceção documentada: ValueError).",
+        "alvo": "loja.calcular_frete",
+        "requisito_id": "RF-02",
+        "entradas": {
+          "peso_kg": 0.0,
+          "distancia_km": 7
+        },
+        "resultado_esperado": "um valor do tipo float",
+        "excecao_esperada": null,
+        "nao_deve_lancar": false,
+        "tipo_teste_sugerido": null,
+        "automatizavel": true,
+        "origem": "heuristica"
+      },
+      {
+        "id": "CEN-484ec7a68d",
+        "titulo": "calcular_frete: peso_kg=-0.01",
+        "tipo": "borda",
+        "descricao": "Dado peso_kg=-0.01 (valor-limite), quando calcular_frete é executada, então não deve lançar exceção inesperada; retorna um valor do tipo float (ou uma exceção documentada: ValueError).",
+        "alvo": "loja.calcular_frete",
+        "requisito_id": "RF-02",
+        "entradas": {
+          "peso_kg": -0.01,
+          "distancia_km": 7
+        },
+        "resultado_esperado": "um valor do tipo float",
+        "excecao_esperada": null,
+        "nao_deve_lancar": false,
+        "tipo_teste_sugerido": null,
+        "automatizavel": true,
+        "origem": "heuristica"
+      },
+      {
+        "id": "CEN-3966b9043a",
+        "titulo": "calcular_frete: peso_kg=1000000000000.0",
+        "tipo": "borda",
+        "descricao": "Dado peso_kg=1000000000000.0 (valor-limite), quando calcular_frete é executada, então não deve lançar exceção inesperada; retorna um valor do tipo float (ou uma exceção documentada: ValueError).",
+        "alvo": "loja.calcular_frete",
+        "requisito_id": "RF-02",
+        "entradas": {
+          "peso_kg": 1000000000000.0,
+          "distancia_km": 7
+        },
+        "resultado_esperado": "um valor do tipo float",
+        "excecao_esperada": null,
+        "nao_deve_lancar": false,
+        "tipo_teste_sugerido": null,
+        "automatizavel": true,
+        "origem": "heuristica"
+      },
+      {
+        "id": "CEN-28de335856",
+        "titulo": "calcular_frete: distancia_km=0",
+        "tipo": "borda",
+        "descricao": "Dado distancia_km=0 (valor-limite), quando calcular_frete é executada, então não deve lançar exceção inesperada; retorna um valor do tipo float (ou uma exceção documentada: ValueError).",
+        "alvo": "loja.calcular_frete",
+        "requisito_id": "RF-02",
+        "entradas": {
+          "peso_kg": 2.5,
+          "distancia_km": 0
+        },
+        "resultado_esperado": "um valor do tipo float",
+        "excecao_esperada": null,
+        "nao_deve_lancar": false,
+        "tipo_teste_sugerido": null,
+        "automatizavel": true,
+        "origem": "heuristica"
+      },
+      {
+        "id": "CEN-df39a1aa97",
+        "titulo": "calcular_frete: distancia_km=-1",
+        "tipo": "borda",
+        "descricao": "Dado distancia_km=-1 (valor-limite), quando calcular_frete é executada, então não deve lançar exceção inesperada; retorna um valor do tipo float (ou uma exceção documentada: ValueError).",
+        "alvo": "loja.calcular_frete",
+        "requisito_id": "RF-02",
+        "entradas": {
+          "peso_kg": 2.5,
+          "distancia_km": -1
+        },
+        "resultado_esperado": "um valor do tipo float",
+        "excecao_esperada": null,
+        "nao_deve_lancar": false,
+        "tipo_teste_sugerido": null,
+        "automatizavel": true,
+        "origem": "heuristica"
+      },
+      {
+        "id": "CEN-57e0fde07a",
+        "titulo": "calcular_frete: distancia_km=1000000000000",
+        "tipo": "borda",
+        "descricao": "Dado distancia_km=1000000000000 (valor-limite), quando calcular_frete é executada, então não deve lançar exceção inesperada; retorna um valor do tipo float (ou uma exceção documentada: ValueError).",
+        "alvo": "loja.calcular_frete",
+        "requisito_id": "RF-02",
+        "entradas": {
+          "peso_kg": 2.5,
+          "distancia_km": 1000000000000
+        },
+        "resultado_esperado": "um valor do tipo float",
+        "excecao_esperada": null,
+        "nao_deve_lancar": false,
+        "tipo_teste_sugerido": null,
+        "automatizavel": true,
+        "origem": "heuristica"
+      },
+      {
+        "id": "CEN-0502f971cc",
+        "titulo": "calcular_frete: rejeita peso_kg <= 0",
+        "tipo": "falha",
+        "descricao": "Dado peso_kg=0 (viola 'peso_kg <= 0'), quando calcular_frete é executada, então lança ValueError.",
+        "alvo": "loja.calcular_frete",
+        "requisito_id": "RF-02",
+        "entradas": {
+          "peso_kg": 0,
+          "distancia_km": 7
+        },
+        "resultado_esperado": "lança ValueError",
+        "excecao_esperada": "ValueError",
+        "nao_deve_lancar": false,
+        "tipo_teste_sugerido": null,
+        "automatizavel": true,
+        "origem": "heuristica"
+      },
+      {
+        "id": "CEN-86fafcf36f",
+        "titulo": "calcular_frete: rejeita distancia_km < 0",
+        "tipo": "falha",
+        "descricao": "Dado distancia_km=-1 (viola 'distancia_km < 0'), quando calcular_frete é executada, então lança ValueError.",
+        "alvo": "loja.calcular_frete",
+        "requisito_id": "RF-02",
+        "entradas": {
+          "peso_kg": 2.5,
+          "distancia_km": -1
+        },
+        "resultado_esperado": "lança ValueError",
+        "excecao_esperada": "ValueError",
+        "nao_deve_lancar": false,
+        "tipo_teste_sugerido": null,
+        "automatizavel": true,
+        "origem": "heuristica"
+      },
+      {
+        "id": "CEN-24deaa7d0a",
+        "titulo": "calcular_frete: aceita peso_kg=0.5 (limite de 'peso_kg <= 0')",
+        "tipo": "borda",
+        "descricao": "Dado peso_kg=0.5 (fronteira válida de 'peso_kg <= 0'), quando calcular_frete é executada, então não lança exceção e retorna um valor do tipo float.",
+        "alvo": "loja.calcular_frete",
+        "requisito_id": "RF-02",
+        "entradas": {
+          "peso_kg": 0.5,
+          "distancia_km": 7
+        },
+        "resultado_esperado": "um valor do tipo float",
+        "excecao_esperada": null,
+        "nao_deve_lancar": true,
+        "tipo_teste_sugerido": null,
+        "automatizavel": true,
+        "origem": "heuristica"
+      },
+      {
+        "id": "CEN-32486f7332",
+        "titulo": "calcular_frete: aceita distancia_km=0 (limite de 'distancia_km < 0')",
+        "tipo": "borda",
+        "descricao": "Dado distancia_km=0 (fronteira válida de 'distancia_km < 0'), quando calcular_frete é executada, então não lança exceção e retorna um valor do tipo float.",
+        "alvo": "loja.calcular_frete",
+        "requisito_id": "RF-02",
+        "entradas": {
+          "peso_kg": 2.5,
+          "distancia_km": 0
+        },
+        "resultado_esperado": "um valor do tipo float",
+        "excecao_esperada": null,
+        "nao_deve_lancar": true,
+        "tipo_teste_sugerido": null,
+        "automatizavel": true,
+        "origem": "heuristica"
+      },
+      {
+        "id": "CEN-91bc8932af",
+        "titulo": "calcular_frete: peso_kg=None é rejeitado",
+        "tipo": "falha",
+        "descricao": "Dado peso_kg=None (tipo declarado float), quando calcular_frete é executada, então deve rejeitar a entrada com TypeError/ValueError (ou uma exceção documentada: ValueError) em vez de prosseguir.",
+        "alvo": "loja.calcular_frete",
+        "requisito_id": "RF-02",
+        "entradas": {
+          "peso_kg": null,
+          "distancia_km": 7
+        },
+        "resultado_esperado": "entrada inválida rejeitada",
+        "excecao_esperada": "TypeError|ValueError",
+        "nao_deve_lancar": false,
+        "tipo_teste_sugerido": "validacao_entrada",
+        "automatizavel": true,
+        "origem": "heuristica"
+      },
+      {
+        "id": "CEN-fa9a6e61c5",
+        "titulo": "ticket_medio: entradas típicas",
+        "tipo": "sucesso",
+        "descricao": "Dado pedidos=[1, 2, 3], quando ticket_medio é executada, então retorna um valor do tipo float.",
+        "alvo": "loja.ticket_medio",
+        "requisito_id": "RF-03",
+        "entradas": {
+          "pedidos": [
+            1,
+            2,
+            3
+          ]
+        },
+        "resultado_esperado": "um valor do tipo float",
+        "excecao_esperada": null,
+        "nao_deve_lancar": false,
+        "tipo_teste_sugerido": null,
+        "automatizavel": true,
+        "origem": "heuristica"
+      },
+      {
+        "id": "CEN-6a00c9a25c",
+        "titulo": "ticket_medio: pedidos=[]",
+        "tipo": "borda",
+        "descricao": "Dado pedidos=[] (valor-limite), quando ticket_medio é executada, então não deve lançar exceção inesperada; retorna um valor do tipo float.",
+        "alvo": "loja.ticket_medio",
+        "requisito_id": "RF-03",
+        "entradas": {
+          "pedidos": []
+        },
+        "resultado_esperado": "um valor do tipo float",
+        "excecao_esperada": null,
+        "nao_deve_lancar": false,
+        "tipo_teste_sugerido": null,
+        "automatizavel": true,
+        "origem": "heuristica"
+      },
+      {
+        "id": "CEN-4f960c71e7",
+        "titulo": "ticket_medio: pedidos=[0]",
+        "tipo": "borda",
+        "descricao": "Dado pedidos=[0] (valor-limite), quando ticket_medio é executada, então não deve lançar exceção inesperada; retorna um valor do tipo float.",
+        "alvo": "loja.ticket_medio",
+        "requisito_id": "RF-03",
+        "entradas": {
+          "pedidos": [
+            0
+          ]
+        },
+        "resultado_esperado": "um valor do tipo float",
+        "excecao_esperada": null,
+        "nao_deve_lancar": false,
+        "tipo_teste_sugerido": null,
+        "automatizavel": true,
+        "origem": "heuristica"
+      },
+      {
+        "id": "CEN-69b177af57",
+        "titulo": "ticket_medio: pedidos=None é rejeitado",
+        "tipo": "falha",
+        "descricao": "Dado pedidos=None (tipo declarado List[float]), quando ticket_medio é executada, então deve rejeitar a entrada com TypeError/ValueError em vez de prosseguir.",
+        "alvo": "loja.ticket_medio",
+        "requisito_id": "RF-03",
+        "entradas": {
+          "pedidos": null
+        },
+        "resultado_esperado": "entrada inválida rejeitada",
+        "excecao_esperada": "TypeError|ValueError",
+        "nao_deve_lancar": false,
+        "tipo_teste_sugerido": "validacao_entrada",
+        "automatizavel": true,
+        "origem": "heuristica"
+      },
+      {
+        "id": "CEN-9a58446164",
+        "titulo": "aplicar_cupom: entradas típicas",
+        "tipo": "sucesso",
+        "descricao": "Dado total=2.5, codigo='abc', quando aplicar_cupom é executada, então retorna um valor do tipo float.",
+        "alvo": "loja.aplicar_cupom",
+        "requisito_id": "RF-04",
+        "entradas": {
+          "total": 2.5,
+          "codigo": "abc"
+        },
+        "resultado_esperado": "um valor do tipo float",
+        "excecao_esperada": null,
+        "nao_deve_lancar": false,
+        "tipo_teste_sugerido": null,
+        "automatizavel": true,
+        "origem": "heuristica"
+      },
+      {
+        "id": "CEN-705565d98e",
+        "titulo": "aplicar_cupom: total=0.0",
+        "tipo": "borda",
+        "descricao": "Dado total=0.0 (valor-limite), quando aplicar_cupom é executada, então não deve lançar exceção inesperada; retorna um valor do tipo float.",
+        "alvo": "loja.aplicar_cupom",
+        "requisito_id": "RF-04",
+        "entradas": {
+          "total": 0.0,
+          "codigo": "abc"
+        },
+        "resultado_esperado": "um valor do tipo float",
+        "excecao_esperada": null,
+        "nao_deve_lancar": false,
+        "tipo_teste_sugerido": null,
+        "automatizavel": true,
+        "origem": "heuristica"
+      },
+      {
+        "id": "CEN-28c526f56b",
+        "titulo": "aplicar_cupom: total=-0.01",
+        "tipo": "borda",
+        "descricao": "Dado total=-0.01 (valor-limite), quando aplicar_cupom é executada, então não deve lançar exceção inesperada; retorna um valor do tipo float.",
+        "alvo": "loja.aplicar_cupom",
+        "requisito_id": "RF-04",
+        "entradas": {
+          "total": -0.01,
+          "codigo": "abc"
+        },
+        "resultado_esperado": "um valor do tipo float",
+        "excecao_esperada": null,
+        "nao_deve_lancar": false,
+        "tipo_teste_sugerido": null,
+        "automatizavel": true,
+        "origem": "heuristica"
+      },
+      {
+        "id": "CEN-1c6be3378f",
+        "titulo": "aplicar_cupom: total=1000000000000.0",
+        "tipo": "borda",
+        "descricao": "Dado total=1000000000000.0 (valor-limite), quando aplicar_cupom é executada, então não deve lançar exceção inesperada; retorna um valor do tipo float.",
+        "alvo": "loja.aplicar_cupom",
+        "requisito_id": "RF-04",
+        "entradas": {
+          "total": 1000000000000.0,
+          "codigo": "abc"
+        },
+        "resultado_esperado": "um valor do tipo float",
+        "excecao_esperada": null,
+        "nao_deve_lancar": false,
+        "tipo_teste_sugerido": null,
+        "automatizavel": true,
+        "origem": "heuristica"
+      },
+      {
+        "id": "CEN-2d2b918fb5",
+        "titulo": "aplicar_cupom: codigo=''",
+        "tipo": "borda",
+        "descricao": "Dado codigo='' (valor-limite), quando aplicar_cupom é executada, então não deve lançar exceção inesperada; retorna um valor do tipo float.",
+        "alvo": "loja.aplicar_cupom",
+        "requisito_id": "RF-04",
+        "entradas": {
+          "total": 2.5,
+          "codigo": ""
+        },
+        "resultado_esperado": "um valor do tipo float",
+        "excecao_esperada": null,
+        "nao_deve_lancar": false,
+        "tipo_teste_sugerido": null,
+        "automatizavel": true,
+        "origem": "heuristica"
+      },
+      {
+        "id": "CEN-bdbb7e59bf",
+        "titulo": "aplicar_cupom: codigo='   '",
+        "tipo": "borda",
+        "descricao": "Dado codigo='   ' (valor-limite), quando aplicar_cupom é executada, então não deve lançar exceção inesperada; retorna um valor do tipo float.",
+        "alvo": "loja.aplicar_cupom",
+        "requisito_id": "RF-04",
+        "entradas": {
+          "total": 2.5,
+          "codigo": "   "
+        },
+        "resultado_esperado": "um valor do tipo float",
+        "excecao_esperada": null,
+        "nao_deve_lancar": false,
+        "tipo_teste_sugerido": null,
+        "automatizavel": true,
+        "origem": "heuristica"
+      },
+      {
+        "id": "CEN-8373d1253d",
+        "titulo": "aplicar_cupom: codigo=str de tamanho 256",
+        "tipo": "borda",
+        "descricao": "Dado codigo=str de tamanho 256 (valor-limite), quando aplicar_cupom é executada, então não deve lançar exceção inesperada; retorna um valor do tipo float.",
+        "alvo": "loja.aplicar_cupom",
+        "requisito_id": "RF-04",
+        "entradas": {
+          "total": 2.5,
+          "codigo": "çççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççç"
+        },
+        "resultado_esperado": "um valor do tipo float",
+        "excecao_esperada": null,
+        "nao_deve_lancar": false,
+        "tipo_teste_sugerido": null,
+        "automatizavel": true,
+        "origem": "heuristica"
+      },
+      {
+        "id": "CEN-56f2c1b86e",
+        "titulo": "aplicar_cupom: total=None é rejeitado",
+        "tipo": "falha",
+        "descricao": "Dado total=None (tipo declarado float), quando aplicar_cupom é executada, então deve rejeitar a entrada com TypeError/ValueError em vez de prosseguir.",
+        "alvo": "loja.aplicar_cupom",
+        "requisito_id": "RF-04",
+        "entradas": {
+          "total": null,
+          "codigo": "abc"
+        },
+        "resultado_esperado": "entrada inválida rejeitada",
+        "excecao_esperada": "TypeError|ValueError",
+        "nao_deve_lancar": false,
+        "tipo_teste_sugerido": "validacao_entrada",
+        "automatizavel": true,
+        "origem": "heuristica"
+      },
+      {
+        "id": "CEN-7fffd518c0",
+        "titulo": "aplicar_cupom: fluxo integrado com calcular_desconto",
+        "tipo": "sucesso",
+        "descricao": "Dado os colaboradores reais (calcular_desconto) sem dublês, quando aplicar_cupom é executada com total=2.5, codigo='abc', então o fluxo completo retorna um valor do tipo float.",
+        "alvo": "loja.aplicar_cupom",
+        "requisito_id": "RF-04",
+        "entradas": {
+          "total": 2.5,
+          "codigo": "abc"
+        },
+        "resultado_esperado": "um valor do tipo float",
+        "excecao_esperada": null,
+        "nao_deve_lancar": false,
+        "tipo_teste_sugerido": "integracao",
+        "automatizavel": true,
+        "origem": "heuristica"
+      },
+      {
+        "id": "CEN-27a59153aa",
+        "titulo": "fechar_pedido: entradas típicas",
+        "tipo": "sucesso",
+        "descricao": "Dado itens={'a': 1}, frete=2.5, quando fechar_pedido é executada, então retorna um valor do tipo float.",
+        "alvo": "loja.fechar_pedido",
+        "requisito_id": null,
+        "entradas": {
+          "itens": {
+            "a": 1
+          },
+          "frete": 2.5
+        },
+        "resultado_esperado": "um valor do tipo float",
+        "excecao_esperada": null,
+        "nao_deve_lancar": false,
+        "tipo_teste_sugerido": null,
+        "automatizavel": true,
+        "origem": "heuristica"
+      },
+      {
+        "id": "CEN-ec0e4e8257",
+        "titulo": "fechar_pedido: itens={}",
+        "tipo": "borda",
+        "descricao": "Dado itens={} (valor-limite), quando fechar_pedido é executada, então não deve lançar exceção inesperada; retorna um valor do tipo float (ou uma exceção documentada: ValueError).",
+        "alvo": "loja.fechar_pedido",
+        "requisito_id": null,
+        "entradas": {
+          "itens": {},
+          "frete": 2.5
+        },
+        "resultado_esperado": "um valor do tipo float",
+        "excecao_esperada": null,
+        "nao_deve_lancar": false,
+        "tipo_teste_sugerido": null,
+        "automatizavel": true,
+        "origem": "heuristica"
+      },
+      {
+        "id": "CEN-0bde6f922e",
+        "titulo": "fechar_pedido: frete=0.0",
+        "tipo": "borda",
+        "descricao": "Dado frete=0.0 (valor-limite), quando fechar_pedido é executada, então não deve lançar exceção inesperada; retorna um valor do tipo float (ou uma exceção documentada: ValueError).",
+        "alvo": "loja.fechar_pedido",
+        "requisito_id": null,
+        "entradas": {
+          "itens": {
+            "a": 1
+          },
+          "frete": 0.0
+        },
+        "resultado_esperado": "um valor do tipo float",
+        "excecao_esperada": null,
+        "nao_deve_lancar": false,
+        "tipo_teste_sugerido": null,
+        "automatizavel": true,
+        "origem": "heuristica"
+      },
+      {
+        "id": "CEN-abcbea9c31",
+        "titulo": "fechar_pedido: frete=-0.01",
+        "tipo": "borda",
+        "descricao": "Dado frete=-0.01 (valor-limite), quando fechar_pedido é executada, então não deve lançar exceção inesperada; retorna um valor do tipo float (ou uma exceção documentada: ValueError).",
+        "alvo": "loja.fechar_pedido",
+        "requisito_id": null,
+        "entradas": {
+          "itens": {
+            "a": 1
+          },
+          "frete": -0.01
+        },
+        "resultado_esperado": "um valor do tipo float",
+        "excecao_esperada": null,
+        "nao_deve_lancar": false,
+        "tipo_teste_sugerido": null,
+        "automatizavel": true,
+        "origem": "heuristica"
+      },
+      {
+        "id": "CEN-a3602e1d1e",
+        "titulo": "fechar_pedido: frete=1000000000000.0",
+        "tipo": "borda",
+        "descricao": "Dado frete=1000000000000.0 (valor-limite), quando fechar_pedido é executada, então não deve lançar exceção inesperada; retorna um valor do tipo float (ou uma exceção documentada: ValueError).",
+        "alvo": "loja.fechar_pedido",
+        "requisito_id": null,
+        "entradas": {
+          "itens": {
+            "a": 1
+          },
+          "frete": 1000000000000.0
+        },
+        "resultado_esperado": "um valor do tipo float",
+        "excecao_esperada": null,
+        "nao_deve_lancar": false,
+        "tipo_teste_sugerido": null,
+        "automatizavel": true,
+        "origem": "heuristica"
+      },
+      {
+        "id": "CEN-76e69367f7",
+        "titulo": "fechar_pedido: rejeita itens vazio/falso",
+        "tipo": "falha",
+        "descricao": "Dado itens={} (viola 'itens vazio/falso'), quando fechar_pedido é executada, então lança ValueError.",
+        "alvo": "loja.fechar_pedido",
+        "requisito_id": null,
+        "entradas": {
+          "itens": {},
+          "frete": 2.5
+        },
+        "resultado_esperado": "lança ValueError",
+        "excecao_esperada": "ValueError",
+        "nao_deve_lancar": false,
+        "tipo_teste_sugerido": null,
+        "automatizavel": true,
+        "origem": "heuristica"
+      },
+      {
+        "id": "CEN-7bc33297ec",
+        "titulo": "fechar_pedido: itens=None é rejeitado",
+        "tipo": "falha",
+        "descricao": "Dado itens=None (tipo declarado Dict[str, int]), quando fechar_pedido é executada, então deve rejeitar a entrada com TypeError/ValueError (ou uma exceção documentada: ValueError) em vez de prosseguir.",
+        "alvo": "loja.fechar_pedido",
+        "requisito_id": null,
+        "entradas": {
+          "itens": null,
+          "frete": 2.5
+        },
+        "resultado_esperado": "entrada inválida rejeitada",
+        "excecao_esperada": "TypeError|ValueError",
+        "nao_deve_lancar": false,
+        "tipo_teste_sugerido": "validacao_entrada",
+        "automatizavel": true,
+        "origem": "heuristica"
+      },
+      {
+        "id": "CEN-a54077ff3c",
+        "titulo": "fechar_pedido: fluxo integrado com calcular_desconto",
+        "tipo": "sucesso",
+        "descricao": "Dado os colaboradores reais (calcular_desconto) sem dublês, quando fechar_pedido é executada com itens={'a': 1}, frete=2.5, então o fluxo completo retorna um valor do tipo float.",
+        "alvo": "loja.fechar_pedido",
+        "requisito_id": null,
+        "entradas": {
+          "itens": {
+            "a": 1
+          },
+          "frete": 2.5
+        },
+        "resultado_esperado": "um valor do tipo float",
+        "excecao_esperada": null,
+        "nao_deve_lancar": false,
+        "tipo_teste_sugerido": "integracao",
+        "automatizavel": true,
+        "origem": "heuristica"
+      },
+      {
+        "id": "CEN-88a0b9ce4c",
+        "titulo": "adicionar: entradas típicas",
+        "tipo": "sucesso",
+        "descricao": "Dado sku='abc', quantidade=7, quando adicionar é executada, então retorna um valor do tipo int.",
+        "alvo": "loja.Estoque.adicionar",
+        "requisito_id": null,
+        "entradas": {
+          "sku": "abc",
+          "quantidade": 7
+        },
+        "resultado_esperado": "um valor do tipo int",
+        "excecao_esperada": null,
+        "nao_deve_lancar": false,
+        "tipo_teste_sugerido": null,
+        "automatizavel": true,
+        "origem": "heuristica"
+      },
+      {
+        "id": "CEN-2032951148",
+        "titulo": "adicionar: sku=''",
+        "tipo": "borda",
+        "descricao": "Dado sku='' (valor-limite), quando adicionar é executada, então não deve lançar exceção inesperada; retorna um valor do tipo int (ou uma exceção documentada: ValueError).",
+        "alvo": "loja.Estoque.adicionar",
+        "requisito_id": null,
+        "entradas": {
+          "sku": "",
+          "quantidade": 7
+        },
+        "resultado_esperado": "um valor do tipo int",
+        "excecao_esperada": null,
+        "nao_deve_lancar": false,
+        "tipo_teste_sugerido": null,
+        "automatizavel": true,
+        "origem": "heuristica"
+      },
+      {
+        "id": "CEN-545b3ced40",
+        "titulo": "adicionar: sku='   '",
+        "tipo": "borda",
+        "descricao": "Dado sku='   ' (valor-limite), quando adicionar é executada, então não deve lançar exceção inesperada; retorna um valor do tipo int (ou uma exceção documentada: ValueError).",
+        "alvo": "loja.Estoque.adicionar",
+        "requisito_id": null,
+        "entradas": {
+          "sku": "   ",
+          "quantidade": 7
+        },
+        "resultado_esperado": "um valor do tipo int",
+        "excecao_esperada": null,
+        "nao_deve_lancar": false,
+        "tipo_teste_sugerido": null,
+        "automatizavel": true,
+        "origem": "heuristica"
+      },
+      {
+        "id": "CEN-c38d40a951",
+        "titulo": "adicionar: sku=str de tamanho 256",
+        "tipo": "borda",
+        "descricao": "Dado sku=str de tamanho 256 (valor-limite), quando adicionar é executada, então não deve lançar exceção inesperada; retorna um valor do tipo int (ou uma exceção documentada: ValueError).",
+        "alvo": "loja.Estoque.adicionar",
+        "requisito_id": null,
+        "entradas": {
+          "sku": "çççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççç",
+          "quantidade": 7
+        },
+        "resultado_esperado": "um valor do tipo int",
+        "excecao_esperada": null,
+        "nao_deve_lancar": false,
+        "tipo_teste_sugerido": null,
+        "automatizavel": true,
+        "origem": "heuristica"
+      },
+      {
+        "id": "CEN-eb3d73d125",
+        "titulo": "adicionar: quantidade=0",
+        "tipo": "borda",
+        "descricao": "Dado quantidade=0 (valor-limite), quando adicionar é executada, então não deve lançar exceção inesperada; retorna um valor do tipo int (ou uma exceção documentada: ValueError).",
+        "alvo": "loja.Estoque.adicionar",
+        "requisito_id": null,
+        "entradas": {
+          "sku": "abc",
+          "quantidade": 0
+        },
+        "resultado_esperado": "um valor do tipo int",
+        "excecao_esperada": null,
+        "nao_deve_lancar": false,
+        "tipo_teste_sugerido": null,
+        "automatizavel": true,
+        "origem": "heuristica"
+      },
+      {
+        "id": "CEN-bce92e9a13",
+        "titulo": "adicionar: quantidade=-1",
+        "tipo": "borda",
+        "descricao": "Dado quantidade=-1 (valor-limite), quando adicionar é executada, então não deve lançar exceção inesperada; retorna um valor do tipo int (ou uma exceção documentada: ValueError).",
+        "alvo": "loja.Estoque.adicionar",
+        "requisito_id": null,
+        "entradas": {
+          "sku": "abc",
+          "quantidade": -1
+        },
+        "resultado_esperado": "um valor do tipo int",
+        "excecao_esperada": null,
+        "nao_deve_lancar": false,
+        "tipo_teste_sugerido": null,
+        "automatizavel": true,
+        "origem": "heuristica"
+      },
+      {
+        "id": "CEN-96fb245789",
+        "titulo": "adicionar: quantidade=1000000000000",
+        "tipo": "borda",
+        "descricao": "Dado quantidade=1000000000000 (valor-limite), quando adicionar é executada, então não deve lançar exceção inesperada; retorna um valor do tipo int (ou uma exceção documentada: ValueError).",
+        "alvo": "loja.Estoque.adicionar",
+        "requisito_id": null,
+        "entradas": {
+          "sku": "abc",
+          "quantidade": 1000000000000
+        },
+        "resultado_esperado": "um valor do tipo int",
+        "excecao_esperada": null,
+        "nao_deve_lancar": false,
+        "tipo_teste_sugerido": null,
+        "automatizavel": true,
+        "origem": "heuristica"
+      },
+      {
+        "id": "CEN-63b5a9340e",
+        "titulo": "adicionar: rejeita quantidade <= 0",
+        "tipo": "falha",
+        "descricao": "Dado quantidade=0 (viola 'quantidade <= 0'), quando adicionar é executada, então lança ValueError.",
+        "alvo": "loja.Estoque.adicionar",
+        "requisito_id": null,
+        "entradas": {
+          "sku": "abc",
+          "quantidade": 0
+        },
+        "resultado_esperado": "lança ValueError",
+        "excecao_esperada": "ValueError",
+        "nao_deve_lancar": false,
+        "tipo_teste_sugerido": null,
+        "automatizavel": true,
+        "origem": "heuristica"
+      },
+      {
+        "id": "CEN-513e03552b",
+        "titulo": "adicionar: aceita quantidade=1 (limite de 'quantidade <= 0')",
+        "tipo": "borda",
+        "descricao": "Dado quantidade=1 (fronteira válida de 'quantidade <= 0'), quando adicionar é executada, então não lança exceção e retorna um valor do tipo int.",
+        "alvo": "loja.Estoque.adicionar",
+        "requisito_id": null,
+        "entradas": {
+          "sku": "abc",
+          "quantidade": 1
+        },
+        "resultado_esperado": "um valor do tipo int",
+        "excecao_esperada": null,
+        "nao_deve_lancar": true,
+        "tipo_teste_sugerido": null,
+        "automatizavel": true,
+        "origem": "heuristica"
+      },
+      {
+        "id": "CEN-7d63aab931",
+        "titulo": "adicionar: sku=None é rejeitado",
+        "tipo": "falha",
+        "descricao": "Dado sku=None (tipo declarado str), quando adicionar é executada, então deve rejeitar a entrada com TypeError/ValueError (ou uma exceção documentada: ValueError) em vez de prosseguir.",
+        "alvo": "loja.Estoque.adicionar",
+        "requisito_id": null,
+        "entradas": {
+          "sku": null,
+          "quantidade": 7
+        },
+        "resultado_esperado": "entrada inválida rejeitada",
+        "excecao_esperada": "TypeError|ValueError",
+        "nao_deve_lancar": false,
+        "tipo_teste_sugerido": "validacao_entrada",
+        "automatizavel": true,
+        "origem": "heuristica"
+      },
+      {
+        "id": "CEN-41efbc31c9",
+        "titulo": "retirar: entradas típicas",
+        "tipo": "sucesso",
+        "descricao": "Dado sku='abc', quantidade=7, quando retirar é executada, então retorna um valor do tipo int.",
+        "alvo": "loja.Estoque.retirar",
+        "requisito_id": null,
+        "entradas": {
+          "sku": "abc",
+          "quantidade": 7
+        },
+        "resultado_esperado": "um valor do tipo int",
+        "excecao_esperada": null,
+        "nao_deve_lancar": false,
+        "tipo_teste_sugerido": null,
+        "automatizavel": true,
+        "origem": "heuristica"
+      },
+      {
+        "id": "CEN-94df6a73a4",
+        "titulo": "retirar: sku=''",
+        "tipo": "borda",
+        "descricao": "Dado sku='' (valor-limite), quando retirar é executada, então não deve lançar exceção inesperada; retorna um valor do tipo int (ou uma exceção documentada: EstoqueInsuficiente).",
+        "alvo": "loja.Estoque.retirar",
+        "requisito_id": null,
+        "entradas": {
+          "sku": "",
+          "quantidade": 7
+        },
+        "resultado_esperado": "um valor do tipo int",
+        "excecao_esperada": null,
+        "nao_deve_lancar": false,
+        "tipo_teste_sugerido": null,
+        "automatizavel": true,
+        "origem": "heuristica"
+      },
+      {
+        "id": "CEN-9a8362dfab",
+        "titulo": "retirar: sku='   '",
+        "tipo": "borda",
+        "descricao": "Dado sku='   ' (valor-limite), quando retirar é executada, então não deve lançar exceção inesperada; retorna um valor do tipo int (ou uma exceção documentada: EstoqueInsuficiente).",
+        "alvo": "loja.Estoque.retirar",
+        "requisito_id": null,
+        "entradas": {
+          "sku": "   ",
+          "quantidade": 7
+        },
+        "resultado_esperado": "um valor do tipo int",
+        "excecao_esperada": null,
+        "nao_deve_lancar": false,
+        "tipo_teste_sugerido": null,
+        "automatizavel": true,
+        "origem": "heuristica"
+      },
+      {
+        "id": "CEN-d2369a8d28",
+        "titulo": "retirar: sku=str de tamanho 256",
+        "tipo": "borda",
+        "descricao": "Dado sku=str de tamanho 256 (valor-limite), quando retirar é executada, então não deve lançar exceção inesperada; retorna um valor do tipo int (ou uma exceção documentada: EstoqueInsuficiente).",
+        "alvo": "loja.Estoque.retirar",
+        "requisito_id": null,
+        "entradas": {
+          "sku": "çççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççç",
+          "quantidade": 7
+        },
+        "resultado_esperado": "um valor do tipo int",
+        "excecao_esperada": null,
+        "nao_deve_lancar": false,
+        "tipo_teste_sugerido": null,
+        "automatizavel": true,
+        "origem": "heuristica"
+      },
+      {
+        "id": "CEN-6c5450a938",
+        "titulo": "retirar: quantidade=0",
+        "tipo": "borda",
+        "descricao": "Dado quantidade=0 (valor-limite), quando retirar é executada, então não deve lançar exceção inesperada; retorna um valor do tipo int (ou uma exceção documentada: EstoqueInsuficiente).",
+        "alvo": "loja.Estoque.retirar",
+        "requisito_id": null,
+        "entradas": {
+          "sku": "abc",
+          "quantidade": 0
+        },
+        "resultado_esperado": "um valor do tipo int",
+        "excecao_esperada": null,
+        "nao_deve_lancar": false,
+        "tipo_teste_sugerido": null,
+        "automatizavel": true,
+        "origem": "heuristica"
+      },
+      {
+        "id": "CEN-1da067bf2d",
+        "titulo": "retirar: quantidade=-1",
+        "tipo": "borda",
+        "descricao": "Dado quantidade=-1 (valor-limite), quando retirar é executada, então não deve lançar exceção inesperada; retorna um valor do tipo int (ou uma exceção documentada: EstoqueInsuficiente).",
+        "alvo": "loja.Estoque.retirar",
+        "requisito_id": null,
+        "entradas": {
+          "sku": "abc",
+          "quantidade": -1
+        },
+        "resultado_esperado": "um valor do tipo int",
+        "excecao_esperada": null,
+        "nao_deve_lancar": false,
+        "tipo_teste_sugerido": null,
+        "automatizavel": true,
+        "origem": "heuristica"
+      },
+      {
+        "id": "CEN-298e4d82e7",
+        "titulo": "retirar: quantidade=1000000000000",
+        "tipo": "borda",
+        "descricao": "Dado quantidade=1000000000000 (valor-limite), quando retirar é executada, então não deve lançar exceção inesperada; retorna um valor do tipo int (ou uma exceção documentada: EstoqueInsuficiente).",
+        "alvo": "loja.Estoque.retirar",
+        "requisito_id": null,
+        "entradas": {
+          "sku": "abc",
+          "quantidade": 1000000000000
+        },
+        "resultado_esperado": "um valor do tipo int",
+        "excecao_esperada": null,
+        "nao_deve_lancar": false,
+        "tipo_teste_sugerido": null,
+        "automatizavel": true,
+        "origem": "heuristica"
+      },
+      {
+        "id": "CEN-689adc6bee",
+        "titulo": "retirar: sku=None é rejeitado",
+        "tipo": "falha",
+        "descricao": "Dado sku=None (tipo declarado str), quando retirar é executada, então deve rejeitar a entrada com TypeError/ValueError (ou uma exceção documentada: EstoqueInsuficiente) em vez de prosseguir.",
+        "alvo": "loja.Estoque.retirar",
+        "requisito_id": null,
+        "entradas": {
+          "sku": null,
+          "quantidade": 7
+        },
+        "resultado_esperado": "entrada inválida rejeitada",
+        "excecao_esperada": "TypeError|ValueError",
+        "nao_deve_lancar": false,
+        "tipo_teste_sugerido": "validacao_entrada",
+        "automatizavel": true,
+        "origem": "heuristica"
+      }
+    ],
+    "casos": [
+      {
+        "id": "CASO-76daf2a9b2",
+        "caminho": "tests_gerados/test_loja_unitario.py",
+        "codigo": "\"\"\"Testes unitario gerados pelo Agente de Testes para loja.\n\nGerados a partir de cenários (hipóteses); a execução é a fonte da verdade.\n\"\"\"\nimport asyncio\n\nimport pytest\n\ndef test_cen_20e0b290d1_calcular_desconto_entradas_t_picas():\n    \"\"\"Dado valor=2.5, percentual=2.5, quando calcular_desconto é executada, então retorna um valor do tipo float.\"\"\"\n    from loja import calcular_desconto\n    try:\n        resultado = calcular_desconto(valor=2.5, percentual=2.5)\n    except (ValueError,):\n        return  # exceção documentada pelo código: comportamento aceito\n    assert isinstance(resultado, (int, float)), f'retorno inesperado: {resultado!r}'\n\n\n\ndef test_cen_219e8d1bec_calcular_desconto_valor_0_0():\n    \"\"\"Dado valor=0.0 (valor-limite), quando calcular_desconto é executada, então não deve lançar exceção inesperada; retorna um valor do tipo float (ou uma exceção documentada: ValueError).\"\"\"\n    from loja import calcular_desconto\n    try:\n        resultado = calcular_desconto(valor=0.0, percentual=2.5)\n    except (ValueError,):\n        return  # exceção documentada pelo código: comportamento aceito\n    assert isinstance(resultado, (int, float)), f'retorno inesperado: {resultado!r}'\n\n\n\ndef test_cen_53f733f159_calcular_desconto_valor_0_01():\n    \"\"\"Dado valor=-0.01 (valor-limite), quando calcular_desconto é executada, então não deve lançar exceção inesperada; retorna um valor do tipo float (ou uma exceção documentada: ValueError).\"\"\"\n    from loja import calcular_desconto\n    try:\n        resultado = calcular_desconto(valor=-0.01, percentual=2.5)\n    except (ValueError,):\n        return  # exceção documentada pelo código: comportamento aceito\n    assert isinstance(resultado, (int, float)), f'retorno inesperado: {resultado!r}'\n\n\n\ndef test_cen_749c208c23_calcular_desconto_valor_1000000000000_0():\n    \"\"\"Dado valor=1000000000000.0 (valor-limite), quando calcular_desconto é executada, então não deve lançar exceção inesperada; retorna um valor do tipo float (ou uma exceção documentada: ValueError).\"\"\"\n    from loja import calcular_desconto\n    try:\n        resultado = calcular_desconto(valor=1000000000000.0, percentual=2.5)\n    except (ValueError,):\n        return  # exceção documentada pelo código: comportamento aceito\n    assert isinstance(resultado, (int, float)), f'retorno inesperado: {resultado!r}'\n\n\n\ndef test_cen_1db8d2a9a0_calcular_desconto_percentual_0_0():\n    \"\"\"Dado percentual=0.0 (valor-limite), quando calcular_desconto é executada, então não deve lançar exceção inesperada; retorna um valor do tipo float (ou uma exceção documentada: ValueError).\"\"\"\n    from loja import calcular_desconto\n    try:\n        resultado = calcular_desconto(valor=2.5, percentual=0.0)\n    except (ValueError,):\n        return  # exceção documentada pelo código: comportamento aceito\n    assert isinstance(resultado, (int, float)), f'retorno inesperado: {resultado!r}'\n\n\n\ndef test_cen_b63b5f005d_calcular_desconto_percentual_0_01():\n    \"\"\"Dado percentual=-0.01 (valor-limite), quando calcular_desconto é executada, então não deve lançar exceção inesperada; retorna um valor do tipo float (ou uma exceção documentada: ValueError).\"\"\"\n    from loja import calcular_desconto\n    try:\n        resultado = calcular_desconto(valor=2.5, percentual=-0.01)\n    except (ValueError,):\n        return  # exceção documentada pelo código: comportamento aceito\n    assert isinstance(resultado, (int, float)), f'retorno inesperado: {resultado!r}'\n\n\n\ndef test_cen_24be833dff_calcular_desconto_percentual_1000000000000_0():\n    \"\"\"Dado percentual=1000000000000.0 (valor-limite), quando calcular_desconto é executada, então não deve lançar exceção inesperada; retorna um valor do tipo float (ou uma exceção documentada: ValueError).\"\"\"\n    from loja import calcular_desconto\n    try:\n        resultado = calcular_desconto(valor=2.5, percentual=1000000000000.0)\n    except (ValueError,):\n        return  # exceção documentada pelo código: comportamento aceito\n    assert isinstance(resultado, (int, float)), f'retorno inesperado: {resultado!r}'\n\n\n\ndef test_cen_f1710123c9_calcular_desconto_rejeita_valor_0():\n    \"\"\"Dado valor=-0.5 (viola 'valor < 0'), quando calcular_desconto é executada, então lança ValueError.\"\"\"\n    from loja import calcular_desconto\n    with pytest.raises((ValueError,)):\n        calcular_desconto(valor=-0.5, percentual=2.5)\n\n\n\ndef test_cen_345d30abd4_calcular_desconto_rejeita_percentual_0():\n    \"\"\"Dado percentual=-0.5 (viola 'percentual < 0'), quando calcular_desconto é executada, então lança ValueError.\"\"\"\n    from loja import calcular_desconto\n    with pytest.raises((ValueError,)):\n        calcular_desconto(valor=2.5, percentual=-0.5)\n\n\n\ndef test_cen_06f94a711c_calcular_desconto_rejeita_percentual_100():\n    \"\"\"Dado percentual=100.5 (viola 'percentual > 100'), quando calcular_desconto é executada, então lança ValueError.\"\"\"\n    from loja import calcular_desconto\n    with pytest.raises((ValueError,)):\n        calcular_desconto(valor=2.5, percentual=100.5)\n\n\n\ndef test_cen_41a265c9a7_calcular_desconto_aceita_valor_0_limite_de_valor_0():\n    \"\"\"Dado valor=0 (fronteira válida de 'valor < 0'), quando calcular_desconto é executada, então não lança exceção e retorna um valor do tipo float.\"\"\"\n    from loja import calcular_desconto\n    resultado = calcular_desconto(valor=0, percentual=2.5)\n    assert isinstance(resultado, (int, float)), f'retorno inesperado: {resultado!r}'\n\n\n\ndef test_cen_ea0e6dcbc9_calcular_desconto_aceita_percentual_0_limite_de_pe():\n    \"\"\"Dado percentual=0 (fronteira válida de 'percentual < 0'), quando calcular_desconto é executada, então não lança exceção e retorna um valor do tipo float.\"\"\"\n    from loja import calcular_desconto\n    resultado = calcular_desconto(valor=2.5, percentual=0)\n    assert isinstance(resultado, (int, float)), f'retorno inesperado: {resultado!r}'\n\n\n\ndef test_cen_80cade12a4_calcular_desconto_aceita_percentual_100_limite_de_():\n    \"\"\"Dado percentual=100 (fronteira válida de 'percentual > 100'), quando calcular_desconto é executada, então não lança exceção e retorna um valor do tipo float.\"\"\"\n    from loja import calcular_desconto\n    resultado = calcular_desconto(valor=2.5, percentual=100)\n    assert isinstance(resultado, (int, float)), f'retorno inesperado: {resultado!r}'\n\n\n\ndef test_cen_c3bf8a9d9f_calcular_frete_entradas_t_picas():\n    \"\"\"Dado peso_kg=2.5, distancia_km=7, quando calcular_frete é executada, então retorna um valor do tipo float.\"\"\"\n    from loja import calcular_frete\n    try:\n        resultado = calcular_frete(peso_kg=2.5, distancia_km=7)\n    except (ValueError,):\n        return  # exceção documentada pelo código: comportamento aceito\n    assert isinstance(resultado, (int, float)), f'retorno inesperado: {resultado!r}'\n\n\n\ndef test_cen_2c3653e881_calcular_frete_peso_kg_0_0():\n    \"\"\"Dado peso_kg=0.0 (valor-limite), quando calcular_frete é executada, então não deve lançar exceção inesperada; retorna um valor do tipo float (ou uma exceção documentada: ValueError).\"\"\"\n    from loja import calcular_frete\n    try:\n        resultado = calcular_frete(peso_kg=0.0, distancia_km=7)\n    except (ValueError,):\n        return  # exceção documentada pelo código: comportamento aceito\n    assert isinstance(resultado, (int, float)), f'retorno inesperado: {resultado!r}'\n\n\n\ndef test_cen_484ec7a68d_calcular_frete_peso_kg_0_01():\n    \"\"\"Dado peso_kg=-0.01 (valor-limite), quando calcular_frete é executada, então não deve lançar exceção inesperada; retorna um valor do tipo float (ou uma exceção documentada: ValueError).\"\"\"\n    from loja import calcular_frete\n    try:\n        resultado = calcular_frete(peso_kg=-0.01, distancia_km=7)\n    except (ValueError,):\n        return  # exceção documentada pelo código: comportamento aceito\n    assert isinstance(resultado, (int, float)), f'retorno inesperado: {resultado!r}'\n\n\n\ndef test_cen_3966b9043a_calcular_frete_peso_kg_1000000000000_0():\n    \"\"\"Dado peso_kg=1000000000000.0 (valor-limite), quando calcular_frete é executada, então não deve lançar exceção inesperada; retorna um valor do tipo float (ou uma exceção documentada: ValueError).\"\"\"\n    from loja import calcular_frete\n    try:\n        resultado = calcular_frete(peso_kg=1000000000000.0, distancia_km=7)\n    except (ValueError,):\n        return  # exceção documentada pelo código: comportamento aceito\n    assert isinstance(resultado, (int, float)), f'retorno inesperado: {resultado!r}'\n\n\n\ndef test_cen_28de335856_calcular_frete_distancia_km_0():\n    \"\"\"Dado distancia_km=0 (valor-limite), quando calcular_frete é executada, então não deve lançar exceção inesperada; retorna um valor do tipo float (ou uma exceção documentada: ValueError).\"\"\"\n    from loja import calcular_frete\n    try:\n        resultado = calcular_frete(peso_kg=2.5, distancia_km=0)\n    except (ValueError,):\n        return  # exceção documentada pelo código: comportamento aceito\n    assert isinstance(resultado, (int, float)), f'retorno inesperado: {resultado!r}'\n\n\n\ndef test_cen_df39a1aa97_calcular_frete_distancia_km_1():\n    \"\"\"Dado distancia_km=-1 (valor-limite), quando calcular_frete é executada, então não deve lançar exceção inesperada; retorna um valor do tipo float (ou uma exceção documentada: ValueError).\"\"\"\n    from loja import calcular_frete\n    try:\n        resultado = calcular_frete(peso_kg=2.5, distancia_km=-1)\n    except (ValueError,):\n        return  # exceção documentada pelo código: comportamento aceito\n    assert isinstance(resultado, (int, float)), f'retorno inesperado: {resultado!r}'\n\n\n\ndef test_cen_57e0fde07a_calcular_frete_distancia_km_1000000000000():\n    \"\"\"Dado distancia_km=1000000000000 (valor-limite), quando calcular_frete é executada, então não deve lançar exceção inesperada; retorna um valor do tipo float (ou uma exceção documentada: ValueError).\"\"\"\n    from loja import calcular_frete\n    try:\n        resultado = calcular_frete(peso_kg=2.5, distancia_km=1000000000000)\n    except (ValueError,):\n        return  # exceção documentada pelo código: comportamento aceito\n    assert isinstance(resultado, (int, float)), f'retorno inesperado: {resultado!r}'\n\n\n\ndef test_cen_0502f971cc_calcular_frete_rejeita_peso_kg_0():\n    \"\"\"Dado peso_kg=0 (viola 'peso_kg <= 0'), quando calcular_frete é executada, então lança ValueError.\"\"\"\n    from loja import calcular_frete\n    with pytest.raises((ValueError,)):\n        calcular_frete(peso_kg=0, distancia_km=7)\n\n\n\ndef test_cen_86fafcf36f_calcular_frete_rejeita_distancia_km_0():\n    \"\"\"Dado distancia_km=-1 (viola 'distancia_km < 0'), quando calcular_frete é executada, então lança ValueError.\"\"\"\n    from loja import calcular_frete\n    with pytest.raises((ValueError,)):\n        calcular_frete(peso_kg=2.5, distancia_km=-1)\n\n\n\ndef test_cen_24deaa7d0a_calcular_frete_aceita_peso_kg_0_5_limite_de_peso_k():\n    \"\"\"Dado peso_kg=0.5 (fronteira válida de 'peso_kg <= 0'), quando calcular_frete é executada, então não lança exceção e retorna um valor do tipo float.\"\"\"\n    from loja import calcular_frete\n    resultado = calcular_frete(peso_kg=0.5, distancia_km=7)\n    assert isinstance(resultado, (int, float)), f'retorno inesperado: {resultado!r}'\n\n\n\ndef test_cen_32486f7332_calcular_frete_aceita_distancia_km_0_limite_de_dis():\n    \"\"\"Dado distancia_km=0 (fronteira válida de 'distancia_km < 0'), quando calcular_frete é executada, então não lança exceção e retorna um valor do tipo float.\"\"\"\n    from loja import calcular_frete\n    resultado = calcular_frete(peso_kg=2.5, distancia_km=0)\n    assert isinstance(resultado, (int, float)), f'retorno inesperado: {resultado!r}'\n\n\n\ndef test_cen_fa9a6e61c5_ticket_medio_entradas_t_picas():\n    \"\"\"Dado pedidos=[1, 2, 3], quando ticket_medio é executada, então retorna um valor do tipo float.\"\"\"\n    from loja import ticket_medio\n    try:\n        resultado = ticket_medio(pedidos=[1, 2, 3])\n    except ():\n        return  # exceção documentada pelo código: comportamento aceito\n    assert isinstance(resultado, (int, float)), f'retorno inesperado: {resultado!r}'\n\n\n\ndef test_cen_6a00c9a25c_ticket_medio_pedidos():\n    \"\"\"Dado pedidos=[] (valor-limite), quando ticket_medio é executada, então não deve lançar exceção inesperada; retorna um valor do tipo float.\"\"\"\n    from loja import ticket_medio\n    try:\n        resultado = ticket_medio(pedidos=[])\n    except ():\n        return  # exceção documentada pelo código: comportamento aceito\n    assert isinstance(resultado, (int, float)), f'retorno inesperado: {resultado!r}'\n\n\n\ndef test_cen_4f960c71e7_ticket_medio_pedidos_0():\n    \"\"\"Dado pedidos=[0] (valor-limite), quando ticket_medio é executada, então não deve lançar exceção inesperada; retorna um valor do tipo float.\"\"\"\n    from loja import ticket_medio\n    try:\n        resultado = ticket_medio(pedidos=[0])\n    except ():\n        return  # exceção documentada pelo código: comportamento aceito\n    assert isinstance(resultado, (int, float)), f'retorno inesperado: {resultado!r}'\n\n\n\ndef test_cen_9a58446164_aplicar_cupom_entradas_t_picas():\n    \"\"\"Dado total=2.5, codigo='abc', quando aplicar_cupom é executada, então retorna um valor do tipo float.\"\"\"\n    from loja import aplicar_cupom\n    try:\n        resultado = aplicar_cupom(total=2.5, codigo='abc')\n    except ():\n        return  # exceção documentada pelo código: comportamento aceito\n    assert isinstance(resultado, (int, float)), f'retorno inesperado: {resultado!r}'\n\n\n\ndef test_cen_705565d98e_aplicar_cupom_total_0_0():\n    \"\"\"Dado total=0.0 (valor-limite), quando aplicar_cupom é executada, então não deve lançar exceção inesperada; retorna um valor do tipo float.\"\"\"\n    from loja import aplicar_cupom\n    try:\n        resultado = aplicar_cupom(total=0.0, codigo='abc')\n    except ():\n        return  # exceção documentada pelo código: comportamento aceito\n    assert isinstance(resultado, (int, float)), f'retorno inesperado: {resultado!r}'\n\n\n\ndef test_cen_28c526f56b_aplicar_cupom_total_0_01():\n    \"\"\"Dado total=-0.01 (valor-limite), quando aplicar_cupom é executada, então não deve lançar exceção inesperada; retorna um valor do tipo float.\"\"\"\n    from loja import aplicar_cupom\n    try:\n        resultado = aplicar_cupom(total=-0.01, codigo='abc')\n    except ():\n        return  # exceção documentada pelo código: comportamento aceito\n    assert isinstance(resultado, (int, float)), f'retorno inesperado: {resultado!r}'\n\n\n\ndef test_cen_1c6be3378f_aplicar_cupom_total_1000000000000_0():\n    \"\"\"Dado total=1000000000000.0 (valor-limite), quando aplicar_cupom é executada, então não deve lançar exceção inesperada; retorna um valor do tipo float.\"\"\"\n    from loja import aplicar_cupom\n    try:\n        resultado = aplicar_cupom(total=1000000000000.0, codigo='abc')\n    except ():\n        return  # exceção documentada pelo código: comportamento aceito\n    assert isinstance(resultado, (int, float)), f'retorno inesperado: {resultado!r}'\n\n\n\ndef test_cen_2d2b918fb5_aplicar_cupom_codigo():\n    \"\"\"Dado codigo='' (valor-limite), quando aplicar_cupom é executada, então não deve lançar exceção inesperada; retorna um valor do tipo float.\"\"\"\n    from loja import aplicar_cupom\n    try:\n        resultado = aplicar_cupom(total=2.5, codigo='')\n    except ():\n        return  # exceção documentada pelo código: comportamento aceito\n    assert isinstance(resultado, (int, float)), f'retorno inesperado: {resultado!r}'\n\n\n\ndef test_cen_bdbb7e59bf_aplicar_cupom_codigo():\n    \"\"\"Dado codigo='   ' (valor-limite), quando aplicar_cupom é executada, então não deve lançar exceção inesperada; retorna um valor do tipo float.\"\"\"\n    from loja import aplicar_cupom\n    try:\n        resultado = aplicar_cupom(total=2.5, codigo='   ')\n    except ():\n        return  # exceção documentada pelo código: comportamento aceito\n    assert isinstance(resultado, (int, float)), f'retorno inesperado: {resultado!r}'\n\n\n\ndef test_cen_8373d1253d_aplicar_cupom_codigo_str_de_tamanho_256():\n    \"\"\"Dado codigo=str de tamanho 256 (valor-limite), quando aplicar_cupom é executada, então não deve lançar exceção inesperada; retorna um valor do tipo float.\"\"\"\n    from loja import aplicar_cupom\n    try:\n        resultado = aplicar_cupom(total=2.5, codigo='çççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççç')\n    except ():\n        return  # exceção documentada pelo código: comportamento aceito\n    assert isinstance(resultado, (int, float)), f'retorno inesperado: {resultado!r}'\n\n\n\ndef test_cen_27a59153aa_fechar_pedido_entradas_t_picas():\n    \"\"\"Dado itens={'a': 1}, frete=2.5, quando fechar_pedido é executada, então retorna um valor do tipo float.\"\"\"\n    from loja import fechar_pedido\n    try:\n        resultado = fechar_pedido(itens={'a': 1}, frete=2.5)\n    except (ValueError,):\n        return  # exceção documentada pelo código: comportamento aceito\n    assert isinstance(resultado, (int, float)), f'retorno inesperado: {resultado!r}'\n\n\n\ndef test_cen_ec0e4e8257_fechar_pedido_itens():\n    \"\"\"Dado itens={} (valor-limite), quando fechar_pedido é executada, então não deve lançar exceção inesperada; retorna um valor do tipo float (ou uma exceção documentada: ValueError).\"\"\"\n    from loja import fechar_pedido\n    try:\n        resultado = fechar_pedido(itens={}, frete=2.5)\n    except (ValueError,):\n        return  # exceção documentada pelo código: comportamento aceito\n    assert isinstance(resultado, (int, float)), f'retorno inesperado: {resultado!r}'\n\n\n\ndef test_cen_0bde6f922e_fechar_pedido_frete_0_0():\n    \"\"\"Dado frete=0.0 (valor-limite), quando fechar_pedido é executada, então não deve lançar exceção inesperada; retorna um valor do tipo float (ou uma exceção documentada: ValueError).\"\"\"\n    from loja import fechar_pedido\n    try:\n        resultado = fechar_pedido(itens={'a': 1}, frete=0.0)\n    except (ValueError,):\n        return  # exceção documentada pelo código: comportamento aceito\n    assert isinstance(resultado, (int, float)), f'retorno inesperado: {resultado!r}'\n\n\n\ndef test_cen_abcbea9c31_fechar_pedido_frete_0_01():\n    \"\"\"Dado frete=-0.01 (valor-limite), quando fechar_pedido é executada, então não deve lançar exceção inesperada; retorna um valor do tipo float (ou uma exceção documentada: ValueError).\"\"\"\n    from loja import fechar_pedido\n    try:\n        resultado = fechar_pedido(itens={'a': 1}, frete=-0.01)\n    except (ValueError,):\n        return  # exceção documentada pelo código: comportamento aceito\n    assert isinstance(resultado, (int, float)), f'retorno inesperado: {resultado!r}'\n\n\n\ndef test_cen_a3602e1d1e_fechar_pedido_frete_1000000000000_0():\n    \"\"\"Dado frete=1000000000000.0 (valor-limite), quando fechar_pedido é executada, então não deve lançar exceção inesperada; retorna um valor do tipo float (ou uma exceção documentada: ValueError).\"\"\"\n    from loja import fechar_pedido\n    try:\n        resultado = fechar_pedido(itens={'a': 1}, frete=1000000000000.0)\n    except (ValueError,):\n        return  # exceção documentada pelo código: comportamento aceito\n    assert isinstance(resultado, (int, float)), f'retorno inesperado: {resultado!r}'\n\n\n\ndef test_cen_76e69367f7_fechar_pedido_rejeita_itens_vazio_falso():\n    \"\"\"Dado itens={} (viola 'itens vazio/falso'), quando fechar_pedido é executada, então lança ValueError.\"\"\"\n    from loja import fechar_pedido\n    with pytest.raises((ValueError,)):\n        fechar_pedido(itens={}, frete=2.5)\n\n\n\ndef test_cen_88a0b9ce4c_adicionar_entradas_t_picas():\n    \"\"\"Dado sku='abc', quantidade=7, quando adicionar é executada, então retorna um valor do tipo int.\"\"\"\n    from loja import Estoque\n    try:\n        resultado = Estoque().adicionar(sku='abc', quantidade=7)\n    except (ValueError,):\n        return  # exceção documentada pelo código: comportamento aceito\n    assert isinstance(resultado, int), f'retorno inesperado: {resultado!r}'\n\n\n\ndef test_cen_2032951148_adicionar_sku():\n    \"\"\"Dado sku='' (valor-limite), quando adicionar é executada, então não deve lançar exceção inesperada; retorna um valor do tipo int (ou uma exceção documentada: ValueError).\"\"\"\n    from loja import Estoque\n    try:\n        resultado = Estoque().adicionar(sku='', quantidade=7)\n    except (ValueError,):\n        return  # exceção documentada pelo código: comportamento aceito\n    assert isinstance(resultado, int), f'retorno inesperado: {resultado!r}'\n\n\n\ndef test_cen_545b3ced40_adicionar_sku():\n    \"\"\"Dado sku='   ' (valor-limite), quando adicionar é executada, então não deve lançar exceção inesperada; retorna um valor do tipo int (ou uma exceção documentada: ValueError).\"\"\"\n    from loja import Estoque\n    try:\n        resultado = Estoque().adicionar(sku='   ', quantidade=7)\n    except (ValueError,):\n        return  # exceção documentada pelo código: comportamento aceito\n    assert isinstance(resultado, int), f'retorno inesperado: {resultado!r}'\n\n\n\ndef test_cen_c38d40a951_adicionar_sku_str_de_tamanho_256():\n    \"\"\"Dado sku=str de tamanho 256 (valor-limite), quando adicionar é executada, então não deve lançar exceção inesperada; retorna um valor do tipo int (ou uma exceção documentada: ValueError).\"\"\"\n    from loja import Estoque\n    try:\n        resultado = Estoque().adicionar(sku='çççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççç', quantidade=7)\n    except (ValueError,):\n        return  # exceção documentada pelo código: comportamento aceito\n    assert isinstance(resultado, int), f'retorno inesperado: {resultado!r}'\n\n\n\ndef test_cen_eb3d73d125_adicionar_quantidade_0():\n    \"\"\"Dado quantidade=0 (valor-limite), quando adicionar é executada, então não deve lançar exceção inesperada; retorna um valor do tipo int (ou uma exceção documentada: ValueError).\"\"\"\n    from loja import Estoque\n    try:\n        resultado = Estoque().adicionar(sku='abc', quantidade=0)\n    except (ValueError,):\n        return  # exceção documentada pelo código: comportamento aceito\n    assert isinstance(resultado, int), f'retorno inesperado: {resultado!r}'\n\n\n\ndef test_cen_bce92e9a13_adicionar_quantidade_1():\n    \"\"\"Dado quantidade=-1 (valor-limite), quando adicionar é executada, então não deve lançar exceção inesperada; retorna um valor do tipo int (ou uma exceção documentada: ValueError).\"\"\"\n    from loja import Estoque\n    try:\n        resultado = Estoque().adicionar(sku='abc', quantidade=-1)\n    except (ValueError,):\n        return  # exceção documentada pelo código: comportamento aceito\n    assert isinstance(resultado, int), f'retorno inesperado: {resultado!r}'\n\n\n\ndef test_cen_96fb245789_adicionar_quantidade_1000000000000():\n    \"\"\"Dado quantidade=1000000000000 (valor-limite), quando adicionar é executada, então não deve lançar exceção inesperada; retorna um valor do tipo int (ou uma exceção documentada: ValueError).\"\"\"\n    from loja import Estoque\n    try:\n        resultado = Estoque().adicionar(sku='abc', quantidade=1000000000000)\n    except (ValueError,):\n        return  # exceção documentada pelo código: comportamento aceito\n    assert isinstance(resultado, int), f'retorno inesperado: {resultado!r}'\n\n\n\ndef test_cen_63b5a9340e_adicionar_rejeita_quantidade_0():\n    \"\"\"Dado quantidade=0 (viola 'quantidade <= 0'), quando adicionar é executada, então lança ValueError.\"\"\"\n    from loja import Estoque\n    with pytest.raises((ValueError,)):\n        Estoque().adicionar(sku='abc', quantidade=0)\n\n\n\ndef test_cen_513e03552b_adicionar_aceita_quantidade_1_limite_de_quantidade():\n    \"\"\"Dado quantidade=1 (fronteira válida de 'quantidade <= 0'), quando adicionar é executada, então não lança exceção e retorna um valor do tipo int.\"\"\"\n    from loja import Estoque\n    resultado = Estoque().adicionar(sku='abc', quantidade=1)\n    assert isinstance(resultado, int), f'retorno inesperado: {resultado!r}'\n\n\n\ndef test_cen_41efbc31c9_retirar_entradas_t_picas():\n    \"\"\"Dado sku='abc', quantidade=7, quando retirar é executada, então retorna um valor do tipo int.\"\"\"\n    from loja import Estoque\n    from loja import EstoqueInsuficiente\n    try:\n        resultado = Estoque().retirar(sku='abc', quantidade=7)\n    except (EstoqueInsuficiente,):\n        return  # exceção documentada pelo código: comportamento aceito\n    assert isinstance(resultado, int), f'retorno inesperado: {resultado!r}'\n\n\n\ndef test_cen_94df6a73a4_retirar_sku():\n    \"\"\"Dado sku='' (valor-limite), quando retirar é executada, então não deve lançar exceção inesperada; retorna um valor do tipo int (ou uma exceção documentada: EstoqueInsuficiente).\"\"\"\n    from loja import Estoque\n    from loja import EstoqueInsuficiente\n    try:\n        resultado = Estoque().retirar(sku='', quantidade=7)\n    except (EstoqueInsuficiente,):\n        return  # exceção documentada pelo código: comportamento aceito\n    assert isinstance(resultado, int), f'retorno inesperado: {resultado!r}'\n\n\n\ndef test_cen_9a8362dfab_retirar_sku():\n    \"\"\"Dado sku='   ' (valor-limite), quando retirar é executada, então não deve lançar exceção inesperada; retorna um valor do tipo int (ou uma exceção documentada: EstoqueInsuficiente).\"\"\"\n    from loja import Estoque\n    from loja import EstoqueInsuficiente\n    try:\n        resultado = Estoque().retirar(sku='   ', quantidade=7)\n    except (EstoqueInsuficiente,):\n        return  # exceção documentada pelo código: comportamento aceito\n    assert isinstance(resultado, int), f'retorno inesperado: {resultado!r}'\n\n\n\ndef test_cen_d2369a8d28_retirar_sku_str_de_tamanho_256():\n    \"\"\"Dado sku=str de tamanho 256 (valor-limite), quando retirar é executada, então não deve lançar exceção inesperada; retorna um valor do tipo int (ou uma exceção documentada: EstoqueInsuficiente).\"\"\"\n    from loja import Estoque\n    from loja import EstoqueInsuficiente\n    try:\n        resultado = Estoque().retirar(sku='çççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççç', quantidade=7)\n    except (EstoqueInsuficiente,):\n        return  # exceção documentada pelo código: comportamento aceito\n    assert isinstance(resultado, int), f'retorno inesperado: {resultado!r}'\n\n\n\ndef test_cen_6c5450a938_retirar_quantidade_0():\n    \"\"\"Dado quantidade=0 (valor-limite), quando retirar é executada, então não deve lançar exceção inesperada; retorna um valor do tipo int (ou uma exceção documentada: EstoqueInsuficiente).\"\"\"\n    from loja import Estoque\n    from loja import EstoqueInsuficiente\n    try:\n        resultado = Estoque().retirar(sku='abc', quantidade=0)\n    except (EstoqueInsuficiente,):\n        return  # exceção documentada pelo código: comportamento aceito\n    assert isinstance(resultado, int), f'retorno inesperado: {resultado!r}'\n\n\n\ndef test_cen_1da067bf2d_retirar_quantidade_1():\n    \"\"\"Dado quantidade=-1 (valor-limite), quando retirar é executada, então não deve lançar exceção inesperada; retorna um valor do tipo int (ou uma exceção documentada: EstoqueInsuficiente).\"\"\"\n    from loja import Estoque\n    from loja import EstoqueInsuficiente\n    try:\n        resultado = Estoque().retirar(sku='abc', quantidade=-1)\n    except (EstoqueInsuficiente,):\n        return  # exceção documentada pelo código: comportamento aceito\n    assert isinstance(resultado, int), f'retorno inesperado: {resultado!r}'\n\n\n\ndef test_cen_298e4d82e7_retirar_quantidade_1000000000000():\n    \"\"\"Dado quantidade=1000000000000 (valor-limite), quando retirar é executada, então não deve lançar exceção inesperada; retorna um valor do tipo int (ou uma exceção documentada: EstoqueInsuficiente).\"\"\"\n    from loja import Estoque\n    from loja import EstoqueInsuficiente\n    try:\n        resultado = Estoque().retirar(sku='abc', quantidade=1000000000000)\n    except (EstoqueInsuficiente,):\n        return  # exceção documentada pelo código: comportamento aceito\n    assert isinstance(resultado, int), f'retorno inesperado: {resultado!r}'\n\n",
+        "tipo_teste": "unitario",
+        "framework": "pytest",
+        "cenarios": [
+          "CEN-20e0b290d1",
+          "CEN-219e8d1bec",
+          "CEN-53f733f159",
+          "CEN-749c208c23",
+          "CEN-1db8d2a9a0",
+          "CEN-b63b5f005d",
+          "CEN-24be833dff",
+          "CEN-f1710123c9",
+          "CEN-345d30abd4",
+          "CEN-06f94a711c",
+          "CEN-41a265c9a7",
+          "CEN-ea0e6dcbc9",
+          "CEN-80cade12a4",
+          "CEN-c3bf8a9d9f",
+          "CEN-2c3653e881",
+          "CEN-484ec7a68d",
+          "CEN-3966b9043a",
+          "CEN-28de335856",
+          "CEN-df39a1aa97",
+          "CEN-57e0fde07a",
+          "CEN-0502f971cc",
+          "CEN-86fafcf36f",
+          "CEN-24deaa7d0a",
+          "CEN-32486f7332",
+          "CEN-fa9a6e61c5",
+          "CEN-6a00c9a25c",
+          "CEN-4f960c71e7",
+          "CEN-9a58446164",
+          "CEN-705565d98e",
+          "CEN-28c526f56b",
+          "CEN-1c6be3378f",
+          "CEN-2d2b918fb5",
+          "CEN-bdbb7e59bf",
+          "CEN-8373d1253d",
+          "CEN-27a59153aa",
+          "CEN-ec0e4e8257",
+          "CEN-0bde6f922e",
+          "CEN-abcbea9c31",
+          "CEN-a3602e1d1e",
+          "CEN-76e69367f7",
+          "CEN-88a0b9ce4c",
+          "CEN-2032951148",
+          "CEN-545b3ced40",
+          "CEN-c38d40a951",
+          "CEN-eb3d73d125",
+          "CEN-bce92e9a13",
+          "CEN-96fb245789",
+          "CEN-63b5a9340e",
+          "CEN-513e03552b",
+          "CEN-41efbc31c9",
+          "CEN-94df6a73a4",
+          "CEN-9a8362dfab",
+          "CEN-d2369a8d28",
+          "CEN-6c5450a938",
+          "CEN-1da067bf2d",
+          "CEN-298e4d82e7"
+        ],
+        "origem": "heuristica"
+      },
+      {
+        "id": "CASO-a388339939",
+        "caminho": "tests_gerados/test_loja_validacao_entrada.py",
+        "codigo": "\"\"\"Testes validacao_entrada gerados pelo Agente de Testes para loja.\n\nGerados a partir de cenários (hipóteses); a execução é a fonte da verdade.\n\"\"\"\nimport asyncio\n\nimport pytest\n\ndef test_cen_2fd6225bad_calcular_desconto_valor_none_rejeitado():\n    \"\"\"Dado valor=None (tipo declarado float), quando calcular_desconto é executada, então deve rejeitar a entrada com TypeError/ValueError (ou uma exceção documentada: ValueError) em vez de prosseguir.\"\"\"\n    from loja import calcular_desconto\n    with pytest.raises((TypeError, ValueError)):\n        resultado = calcular_desconto(valor=None, percentual=2.5)\n        pytest.fail(f'entrada inválida aceita sem validação; retorno: {resultado!r}')\n\n\n\ndef test_cen_91bc8932af_calcular_frete_peso_kg_none_rejeitado():\n    \"\"\"Dado peso_kg=None (tipo declarado float), quando calcular_frete é executada, então deve rejeitar a entrada com TypeError/ValueError (ou uma exceção documentada: ValueError) em vez de prosseguir.\"\"\"\n    from loja import calcular_frete\n    with pytest.raises((TypeError, ValueError)):\n        resultado = calcular_frete(peso_kg=None, distancia_km=7)\n        pytest.fail(f'entrada inválida aceita sem validação; retorno: {resultado!r}')\n\n\n\ndef test_cen_69b177af57_ticket_medio_pedidos_none_rejeitado():\n    \"\"\"Dado pedidos=None (tipo declarado List[float]), quando ticket_medio é executada, então deve rejeitar a entrada com TypeError/ValueError em vez de prosseguir.\"\"\"\n    from loja import ticket_medio\n    with pytest.raises((TypeError, ValueError)):\n        resultado = ticket_medio(pedidos=None)\n        pytest.fail(f'entrada inválida aceita sem validação; retorno: {resultado!r}')\n\n\n\ndef test_cen_56f2c1b86e_aplicar_cupom_total_none_rejeitado():\n    \"\"\"Dado total=None (tipo declarado float), quando aplicar_cupom é executada, então deve rejeitar a entrada com TypeError/ValueError em vez de prosseguir.\"\"\"\n    from loja import aplicar_cupom\n    with pytest.raises((TypeError, ValueError)):\n        resultado = aplicar_cupom(total=None, codigo='abc')\n        pytest.fail(f'entrada inválida aceita sem validação; retorno: {resultado!r}')\n\n\n\ndef test_cen_7bc33297ec_fechar_pedido_itens_none_rejeitado():\n    \"\"\"Dado itens=None (tipo declarado Dict[str, int]), quando fechar_pedido é executada, então deve rejeitar a entrada com TypeError/ValueError (ou uma exceção documentada: ValueError) em vez de prosseguir.\"\"\"\n    from loja import fechar_pedido\n    with pytest.raises((TypeError, ValueError)):\n        resultado = fechar_pedido(itens=None, frete=2.5)\n        pytest.fail(f'entrada inválida aceita sem validação; retorno: {resultado!r}')\n\n\n\ndef test_cen_7d63aab931_adicionar_sku_none_rejeitado():\n    \"\"\"Dado sku=None (tipo declarado str), quando adicionar é executada, então deve rejeitar a entrada com TypeError/ValueError (ou uma exceção documentada: ValueError) em vez de prosseguir.\"\"\"\n    from loja import Estoque\n    with pytest.raises((TypeError, ValueError)):\n        resultado = Estoque().adicionar(sku=None, quantidade=7)\n        pytest.fail(f'entrada inválida aceita sem validação; retorno: {resultado!r}')\n\n\n\ndef test_cen_689adc6bee_retirar_sku_none_rejeitado():\n    \"\"\"Dado sku=None (tipo declarado str), quando retirar é executada, então deve rejeitar a entrada com TypeError/ValueError (ou uma exceção documentada: EstoqueInsuficiente) em vez de prosseguir.\"\"\"\n    from loja import Estoque\n    from loja import EstoqueInsuficiente\n    with pytest.raises((EstoqueInsuficiente, TypeError, ValueError)):\n        resultado = Estoque().retirar(sku=None, quantidade=7)\n        pytest.fail(f'entrada inválida aceita sem validação; retorno: {resultado!r}')\n\n",
+        "tipo_teste": "validacao_entrada",
+        "framework": "pytest",
+        "cenarios": [
+          "CEN-2fd6225bad",
+          "CEN-91bc8932af",
+          "CEN-69b177af57",
+          "CEN-56f2c1b86e",
+          "CEN-7bc33297ec",
+          "CEN-7d63aab931",
+          "CEN-689adc6bee"
+        ],
+        "origem": "heuristica"
+      },
+      {
+        "id": "CASO-2ebd0118fb",
+        "caminho": "tests_gerados/test_loja_integracao.py",
+        "codigo": "\"\"\"Testes integracao gerados pelo Agente de Testes para loja.\n\nGerados a partir de cenários (hipóteses); a execução é a fonte da verdade.\n\"\"\"\nimport asyncio\n\nimport pytest\n\ndef test_cen_7fffd518c0_aplicar_cupom_fluxo_integrado_com_calcular_descont():\n    \"\"\"Dado os colaboradores reais (calcular_desconto) sem dublês, quando aplicar_cupom é executada com total=2.5, codigo='abc', então o fluxo completo retorna um valor do tipo float.\"\"\"\n    from loja import aplicar_cupom\n    try:\n        resultado = aplicar_cupom(total=2.5, codigo='abc')\n    except ():\n        return  # exceção documentada pelo código: comportamento aceito\n    assert isinstance(resultado, (int, float)), f'retorno inesperado: {resultado!r}'\n\n\n\ndef test_cen_a54077ff3c_fechar_pedido_fluxo_integrado_com_calcular_descont():\n    \"\"\"Dado os colaboradores reais (calcular_desconto) sem dublês, quando fechar_pedido é executada com itens={'a': 1}, frete=2.5, então o fluxo completo retorna um valor do tipo float.\"\"\"\n    from loja import fechar_pedido\n    try:\n        resultado = fechar_pedido(itens={'a': 1}, frete=2.5)\n    except (ValueError,):\n        return  # exceção documentada pelo código: comportamento aceito\n    assert isinstance(resultado, (int, float)), f'retorno inesperado: {resultado!r}'\n\n",
+        "tipo_teste": "integracao",
+        "framework": "pytest",
+        "cenarios": [
+          "CEN-7fffd518c0",
+          "CEN-a54077ff3c"
+        ],
+        "origem": "heuristica"
+      }
+    ],
+    "execucao": {
+      "id": "EXEC-2314c54cfc",
+      "iniciada_em": "2026-11-12T13:11:57.245500Z",
+      "executor": "docker",
+      "framework": "pytest",
+      "comando": "python -m pytest -q -p no:cacheprovider --rootdir=. --junitxml=.resultados/junit.xml --cov=. --cov-config=.coveragerc --cov-report=xml:.resultados/cobertura.xml tests_gerados/test_loja_unitario.py tests_gerados/test_loja_validacao_entrada.py tests_gerados/test_loja_integracao.py",
+      "codigo_saida": 1,
+      "duracao_s": 0.57,
+      "resultados": [
+        {
+          "nome": "tests_gerados.test_loja_unitario::test_cen_20e0b290d1_calcular_desconto_entradas_t_picas",
+          "arquivo": "tests_gerados/test_loja_unitario.py",
+          "status": "aprovado",
+          "duracao_s": 0.001,
+          "mensagem": null,
+          "detalhe": null,
+          "cenario_id": "CEN-20e0b290d1"
+        },
+        {
+          "nome": "tests_gerados.test_loja_unitario::test_cen_219e8d1bec_calcular_desconto_valor_0_0",
+          "arquivo": "tests_gerados/test_loja_unitario.py",
+          "status": "aprovado",
+          "duracao_s": 0.0,
+          "mensagem": null,
+          "detalhe": null,
+          "cenario_id": "CEN-219e8d1bec"
+        },
+        {
+          "nome": "tests_gerados.test_loja_unitario::test_cen_53f733f159_calcular_desconto_valor_0_01",
+          "arquivo": "tests_gerados/test_loja_unitario.py",
+          "status": "aprovado",
+          "duracao_s": 0.0,
+          "mensagem": null,
+          "detalhe": null,
+          "cenario_id": "CEN-53f733f159"
+        },
+        {
+          "nome": "tests_gerados.test_loja_unitario::test_cen_749c208c23_calcular_desconto_valor_1000000000000_0",
+          "arquivo": "tests_gerados/test_loja_unitario.py",
+          "status": "aprovado",
+          "duracao_s": 0.0,
+          "mensagem": null,
+          "detalhe": null,
+          "cenario_id": "CEN-749c208c23"
+        },
+        {
+          "nome": "tests_gerados.test_loja_unitario::test_cen_1db8d2a9a0_calcular_desconto_percentual_0_0",
+          "arquivo": "tests_gerados/test_loja_unitario.py",
+          "status": "aprovado",
+          "duracao_s": 0.0,
+          "mensagem": null,
+          "detalhe": null,
+          "cenario_id": "CEN-1db8d2a9a0"
+        },
+        {
+          "nome": "tests_gerados.test_loja_unitario::test_cen_b63b5f005d_calcular_desconto_percentual_0_01",
+          "arquivo": "tests_gerados/test_loja_unitario.py",
+          "status": "aprovado",
+          "duracao_s": 0.0,
+          "mensagem": null,
+          "detalhe": null,
+          "cenario_id": "CEN-b63b5f005d"
+        },
+        {
+          "nome": "tests_gerados.test_loja_unitario::test_cen_24be833dff_calcular_desconto_percentual_1000000000000_0",
+          "arquivo": "tests_gerados/test_loja_unitario.py",
+          "status": "aprovado",
+          "duracao_s": 0.0,
+          "mensagem": null,
+          "detalhe": null,
+          "cenario_id": "CEN-24be833dff"
+        },
+        {
+          "nome": "tests_gerados.test_loja_unitario::test_cen_f1710123c9_calcular_desconto_rejeita_valor_0",
+          "arquivo": "tests_gerados/test_loja_unitario.py",
+          "status": "aprovado",
+          "duracao_s": 0.0,
+          "mensagem": null,
+          "detalhe": null,
+          "cenario_id": "CEN-f1710123c9"
+        },
+        {
+          "nome": "tests_gerados.test_loja_unitario::test_cen_345d30abd4_calcular_desconto_rejeita_percentual_0",
+          "arquivo": "tests_gerados/test_loja_unitario.py",
+          "status": "aprovado",
+          "duracao_s": 0.0,
+          "mensagem": null,
+          "detalhe": null,
+          "cenario_id": "CEN-345d30abd4"
+        },
+        {
+          "nome": "tests_gerados.test_loja_unitario::test_cen_06f94a711c_calcular_desconto_rejeita_percentual_100",
+          "arquivo": "tests_gerados/test_loja_unitario.py",
+          "status": "aprovado",
+          "duracao_s": 0.0,
+          "mensagem": null,
+          "detalhe": null,
+          "cenario_id": "CEN-06f94a711c"
+        },
+        {
+          "nome": "tests_gerados.test_loja_unitario::test_cen_41a265c9a7_calcular_desconto_aceita_valor_0_limite_de_valor_0",
+          "arquivo": "tests_gerados/test_loja_unitario.py",
+          "status": "aprovado",
+          "duracao_s": 0.0,
+          "mensagem": null,
+          "detalhe": null,
+          "cenario_id": "CEN-41a265c9a7"
+        },
+        {
+          "nome": "tests_gerados.test_loja_unitario::test_cen_ea0e6dcbc9_calcular_desconto_aceita_percentual_0_limite_de_pe",
+          "arquivo": "tests_gerados/test_loja_unitario.py",
+          "status": "aprovado",
+          "duracao_s": 0.0,
+          "mensagem": null,
+          "detalhe": null,
+          "cenario_id": "CEN-ea0e6dcbc9"
+        },
+        {
+          "nome": "tests_gerados.test_loja_unitario::test_cen_80cade12a4_calcular_desconto_aceita_percentual_100_limite_de_",
+          "arquivo": "tests_gerados/test_loja_unitario.py",
+          "status": "aprovado",
+          "duracao_s": 0.0,
+          "mensagem": null,
+          "detalhe": null,
+          "cenario_id": "CEN-80cade12a4"
+        },
+        {
+          "nome": "tests_gerados.test_loja_unitario::test_cen_c3bf8a9d9f_calcular_frete_entradas_t_picas",
+          "arquivo": "tests_gerados/test_loja_unitario.py",
+          "status": "aprovado",
+          "duracao_s": 0.0,
+          "mensagem": null,
+          "detalhe": null,
+          "cenario_id": "CEN-c3bf8a9d9f"
+        },
+        {
+          "nome": "tests_gerados.test_loja_unitario::test_cen_2c3653e881_calcular_frete_peso_kg_0_0",
+          "arquivo": "tests_gerados/test_loja_unitario.py",
+          "status": "aprovado",
+          "duracao_s": 0.0,
+          "mensagem": null,
+          "detalhe": null,
+          "cenario_id": "CEN-2c3653e881"
+        },
+        {
+          "nome": "tests_gerados.test_loja_unitario::test_cen_484ec7a68d_calcular_frete_peso_kg_0_01",
+          "arquivo": "tests_gerados/test_loja_unitario.py",
+          "status": "aprovado",
+          "duracao_s": 0.0,
+          "mensagem": null,
+          "detalhe": null,
+          "cenario_id": "CEN-484ec7a68d"
+        },
+        {
+          "nome": "tests_gerados.test_loja_unitario::test_cen_3966b9043a_calcular_frete_peso_kg_1000000000000_0",
+          "arquivo": "tests_gerados/test_loja_unitario.py",
+          "status": "aprovado",
+          "duracao_s": 0.0,
+          "mensagem": null,
+          "detalhe": null,
+          "cenario_id": "CEN-3966b9043a"
+        },
+        {
+          "nome": "tests_gerados.test_loja_unitario::test_cen_28de335856_calcular_frete_distancia_km_0",
+          "arquivo": "tests_gerados/test_loja_unitario.py",
+          "status": "aprovado",
+          "duracao_s": 0.0,
+          "mensagem": null,
+          "detalhe": null,
+          "cenario_id": "CEN-28de335856"
+        },
+        {
+          "nome": "tests_gerados.test_loja_unitario::test_cen_df39a1aa97_calcular_frete_distancia_km_1",
+          "arquivo": "tests_gerados/test_loja_unitario.py",
+          "status": "aprovado",
+          "duracao_s": 0.0,
+          "mensagem": null,
+          "detalhe": null,
+          "cenario_id": "CEN-df39a1aa97"
+        },
+        {
+          "nome": "tests_gerados.test_loja_unitario::test_cen_57e0fde07a_calcular_frete_distancia_km_1000000000000",
+          "arquivo": "tests_gerados/test_loja_unitario.py",
+          "status": "aprovado",
+          "duracao_s": 0.0,
+          "mensagem": null,
+          "detalhe": null,
+          "cenario_id": "CEN-57e0fde07a"
+        },
+        {
+          "nome": "tests_gerados.test_loja_unitario::test_cen_0502f971cc_calcular_frete_rejeita_peso_kg_0",
+          "arquivo": "tests_gerados/test_loja_unitario.py",
+          "status": "aprovado",
+          "duracao_s": 0.0,
+          "mensagem": null,
+          "detalhe": null,
+          "cenario_id": "CEN-0502f971cc"
+        },
+        {
+          "nome": "tests_gerados.test_loja_unitario::test_cen_86fafcf36f_calcular_frete_rejeita_distancia_km_0",
+          "arquivo": "tests_gerados/test_loja_unitario.py",
+          "status": "aprovado",
+          "duracao_s": 0.0,
+          "mensagem": null,
+          "detalhe": null,
+          "cenario_id": "CEN-86fafcf36f"
+        },
+        {
+          "nome": "tests_gerados.test_loja_unitario::test_cen_24deaa7d0a_calcular_frete_aceita_peso_kg_0_5_limite_de_peso_k",
+          "arquivo": "tests_gerados/test_loja_unitario.py",
+          "status": "aprovado",
+          "duracao_s": 0.0,
+          "mensagem": null,
+          "detalhe": null,
+          "cenario_id": "CEN-24deaa7d0a"
+        },
+        {
+          "nome": "tests_gerados.test_loja_unitario::test_cen_32486f7332_calcular_frete_aceita_distancia_km_0_limite_de_dis",
+          "arquivo": "tests_gerados/test_loja_unitario.py",
+          "status": "aprovado",
+          "duracao_s": 0.0,
+          "mensagem": null,
+          "detalhe": null,
+          "cenario_id": "CEN-32486f7332"
+        },
+        {
+          "nome": "tests_gerados.test_loja_unitario::test_cen_fa9a6e61c5_ticket_medio_entradas_t_picas",
+          "arquivo": "tests_gerados/test_loja_unitario.py",
+          "status": "aprovado",
+          "duracao_s": 0.0,
+          "mensagem": null,
+          "detalhe": null,
+          "cenario_id": "CEN-fa9a6e61c5"
+        },
+        {
+          "nome": "tests_gerados.test_loja_unitario::test_cen_6a00c9a25c_ticket_medio_pedidos",
+          "arquivo": "tests_gerados/test_loja_unitario.py",
+          "status": "reprovado",
+          "duracao_s": 0.0,
+          "mensagem": "ZeroDivisionError: division by zero",
+          "detalhe": "def test_cen_6a00c9a25c_ticket_medio_pedidos():\n        \"\"\"Dado pedidos=[] (valor-limite), quando ticket_medio é executada, então não deve lançar exceção inesperada; retorna um valor do tipo float.\"\"\"\n        from loja import ticket_medio\n        try:\n>           resultado = ticket_medio(pedidos=[])\n                        ^^^^^^^^^^^^^^^^^^^^^^^^\n\ntests_gerados/test_loja_unitario.py:258: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\npedidos = []\n\n    def ticket_medio(pedidos: List[float]) -> float:\n        \"\"\"Valor médio por pedido.\"\"\"\n>       return round(sum(pedidos) / len(pedidos), 2)\n                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE       ZeroDivisionError: division by zero\n\nloja.py:37: ZeroDivisionError",
+          "cenario_id": "CEN-6a00c9a25c"
+        },
+        {
+          "nome": "tests_gerados.test_loja_unitario::test_cen_4f960c71e7_ticket_medio_pedidos_0",
+          "arquivo": "tests_gerados/test_loja_unitario.py",
+          "status": "aprovado",
+          "duracao_s": 0.0,
+          "mensagem": null,
+          "detalhe": null,
+          "cenario_id": "CEN-4f960c71e7"
+        },
+        {
+          "nome": "tests_gerados.test_loja_unitario::test_cen_9a58446164_aplicar_cupom_entradas_t_picas",
+          "arquivo": "tests_gerados/test_loja_unitario.py",
+          "status": "aprovado",
+          "duracao_s": 0.0,
+          "mensagem": null,
+          "detalhe": null,
+          "cenario_id": "CEN-9a58446164"
+        },
+        {
+          "nome": "tests_gerados.test_loja_unitario::test_cen_705565d98e_aplicar_cupom_total_0_0",
+          "arquivo": "tests_gerados/test_loja_unitario.py",
+          "status": "aprovado",
+          "duracao_s": 0.0,
+          "mensagem": null,
+          "detalhe": null,
+          "cenario_id": "CEN-705565d98e"
+        },
+        {
+          "nome": "tests_gerados.test_loja_unitario::test_cen_28c526f56b_aplicar_cupom_total_0_01",
+          "arquivo": "tests_gerados/test_loja_unitario.py",
+          "status": "aprovado",
+          "duracao_s": 0.0,
+          "mensagem": null,
+          "detalhe": null,
+          "cenario_id": "CEN-28c526f56b"
+        },
+        {
+          "nome": "tests_gerados.test_loja_unitario::test_cen_1c6be3378f_aplicar_cupom_total_1000000000000_0",
+          "arquivo": "tests_gerados/test_loja_unitario.py",
+          "status": "aprovado",
+          "duracao_s": 0.0,
+          "mensagem": null,
+          "detalhe": null,
+          "cenario_id": "CEN-1c6be3378f"
+        },
+        {
+          "nome": "tests_gerados.test_loja_unitario::test_cen_2d2b918fb5_aplicar_cupom_codigo",
+          "arquivo": "tests_gerados/test_loja_unitario.py",
+          "status": "aprovado",
+          "duracao_s": 0.0,
+          "mensagem": null,
+          "detalhe": null,
+          "cenario_id": "CEN-2d2b918fb5"
+        },
+        {
+          "nome": "tests_gerados.test_loja_unitario::test_cen_bdbb7e59bf_aplicar_cupom_codigo",
+          "arquivo": "tests_gerados/test_loja_unitario.py",
+          "status": "aprovado",
+          "duracao_s": 0.0,
+          "mensagem": null,
+          "detalhe": null,
+          "cenario_id": "CEN-bdbb7e59bf"
+        },
+        {
+          "nome": "tests_gerados.test_loja_unitario::test_cen_8373d1253d_aplicar_cupom_codigo_str_de_tamanho_256",
+          "arquivo": "tests_gerados/test_loja_unitario.py",
+          "status": "aprovado",
+          "duracao_s": 0.0,
+          "mensagem": null,
+          "detalhe": null,
+          "cenario_id": "CEN-8373d1253d"
+        },
+        {
+          "nome": "tests_gerados.test_loja_unitario::test_cen_27a59153aa_fechar_pedido_entradas_t_picas",
+          "arquivo": "tests_gerados/test_loja_unitario.py",
+          "status": "aprovado",
+          "duracao_s": 0.0,
+          "mensagem": null,
+          "detalhe": null,
+          "cenario_id": "CEN-27a59153aa"
+        },
+        {
+          "nome": "tests_gerados.test_loja_unitario::test_cen_ec0e4e8257_fechar_pedido_itens",
+          "arquivo": "tests_gerados/test_loja_unitario.py",
+          "status": "aprovado",
+          "duracao_s": 0.0,
+          "mensagem": null,
+          "detalhe": null,
+          "cenario_id": "CEN-ec0e4e8257"
+        },
+        {
+          "nome": "tests_gerados.test_loja_unitario::test_cen_0bde6f922e_fechar_pedido_frete_0_0",
+          "arquivo": "tests_gerados/test_loja_unitario.py",
+          "status": "aprovado",
+          "duracao_s": 0.0,
+          "mensagem": null,
+          "detalhe": null,
+          "cenario_id": "CEN-0bde6f922e"
+        },
+        {
+          "nome": "tests_gerados.test_loja_unitario::test_cen_abcbea9c31_fechar_pedido_frete_0_01",
+          "arquivo": "tests_gerados/test_loja_unitario.py",
+          "status": "aprovado",
+          "duracao_s": 0.0,
+          "mensagem": null,
+          "detalhe": null,
+          "cenario_id": "CEN-abcbea9c31"
+        },
+        {
+          "nome": "tests_gerados.test_loja_unitario::test_cen_a3602e1d1e_fechar_pedido_frete_1000000000000_0",
+          "arquivo": "tests_gerados/test_loja_unitario.py",
+          "status": "aprovado",
+          "duracao_s": 0.0,
+          "mensagem": null,
+          "detalhe": null,
+          "cenario_id": "CEN-a3602e1d1e"
+        },
+        {
+          "nome": "tests_gerados.test_loja_unitario::test_cen_76e69367f7_fechar_pedido_rejeita_itens_vazio_falso",
+          "arquivo": "tests_gerados/test_loja_unitario.py",
+          "status": "aprovado",
+          "duracao_s": 0.0,
+          "mensagem": null,
+          "detalhe": null,
+          "cenario_id": "CEN-76e69367f7"
+        },
+        {
+          "nome": "tests_gerados.test_loja_unitario::test_cen_88a0b9ce4c_adicionar_entradas_t_picas",
+          "arquivo": "tests_gerados/test_loja_unitario.py",
+          "status": "aprovado",
+          "duracao_s": 0.0,
+          "mensagem": null,
+          "detalhe": null,
+          "cenario_id": "CEN-88a0b9ce4c"
+        },
+        {
+          "nome": "tests_gerados.test_loja_unitario::test_cen_2032951148_adicionar_sku",
+          "arquivo": "tests_gerados/test_loja_unitario.py",
+          "status": "aprovado",
+          "duracao_s": 0.0,
+          "mensagem": null,
+          "detalhe": null,
+          "cenario_id": "CEN-2032951148"
+        },
+        {
+          "nome": "tests_gerados.test_loja_unitario::test_cen_545b3ced40_adicionar_sku",
+          "arquivo": "tests_gerados/test_loja_unitario.py",
+          "status": "aprovado",
+          "duracao_s": 0.0,
+          "mensagem": null,
+          "detalhe": null,
+          "cenario_id": "CEN-545b3ced40"
+        },
+        {
+          "nome": "tests_gerados.test_loja_unitario::test_cen_c38d40a951_adicionar_sku_str_de_tamanho_256",
+          "arquivo": "tests_gerados/test_loja_unitario.py",
+          "status": "aprovado",
+          "duracao_s": 0.0,
+          "mensagem": null,
+          "detalhe": null,
+          "cenario_id": "CEN-c38d40a951"
+        },
+        {
+          "nome": "tests_gerados.test_loja_unitario::test_cen_eb3d73d125_adicionar_quantidade_0",
+          "arquivo": "tests_gerados/test_loja_unitario.py",
+          "status": "aprovado",
+          "duracao_s": 0.0,
+          "mensagem": null,
+          "detalhe": null,
+          "cenario_id": "CEN-eb3d73d125"
+        },
+        {
+          "nome": "tests_gerados.test_loja_unitario::test_cen_bce92e9a13_adicionar_quantidade_1",
+          "arquivo": "tests_gerados/test_loja_unitario.py",
+          "status": "aprovado",
+          "duracao_s": 0.0,
+          "mensagem": null,
+          "detalhe": null,
+          "cenario_id": "CEN-bce92e9a13"
+        },
+        {
+          "nome": "tests_gerados.test_loja_unitario::test_cen_96fb245789_adicionar_quantidade_1000000000000",
+          "arquivo": "tests_gerados/test_loja_unitario.py",
+          "status": "aprovado",
+          "duracao_s": 0.0,
+          "mensagem": null,
+          "detalhe": null,
+          "cenario_id": "CEN-96fb245789"
+        },
+        {
+          "nome": "tests_gerados.test_loja_unitario::test_cen_63b5a9340e_adicionar_rejeita_quantidade_0",
+          "arquivo": "tests_gerados/test_loja_unitario.py",
+          "status": "aprovado",
+          "duracao_s": 0.0,
+          "mensagem": null,
+          "detalhe": null,
+          "cenario_id": "CEN-63b5a9340e"
+        },
+        {
+          "nome": "tests_gerados.test_loja_unitario::test_cen_513e03552b_adicionar_aceita_quantidade_1_limite_de_quantidade",
+          "arquivo": "tests_gerados/test_loja_unitario.py",
+          "status": "aprovado",
+          "duracao_s": 0.0,
+          "mensagem": null,
+          "detalhe": null,
+          "cenario_id": "CEN-513e03552b"
+        },
+        {
+          "nome": "tests_gerados.test_loja_unitario::test_cen_41efbc31c9_retirar_entradas_t_picas",
+          "arquivo": "tests_gerados/test_loja_unitario.py",
+          "status": "aprovado",
+          "duracao_s": 0.0,
+          "mensagem": null,
+          "detalhe": null,
+          "cenario_id": "CEN-41efbc31c9"
+        },
+        {
+          "nome": "tests_gerados.test_loja_unitario::test_cen_94df6a73a4_retirar_sku",
+          "arquivo": "tests_gerados/test_loja_unitario.py",
+          "status": "aprovado",
+          "duracao_s": 0.0,
+          "mensagem": null,
+          "detalhe": null,
+          "cenario_id": "CEN-94df6a73a4"
+        },
+        {
+          "nome": "tests_gerados.test_loja_unitario::test_cen_9a8362dfab_retirar_sku",
+          "arquivo": "tests_gerados/test_loja_unitario.py",
+          "status": "aprovado",
+          "duracao_s": 0.0,
+          "mensagem": null,
+          "detalhe": null,
+          "cenario_id": "CEN-9a8362dfab"
+        },
+        {
+          "nome": "tests_gerados.test_loja_unitario::test_cen_d2369a8d28_retirar_sku_str_de_tamanho_256",
+          "arquivo": "tests_gerados/test_loja_unitario.py",
+          "status": "aprovado",
+          "duracao_s": 0.0,
+          "mensagem": null,
+          "detalhe": null,
+          "cenario_id": "CEN-d2369a8d28"
+        },
+        {
+          "nome": "tests_gerados.test_loja_unitario::test_cen_6c5450a938_retirar_quantidade_0",
+          "arquivo": "tests_gerados/test_loja_unitario.py",
+          "status": "aprovado",
+          "duracao_s": 0.0,
+          "mensagem": null,
+          "detalhe": null,
+          "cenario_id": "CEN-6c5450a938"
+        },
+        {
+          "nome": "tests_gerados.test_loja_unitario::test_cen_1da067bf2d_retirar_quantidade_1",
+          "arquivo": "tests_gerados/test_loja_unitario.py",
+          "status": "aprovado",
+          "duracao_s": 0.0,
+          "mensagem": null,
+          "detalhe": null,
+          "cenario_id": "CEN-1da067bf2d"
+        },
+        {
+          "nome": "tests_gerados.test_loja_unitario::test_cen_298e4d82e7_retirar_quantidade_1000000000000",
+          "arquivo": "tests_gerados/test_loja_unitario.py",
+          "status": "aprovado",
+          "duracao_s": 0.0,
+          "mensagem": null,
+          "detalhe": null,
+          "cenario_id": "CEN-298e4d82e7"
+        },
+        {
+          "nome": "tests_gerados.test_loja_validacao_entrada::test_cen_2fd6225bad_calcular_desconto_valor_none_rejeitado",
+          "arquivo": "tests_gerados/test_loja_validacao_entrada.py",
+          "status": "aprovado",
+          "duracao_s": 0.0,
+          "mensagem": null,
+          "detalhe": null,
+          "cenario_id": "CEN-2fd6225bad"
+        },
+        {
+          "nome": "tests_gerados.test_loja_validacao_entrada::test_cen_91bc8932af_calcular_frete_peso_kg_none_rejeitado",
+          "arquivo": "tests_gerados/test_loja_validacao_entrada.py",
+          "status": "aprovado",
+          "duracao_s": 0.0,
+          "mensagem": null,
+          "detalhe": null,
+          "cenario_id": "CEN-91bc8932af"
+        },
+        {
+          "nome": "tests_gerados.test_loja_validacao_entrada::test_cen_69b177af57_ticket_medio_pedidos_none_rejeitado",
+          "arquivo": "tests_gerados/test_loja_validacao_entrada.py",
+          "status": "aprovado",
+          "duracao_s": 0.0,
+          "mensagem": null,
+          "detalhe": null,
+          "cenario_id": "CEN-69b177af57"
+        },
+        {
+          "nome": "tests_gerados.test_loja_validacao_entrada::test_cen_56f2c1b86e_aplicar_cupom_total_none_rejeitado",
+          "arquivo": "tests_gerados/test_loja_validacao_entrada.py",
+          "status": "reprovado",
+          "duracao_s": 0.0,
+          "mensagem": "Failed: entrada inválida aceita sem validação; retorno: None",
+          "detalhe": "def test_cen_56f2c1b86e_aplicar_cupom_total_none_rejeitado():\n        \"\"\"Dado total=None (tipo declarado float), quando aplicar_cupom é executada, então deve rejeitar a entrada com TypeError/ValueError em vez de prosseguir.\"\"\"\n        from loja import aplicar_cupom\n        with pytest.raises((TypeError, ValueError)):\n            resultado = aplicar_cupom(total=None, codigo='abc')\n>           pytest.fail(f'entrada inválida aceita sem validação; retorno: {resultado!r}')\nE           Failed: entrada inválida aceita sem validação; retorno: None\n\ntests_gerados/test_loja_validacao_entrada.py:41: Failed",
+          "cenario_id": "CEN-56f2c1b86e"
+        },
+        {
+          "nome": "tests_gerados.test_loja_validacao_entrada::test_cen_7bc33297ec_fechar_pedido_itens_none_rejeitado",
+          "arquivo": "tests_gerados/test_loja_validacao_entrada.py",
+          "status": "aprovado",
+          "duracao_s": 0.0,
+          "mensagem": null,
+          "detalhe": null,
+          "cenario_id": "CEN-7bc33297ec"
+        },
+        {
+          "nome": "tests_gerados.test_loja_validacao_entrada::test_cen_7d63aab931_adicionar_sku_none_rejeitado",
+          "arquivo": "tests_gerados/test_loja_validacao_entrada.py",
+          "status": "reprovado",
+          "duracao_s": 0.0,
+          "mensagem": "Failed: entrada inválida aceita sem validação; retorno: 7",
+          "detalhe": "def test_cen_7d63aab931_adicionar_sku_none_rejeitado():\n        \"\"\"Dado sku=None (tipo declarado str), quando adicionar é executada, então deve rejeitar a entrada com TypeError/ValueError (ou uma exceção documentada: ValueError) em vez de prosseguir.\"\"\"\n        from loja import Estoque\n        with pytest.raises((TypeError, ValueError)):\n            resultado = Estoque().adicionar(sku=None, quantidade=7)\n>           pytest.fail(f'entrada inválida aceita sem validação; retorno: {resultado!r}')\nE           Failed: entrada inválida aceita sem validação; retorno: 7\n\ntests_gerados/test_loja_validacao_entrada.py:59: Failed",
+          "cenario_id": "CEN-7d63aab931"
+        },
+        {
+          "nome": "tests_gerados.test_loja_validacao_entrada::test_cen_689adc6bee_retirar_sku_none_rejeitado",
+          "arquivo": "tests_gerados/test_loja_validacao_entrada.py",
+          "status": "aprovado",
+          "duracao_s": 0.0,
+          "mensagem": null,
+          "detalhe": null,
+          "cenario_id": "CEN-689adc6bee"
+        },
+        {
+          "nome": "tests_gerados.test_loja_integracao::test_cen_7fffd518c0_aplicar_cupom_fluxo_integrado_com_calcular_descont",
+          "arquivo": "tests_gerados/test_loja_integracao.py",
+          "status": "aprovado",
+          "duracao_s": 0.0,
+          "mensagem": null,
+          "detalhe": null,
+          "cenario_id": "CEN-7fffd518c0"
+        },
+        {
+          "nome": "tests_gerados.test_loja_integracao::test_cen_a54077ff3c_fechar_pedido_fluxo_integrado_com_calcular_descont",
+          "arquivo": "tests_gerados/test_loja_integracao.py",
+          "status": "aprovado",
+          "duracao_s": 0.0,
+          "mensagem": null,
+          "detalhe": null,
+          "cenario_id": "CEN-a54077ff3c"
+        }
+      ],
+      "cobertura": {
+        "percentual": 97.7,
+        "por_arquivo": {
+          "loja.py": 97.7
+        },
+        "linhas_nao_cobertas": {
+          "loja.py": [
+            43
+          ]
+        }
+      },
+      "saida": ".........................F.................................F.F...        [100%]\n=================================== FAILURES ===================================\n___________________ test_cen_6a00c9a25c_ticket_medio_pedidos ___________________\n\n    def test_cen_6a00c9a25c_ticket_medio_pedidos():\n        \"\"\"Dado pedidos=[] (valor-limite), quando ticket_medio é executada, então não deve lançar exceção inesperada; retorna um valor do tipo float.\"\"\"\n        from loja import ticket_medio\n        try:\n>           resultado = ticket_medio(pedidos=[])\n                        ^^^^^^^^^^^^^^^^^^^^^^^^\n\ntests_gerados/test_loja_unitario.py:258: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\npedidos = []\n\n    def ticket_medio(pedidos: List[float]) -> float:\n        \"\"\"Valor médio por pedido.\"\"\"\n>       return round(sum(pedidos) / len(pedidos), 2)\n                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE       ZeroDivisionError: division by zero\n\nloja.py:37: ZeroDivisionError\n____________ test_cen_56f2c1b86e_aplicar_cupom_total_none_rejeitado ____________\n\n    def test_cen_56f2c1b86e_aplicar_cupom_total_none_rejeitado():\n        \"\"\"Dado total=None (tipo declarado float), quando aplicar_cupom é executada, então deve rejeitar a entrada com TypeError/ValueError em vez de prosseguir.\"\"\"\n        from loja import aplicar_cupom\n        with pytest.raises((TypeError, ValueError)):\n            resultado = aplicar_cupom(total=None, codigo='abc')\n>           pytest.fail(f'entrada inválida aceita sem validação; retorno: {resultado!r}')\nE           Failed: entrada inválida aceita sem validação; retorno: None\n\ntests_gerados/test_loja_validacao_entrada.py:41: Failed\n_______________ test_cen_7d63aab931_adicionar_sku_none_rejeitado _______________\n\n    def test_cen_7d63aab931_adicionar_sku_none_rejeitado():\n        \"\"\"Dado sku=None (tipo declarado str), quando adicionar é executada, então deve rejeitar a entrada com TypeError/ValueError (ou uma exceção documentada: ValueError) em vez de prosseguir.\"\"\"\n        from loja import Estoque\n        with pytest.raises((TypeError, ValueError)):\n            resultado = Estoque().adicionar(sku=None, quantidade=7)\n>           pytest.fail(f'entrada inválida aceita sem validação; retorno: {resultado!r}')\nE           Failed: entrada inválida aceita sem validação; retorno: 7\n\ntests_gerados/test_loja_validacao_entrada.py:59: Failed\n================================ tests coverage ================================\n_______________ coverage: platform linux, python 3.12.16-final-0 _______________\n\nCoverage XML written to file .resultados/cobertura.xml\n=========================== short test summary info ============================\nFAILED tests_gerados/test_loja_unitario.py::test_cen_6a00c9a25c_ticket_medio_pedidos\nFAILED tests_gerados/test_loja_validacao_entrada.py::test_cen_56f2c1b86e_aplicar_cupom_total_none_rejeitado\nFAILED tests_gerados/test_loja_validacao_entrada.py::test_cen_7d63aab931_adicionar_sku_none_rejeitado\n3 failed, 62 passed in 0.11s\n"
+    },
+    "resumo": {
+      "total": 65,
+      "aprovados": 62,
+      "reprovados": 3,
+      "erros": 0,
+      "ignorados": 0
+    },
+    "cobertura": {
+      "percentual": 97.7,
+      "por_arquivo": {
+        "loja.py": 97.7
+      },
+      "linhas_nao_cobertas": {
+        "loja.py": [
+          43
+        ]
+      }
+    },
+    "riscos": [],
+    "trechos_nao_cobertos": [
+      "loja.py:43 (loja.aplicar_cupom)"
+    ],
+    "achados": [
+      {
+        "categoria": "defeito_suspeito",
+        "teste": "tests_gerados.test_loja_unitario::test_cen_6a00c9a25c_ticket_medio_pedidos",
+        "cenario_id": "CEN-6a00c9a25c",
+        "alvo": "loja.ticket_medio",
+        "explicacao": "ZeroDivisionError: division by zero"
+      },
+      {
+        "categoria": "validacao_ausente",
+        "teste": "tests_gerados.test_loja_validacao_entrada::test_cen_56f2c1b86e_aplicar_cupom_total_none_rejeitado",
+        "cenario_id": "CEN-56f2c1b86e",
+        "alvo": "loja.aplicar_cupom",
+        "explicacao": "loja.aplicar_cupom aceitou entrada inválida sem rejeitá-la: Failed: entrada inválida aceita sem validação; retorno: None"
+      },
+      {
+        "categoria": "validacao_ausente",
+        "teste": "tests_gerados.test_loja_validacao_entrada::test_cen_7d63aab931_adicionar_sku_none_rejeitado",
+        "cenario_id": "CEN-7d63aab931",
+        "alvo": "loja.Estoque.adicionar",
+        "explicacao": "loja.Estoque.adicionar aceitou entrada inválida sem rejeitá-la: Failed: entrada inválida aceita sem validação; retorno: 7"
+      }
+    ],
+    "iteracoes": 1,
+    "aprovado": false,
+    "motivo_reprovacao": [
+      "3 teste(s) reprovado(s)"
+    ],
+    "modelo_linguagem": "nenhum (modo heurístico)",
+    "auditoria": [
+      {
+        "filtro": "0-normalizacao",
+        "iteracao": 1,
+        "duracao_s": 0.0,
+        "observacoes": [
+          "1 arquivo(s), linguagem=python, framework=pytest, openapi=não, diff=não"
+        ]
+      },
+      {
+        "filtro": "1-analise-contexto",
+        "iteracao": 1,
+        "duracao_s": 0.001,
+        "observacoes": [
+          "7 unidade(s) (7 no escopo da mudança), 0 endpoint(s)"
+        ]
+      },
+      {
+        "filtro": "2-geracao-cenarios",
+        "iteracao": 1,
+        "duracao_s": 0.001,
+        "observacoes": [
+          "65 cenário(s) derivados por heurística (AST/contrato)",
+          "cenários por tipo: {'sucesso': 9, 'falha': 14, 'borda': 42}"
+        ]
+      },
+      {
+        "filtro": "3-selecao-estrategia",
+        "iteracao": 1,
+        "duracao_s": 0.0,
+        "observacoes": [
+          "estratégias ativas: e2e, validacao_entrada, integracao, unitario",
+          "unitario -> loja: 56 cenário(s)",
+          "validacao_entrada -> loja: 7 cenário(s)",
+          "integracao -> loja: 2 cenário(s)"
+        ]
+      },
+      {
+        "filtro": "4-geracao-codigo",
+        "iteracao": 1,
+        "duracao_s": 0.003,
+        "observacoes": [
+          "tests_gerados/test_loja_unitario.py: 56 teste(s) [heuristica]",
+          "tests_gerados/test_loja_validacao_entrada.py: 7 teste(s) [heuristica]",
+          "tests_gerados/test_loja_integracao.py: 2 teste(s) [heuristica]"
+        ]
+      },
+      {
+        "filtro": "5-execucao",
+        "iteracao": 1,
+        "duracao_s": 0.717,
+        "observacoes": [
+          "pytest via docker: código 1 em 0.6s",
+          "65 resultado(s); cobertura=97.7%"
+        ]
+      },
+      {
+        "filtro": "6-analise-resultados",
+        "iteracao": 1,
+        "duracao_s": 0.0,
+        "observacoes": [
+          "resumo: {'total': 65, 'aprovados': 62, 'reprovados': 3, 'erros': 0, 'ignorados': 0} | achados: {'defeito_suspeito': 1, 'validacao_ausente': 2}"
+        ]
+      }
+    ]
+  }
+}

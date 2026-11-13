@@ -14,6 +14,7 @@ make imagens           # constrói a imagem de execução isolada (Docker)
 make testes            # suíte do próprio agente
 make exemplo-docker    # roda o agente no projeto de exemplo exemplos/loja
 make api               # API REST em http://localhost:8000/docs
+make avaliar           # bancada da Entrega 2 (casos, métricas, gráficos e evidências)
 ```
 
 Modelo de linguagem (opcional; sem ele o agente funciona em **modo heurístico**, com análise por AST e
@@ -27,6 +28,7 @@ templates determinísticos):
 | `AGENTE_EXECUTOR` = `auto` \| `docker` \| `local` | `auto` usa Docker se a imagem existir |
 | `AGENTE_COBERTURA_MINIMA` | cobertura mínima (%) para aprovar o portão |
 | `AGENTE_MAX_ITERACOES` | máximo de ciclos de regeneração (padrão 3) |
+| `AGENTE_TIMEOUT_TESTE_S` | limite por teste, em segundos (padrão 10); um laço infinito vira achado `tempo_esgotado` |
 | `AGENTE_DOCUMENTACAO_URL` | URL do Agente de Documentação (integração opcional) |
 
 ### Exemplos de CLI
@@ -61,6 +63,26 @@ O corpo das requisições segue o contrato `EntradaAgente` (`agente_testes/contr
 `requisitos`, `descricao_funcionalidade`, `casos_de_uso`, `contrato_openapi`, `testes_existentes`,
 `relatorios_anteriores`, `framework`, `tipos_teste` e `api_base_url`.
 
+## Avaliação (Entrega 2)
+
+`make avaliar` executa a bancada `agente_testes/avaliacao/` no Docker e grava em `entrega2/resultados/`:
+
+- **12 casos controlados** (5 típicos e 7 de borda), cada um com resultado esperado, verificação objetiva e
+  gabarito de defeitos, executados 5 vezes cada. O corpus fica em `agente_testes/avaliacao/corpus/`.
+- **Métricas:** taxa de acerto, precisão, revocação e F1 na detecção de defeitos, falso positivo em código
+  correto, tempo de resposta (média, desvio-padrão, mediana, p95 e IC 95%), tempo por filtro e cobertura.
+- **Teste de mutação** com 30 mutantes. Mede duas coisas: o escore clássico (a suíte gerada do código correto
+  rodando nos mutantes) e a detecção às cegas (o agente acionado sobre o código já mutado).
+- `RESULTADOS.md` com as tabelas no formato do modelo, `execucoes.csv`, `mutantes.csv`, `resultados.json`,
+  gráficos PNG e evidências antes/depois.
+
+O texto da seção do agente no documento está em `entrega2/SECAO_AGENTE_TESTES.md`. `make avaliar-llm` repete a
+bancada com o LLM configurado.
+
+Categorias de achado no relatório: `defeito_suspeito`, `validacao_ausente`, `tempo_esgotado`,
+`dependencia_externa` (acesso a rede bloqueado pelo isolamento; não é defeito), `erro_no_teste` (é regenerado),
+`regressao` e `falha_suite_existente`.
+
 ## Correspondência com a especificação
 
 | Especificação | Onde está |
@@ -83,8 +105,10 @@ O corpo das requisições segue o contrato `EntradaAgente` (`agente_testes/contr
 
 ## Limitações conhecidas
 
-- No modo heurístico, os testes de sucesso e de borda verificam **robustez**: ausência de exceção não documentada
-  e tipo do retorno. Valores esperados exatos vêm dos cenários do LLM, que também são tratados como hipótese.
+- No modo heurístico, os testes de sucesso e de borda verificam **robustez** (ausência de exceção não documentada e
+  tipo do retorno) e os **valores-limite** de cada validação, dos dois lados da fronteira. O oráculo vem do próprio
+  código: valores esperados exatos, derivados dos requisitos, só existem com o LLM. A avaliação mede esse efeito
+  (escore de mutação de 53,3% e detecção às cegas de 6,7% no modo heurístico).
 - Java e JavaScript/TypeScript têm análise estática leve, feita por regex, e a geração de código para essas
   linguagens depende do LLM. Os adaptadores JUnit, Jest e Newman estão implementados, mas apenas o fluxo Pytest
   foi validado de ponta a ponta. A execução JUnit exige um `pom.xml` com JaCoCo no projeto.

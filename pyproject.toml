@@ -17,13 +17,20 @@ dependencies = [
   "pyyaml>=6",
   "pytest>=8",
   "pytest-cov>=5",
+  "pytest-timeout>=2.2",
 ]
+
+[project.optional-dependencies]
+avaliacao = ["matplotlib>=3.7"]
 
 [project.scripts]
 agente-testes = "agente_testes.cli:main"
 
 [tool.setuptools.packages.find]
 include = ["agente_testes*"]
+
+[tool.setuptools.package-data]
+"agente_testes.avaliacao" = ["corpus/*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

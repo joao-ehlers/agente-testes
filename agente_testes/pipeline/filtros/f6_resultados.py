@@ -15,6 +15,14 @@ _ERRO_DO_TESTE = re.compile(
     r"(ImportError|ModuleNotFoundError|SyntaxError|IndentationError|fixture '.*' not found|"
     r"NameError: name '\w+' is not defined|collection failure|TypeError: .*(unexpected keyword|missing \d+ required))")
 
+# Teste interrompido por tempo (pytest-timeout) ou execução inteira estourando o limite.
+_TEMPO_ESGOTADO = re.compile(r"(Timeout \(?>[\d.]+s\)?|tempo limite total de \d+s excedido)")
+# Acesso a rede bloqueado pelo isolamento (--network none): é dependência externa, não defeito do código.
+_REDE_BLOQUEADA = re.compile(
+    r"(Temporary failure in name resolution|Name or service not known|nodename nor servname|"
+    r"Network is unreachable|socket\.gaierror|ConnectionRefusedError|httpx\.ConnectError|"
+    r"urllib\.error\.URLError|requests\.exceptions\.ConnectionError)")
+
 
 def _intervalos(linhas: List[int]) -> str:
     if not linhas:
@@ -65,7 +73,15 @@ class AnalisadorDeResultados(Filtro[ResultadoPipelineExecucao, Relatorio]):
             cen = cen_por_id.get(r.cenario_id or "")
             texto = f"{r.mensagem or ''}\n{r.detalhe or ''}"
             alvo = cen.alvo if cen else None
-            if _ERRO_DO_TESTE.search(texto) and caso is not None:
+            if _TEMPO_ESGOTADO.search(texto):
+                categoria = "tempo_esgotado"
+                explic = (f"{alvo or r.nome} não terminou dentro do limite de tempo "
+                          f"(possível laço infinito ou bloqueio): {(r.mensagem or '').strip()[:150]}")
+            elif _REDE_BLOQUEADA.search(texto) and caso is not None:
+                categoria = "dependencia_externa"
+                explic = (f"{alvo} depende de rede, bloqueada no ambiente isolado; isole a dependência com um "
+                          f"dublê (mock) ou cubra com teste de integração: {(r.mensagem or '').strip()[:150]}")
+            elif _ERRO_DO_TESTE.search(texto) and caso is not None:
                 categoria = "erro_no_teste"
                 explic = f"o teste gerado não executou corretamente ({(r.mensagem or '').strip()[:200]}); será regenerado"
             elif caso is None:

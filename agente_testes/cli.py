@@ -129,6 +129,14 @@ def main(argv: Optional[List[str]] = None) -> int:
     pe.add_argument("--executor", choices=["auto", "docker", "local"])
     pe.add_argument("--manter-workspace", help="copia o workspace de execução para este diretório")
     pe.add_argument("--nao-falhar", action="store_true", help="código de saída 0 mesmo se reprovado")
+    pv = sub.add_parser("avaliar", help="bancada da Entrega 2: casos controlados, métricas, gráficos e evidências")
+    pv.add_argument("--modo", choices=["heuristico", "llm"], default="heuristico",
+                    help="llm usa o modelo configurado (GEMINI_API_KEY ou LLM_BASE_URL)")
+    pv.add_argument("--executor", choices=["auto", "docker", "local"], default="auto")
+    pv.add_argument("--repeticoes", type=int, default=5, help="execuções por caso (estatística de tempo)")
+    pv.add_argument("--timeout-teste", type=int, default=3, help="limite por teste, em segundos")
+    pv.add_argument("--sem-mutacao", action="store_true", help="pula o teste de mutação")
+    pv.add_argument("--saida", default="entrega2/resultados", help="diretório dos resultados")
     ps = sub.add_parser("servir", help="sobe a API REST")
     ps.add_argument("--host", default="0.0.0.0")
     ps.add_argument("--porta", type=int, default=8000)
@@ -141,6 +149,9 @@ def main(argv: Optional[List[str]] = None) -> int:
         import uvicorn
         uvicorn.run("agente_testes.api.app:app", host=args.host, port=args.porta)
         return 0
+
+    if args.comando == "avaliar":
+        return _avaliar(args)
 
     config = Configuracao()
     if getattr(args, "cobertura_minima", None) is not None:
@@ -179,6 +190,32 @@ def main(argv: Optional[List[str]] = None) -> int:
         Path(args.saida_md).write_text(md, encoding="utf-8")
     print(md)
     return 0 if relatorio.aprovado or args.nao_falhar else 1
+
+
+def _avaliar(args) -> int:
+    from .avaliacao.executar import Bancada, ambiente_executor
+    try:
+        from .avaliacao import graficos
+    except ImportError:
+        print("a avaliação precisa do matplotlib: pip install -e '.[avaliacao]'", file=sys.stderr)
+        return 2
+    from .avaliacao.relatorio import gravar
+
+    logging.getLogger("agente_testes.llm").setLevel(logging.ERROR)  # rejeições do LLM simulado são esperadas
+    executor = ambiente_executor(args.executor)
+    print(f"executor efetivo: {executor}" + ("  (ATENÇÃO: sem isolamento Docker)" if executor == "local" else ""))
+    saida = Path(args.saida)
+    bancada = Bancada(modo=args.modo, executor=executor, repeticoes=args.repeticoes,
+                      timeout_teste_s=args.timeout_teste, saida=saida)
+    res = bancada.rodar(com_mutacao=not args.sem_mutacao)
+    figuras = graficos.gerar_todos(res, saida / "graficos")
+    arquivos = gravar(res, saida, figuras)
+    m = res["metricas"]
+    print(f"\ntaxa de acerto {m['taxa_acerto']:.1f}% | precisão {m['deteccao']['precisao']:.1f}% | "
+          f"revocação {m['deteccao']['revocacao']:.1f}% | tempo médio {m['tempo_s']['media']:.2f}s"
+          + (f" | mutação {m['mutacao']['escore']:.1f}%" if m["mutacao"]["escore"] is not None else ""))
+    print(f"resultados: {arquivos['md']}")
+    return 0
 
 
 if __name__ == "__main__":

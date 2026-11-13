@@ -69,6 +69,14 @@ def _condicao_simples(teste: ast.AST, params: Set[str], excecao: str) -> Optiona
     return None
 
 
+def _condicoes(teste: ast.AST, params: Set[str], excecao: str) -> List[Condicao]:
+    """Todas as condições simples de um `if`: cada termo de `a or b` leva ao mesmo `raise`."""
+    if isinstance(teste, ast.BoolOp) and isinstance(teste.op, ast.Or):
+        return [c for v in teste.values for c in _condicoes(v, params, excecao)]
+    c = _condicao_simples(teste, params, excecao)
+    return [c] if c else []
+
+
 class _ColetorFuncao(ast.NodeVisitor):
     def __init__(self, params: Set[str]):
         self.params = params
@@ -83,9 +91,7 @@ class _ColetorFuncao(ast.NodeVisitor):
             if isinstance(filho, ast.Raise):
                 exc = _nome_excecao(filho.exc)
                 if exc:
-                    c = _condicao_simples(no.test, self.params, exc)
-                    if c:
-                        self.condicoes.append(c)
+                    self.condicoes += _condicoes(no.test, self.params, exc)
         self.generic_visit(no)
 
     def visit_For(self, no): self.ramos += 1; self.generic_visit(no)

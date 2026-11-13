@@ -10,7 +10,8 @@ def test_ast_extrai_unidades_excecoes_e_condicoes():
     assert {"loja.calcular_desconto", "loja.ticket_medio", "loja.Estoque.retirar"} <= set(unidades)
     d = unidades["loja.calcular_desconto"]
     assert d.excecoes == ["ValueError"]
-    assert [(c.parametro, c.operador, c.valor) for c in d.condicoes_excecao] == [("valor", "<", 0), ("percentual", "<", 0)]
+    assert [(c.parametro, c.operador, c.valor) for c in d.condicoes_excecao] == [
+        ("valor", "<", 0), ("percentual", "<", 0), ("percentual", ">", 100)]
     assert unidades["loja.Estoque.retirar"].tipo == "metodo"
     assert unidades["loja.aplicar_cupom"].chamadas_internas == ["calcular_desconto"]
 
